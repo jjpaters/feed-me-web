@@ -8,14 +8,14 @@
       <button mat-button routerLink="/login" *ngIf="!signedIn">
         Log In
       </button>
-      <button mat-raised-button color="accent" routerLink="/signup" *ngIf="!signedIn">
+      <button mat-raised-button color="accent" *ngIf="!signedIn">
         Sign Up
       </button>
       <button mat-raised-button color="accent" [matMenuTriggerFor]="menu" *ngIf="signedIn">
         <mat-icon aria-hidden="true">account_circle</mat-icon> {{ user.name }}
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="logOut()">Log Out</button>
+        <button mat-menu-item>Log Out</button>
       </mat-menu>
     </div>
   </mat-toolbar-row>
