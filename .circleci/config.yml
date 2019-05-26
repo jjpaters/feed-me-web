@@ -73,9 +73,22 @@ jobs:
           key: v1-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run: ./node_modules/.bin/nyc npm test -- --no-watch
-      - run: ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov
-      - run: ./node_modules/.bin/codecov
+      - run: npm run test -- --no-watch
+
+  build:
+    working_directory: ~/app
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: npm run build -- --prod
 
   deploy:
     docker:
