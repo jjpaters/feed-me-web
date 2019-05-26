@@ -73,7 +73,7 @@ jobs:
           key: v1-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run: mpm test -- --no-watch
+      - run: mpm run test -- --no-watch
 
   build:
     working_directory: ~/app
