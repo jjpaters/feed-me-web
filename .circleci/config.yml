@@ -77,6 +77,21 @@ jobs:
       - run: ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov
       - run: ./node_modules/.bin/codecov
 
+  build:
+    working_directory: ~/app
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: npm run build -- --prod
+
   deploy:
     docker:
       - image: buildpack-deps:trusty
