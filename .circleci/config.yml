@@ -1,0 +1,88 @@
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@1.0.2
+
+#############################################################
+# Define workflows
+#############################################################
+workflows:
+  version: 2
+  pipeline:
+    jobs:
+      - e2e_tests
+      - lint
+      - unit_tests
+      - build:
+          requires:
+            - e2e_tests
+            - lint
+            - unit_tests
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+
+#############################################################
+# Define jobs
+#############################################################
+jobs:
+  e2e_tests:
+    working_directory: ~/app
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: npm run e2e
+
+  lint:
+    working_directory: ~/app
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: npm run lint
+
+  unit_tests:
+    working_directory: ~/app
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: ./node_modules/.bin/nyc npm test -- --no-watch
+      - run: ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov
+      - run: ./node_modules/.bin/codecov
+
+  deploy:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
