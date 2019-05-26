@@ -73,9 +73,7 @@ jobs:
           key: v1-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run: ./node_modules/.bin/nyc npm test -- --no-watch
-      - run: ./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov
-      - run: ./node_modules/.bin/codecov
+      - run: mpm test -- --no-watch
 
   build:
     working_directory: ~/app
