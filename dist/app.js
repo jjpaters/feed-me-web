@@ -9,4 +9,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'feed-me-web')));
 
+app.get('*', function (req, res) {
+    res.sendfile(path.join(__dirname, 'feed-me-web', 'index.html'))
+});
+
 module.exports = app;
