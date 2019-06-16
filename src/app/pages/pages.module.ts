@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 // External App Modules
+import { MaterialModule } from '../material.module';
 import { RecipesModule } from '../recipes/recipes.module';
 
 // Module Components
@@ -21,7 +24,10 @@ import { RecipePageComponent } from './recipe-page/recipe-page.component';
   ],
   imports: [
     CommonModule,
-    RecipesModule
+    FormsModule,
+    MaterialModule,
+    RecipesModule,
+    RouterModule
   ]
 })
 export class PagesModule { }

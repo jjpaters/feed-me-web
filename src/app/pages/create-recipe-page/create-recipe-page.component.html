@@ -1,3 +1,25 @@
-<p>
-  create-recipe-page works!
-</p>
+<section class="app-container">
+  <form class="app-form-container" #recipeForm="ngForm" (ngSubmit)="onSubmit(recipeForm)">
+    <mat-card>
+      <mat-card-title>
+        <h1>Add Recipe</h1>
+      </mat-card-title>
+      <mat-form-field appearance="outline" class="app-form-field-full-width ">
+        <mat-label>Title</mat-label>
+        <input matInput name="title" [(ngModel)]="recipe.title" #title="ngModel" required>
+        <mat-error *ngIf="title.invalid">The recipe title is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="app-form-field-full-width ">
+        <mat-label>Description</mat-label>
+        <textarea matInput name="description" [(ngModel)]="recipe.description" #description="ngModel" required rows="5"></textarea>
+        <mat-error *ngIf="description.invalid">The recipe description is required.</mat-error>
+      </mat-form-field>
+
+      <div class="app-button-row">
+        <button type="submit" mat-raised-button color="primary">Add Recipe</button>
+        <button type="reset" mat-raised-button>Clear</button>
+      </div>
+    </mat-card>
+  </form>
+</section>
