@@ -1,8 +1,14 @@
 <section class="app-container">
   <h1>My Recipes</h1>
 
-  <div *ngFor="let recipe of recipes">
-    <app-view-recipe-card [recipe]="recipe"></app-view-recipe-card>
+  <div class="app-button-row">
+    <button mat-raised-button [routerLink]="['/recipes']">Add Recipe</button>
   </div>
+
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let recipe of recipes">
+      <app-view-recipe-card [recipe]="recipe"></app-view-recipe-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 
 </section>
