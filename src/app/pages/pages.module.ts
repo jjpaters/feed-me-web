@@ -1,12 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomePageComponent } from './home-page/home-page.component';
+
+// External App Modules
+import { RecipesModule } from '../recipes/recipes.module';
+
+// Module Components
 import { AuthPageComponent } from './auth-page/auth-page.component';
+import { CreateRecipePageComponent } from './create-recipe-page/create-recipe-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { MyRecipesPageComponent } from './my-recipes-page/my-recipes-page.component';
+import { RecipePageComponent } from './recipe-page/recipe-page.component';
 
 @NgModule({
-  declarations: [HomePageComponent, AuthPageComponent],
+  declarations: [
+    AuthPageComponent,
+    HomePageComponent,
+    MyRecipesPageComponent,
+    RecipePageComponent,
+    CreateRecipePageComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    RecipesModule
   ]
 })
 export class PagesModule { }

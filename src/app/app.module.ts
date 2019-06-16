@@ -1,11 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
+// External App Modules
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './material.module';
 import { PagesModule } from './pages/pages.module';
+
+// Module Components
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +19,7 @@ import { PagesModule } from './pages/pages.module';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
+    HttpClientModule,
     MaterialModule,
     PagesModule
   ],

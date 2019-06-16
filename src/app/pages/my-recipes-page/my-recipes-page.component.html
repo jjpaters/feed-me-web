@@ -1,0 +1,8 @@
+<section class="app-container">
+  <h1>My Recipes</h1>
+
+  <div *ngFor="let recipe of recipes">
+    <app-view-recipe-card [recipe]="recipe"></app-view-recipe-card>
+  </div>
+
+</section>
