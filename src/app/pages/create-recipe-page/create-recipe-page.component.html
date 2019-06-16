@@ -1,25 +1,83 @@
 <section class="app-container">
-  <form class="app-form-container" #recipeForm="ngForm" (ngSubmit)="onSubmit(recipeForm)">
-    <mat-card>
-      <mat-card-title>
-        <h1>Add Recipe</h1>
-      </mat-card-title>
-      <mat-form-field appearance="outline" class="app-form-field-full-width ">
+  <form #recipeForm="ngForm" (ngSubmit)="onSubmit(recipeForm)">
+    <h1>Add Recipe</h1>
+
+    <mat-card class="app-card-margin">
+      <mat-form-field appearance="outline" class="app-form-field-full-width">
         <mat-label>Title</mat-label>
         <input matInput name="title" [(ngModel)]="recipe.title" #title="ngModel" required>
         <mat-error *ngIf="title.invalid">The recipe title is required.</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="app-form-field-full-width ">
+      <mat-form-field appearance="outline" class="app-form-field-full-width">
         <mat-label>Description</mat-label>
-        <textarea matInput name="description" [(ngModel)]="recipe.description" #description="ngModel" required rows="5"></textarea>
+        <textarea matInput name="description" [(ngModel)]="recipe.description" #description="ngModel" required
+          rows="5"></textarea>
         <mat-error *ngIf="description.invalid">The recipe description is required.</mat-error>
       </mat-form-field>
 
+      <mat-form-field appearance="outline" class="app-form-field-full-width">
+        <mat-label>Prep Time</mat-label>
+        <input matInput name="prepTime" [(ngModel)]="recipe.prepTime" #prepTime="ngModel" required>
+        <mat-error *ngIf="prepTime.invalid">The prep time is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="app-form-field-full-width">
+        <mat-label>Cook Time</mat-label>
+        <input matInput name="cookTime" [(ngModel)]="recipe.cookTime" #cookTime="ngModel" required>
+        <mat-error *ngIf="cookTime.invalid">The cook time is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="app-form-field-full-width">
+        <mat-label>Number of Servings</mat-label>
+        <input type="number" matInput name="servings" [(ngModel)]="recipe.servings" #servings="ngModel" required min="1"
+          minlength="1">
+        <mat-error *ngIf="servings.invalid">The number of servings is required.</mat-error>
+      </mat-form-field>
+    </mat-card>
+
+    <mat-card class="app-card-margin">
+      <h2>Ingredients</h2>
+      <mat-action-list role="list">
+        <button mat-list-item *ngFor="let ingredient of recipe.ingredients; index as i"
+          (click)="removeIngredient(step)">
+          {{ i + 1 }}. {{ ingredient }}
+        </button>
+      </mat-action-list>
+
+      <mat-form-field appearance="outline" class="app-form-field-full-width">
+        <mat-label>Ingredient</mat-label>
+        <input matInput name="ingredient" [(ngModel)]="ingredient">
+        <button mat-button *ngIf="ingredient" matSuffix mat-icon-button aria-label="Add"
+          (click)="addIngredient(ingredient)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card>
+
+    <mat-card class="app-card-margin">
+      <h2>Steps</h2>
+      <mat-action-list role="list">
+        <button mat-list-item *ngFor="let step of recipe.steps; index as i" (click)="removeStep(step)">
+          {{ i + 1 }}. {{ step }}
+        </button>
+      </mat-action-list>
+
+      <mat-form-field appearance="outline" class="app-form-field-full-width">
+        <mat-label>Step</mat-label>
+        <input matInput name="step" [(ngModel)]="step">
+        <button mat-button *ngIf="step" matSuffix mat-icon-button aria-label="Add" (click)="addStep(step)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card>
+
+    <mat-card class="app-card-margin">
       <div class="app-button-row">
         <button type="submit" mat-raised-button color="primary">Add Recipe</button>
-        <button type="reset" mat-raised-button>Clear</button>
+        <button type="reset" mat-stroked-button>Clear</button>
       </div>
     </mat-card>
+
   </form>
 </section>

@@ -1,8 +1,48 @@
 <section class="app-container" *ngIf="recipe">
   <h1>{{ recipe.title }}</h1>
 
-  <p>
-    {{ recipe.description }}
-  </p>
+  <mat-card class="app-card-margin">
+    <mat-grid-list cols="3" rowHeight="1rem">
+      <mat-grid-tile>
+        <strong>Servings</strong>: {{ recipe.servings }}
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <strong>Prep Time</strong>: {{ recipe.prepTime }}
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <strong>Cook Time</strong>: {{ recipe.cookTime }}
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+
+  <mat-card class="app-card-margin">
+    <p>
+      {{ recipe.description }}
+    </p>
+  </mat-card>
+
+  <mat-card class="app-card-margin">
+    <h2>Ingredients</h2>
+    <mat-list role="list">
+      <mat-list-item *ngFor="let ingredient of recipe.ingredients; index as i">
+        {{ i + 1 }}. {{ ingredient }}
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+
+  <mat-card class="app-card-margin">
+    <h2>Steps</h2>
+    <mat-list role="list">
+      <mat-list-item *ngFor="let step of recipe.steps; index as i">
+        {{ i + 1 }}. {{ step }}
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+
+  <mat-card class="app-card-margin">
+    <div class="app-button-row">
+      <button mat-raised-button color="warn" (click)="deleteRecipeConfirmation(recipe.id)">Delete Recipe</button>
+    </div>
+  </mat-card>
 
 </section>

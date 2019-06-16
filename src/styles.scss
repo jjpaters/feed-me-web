@@ -1,4 +1,5 @@
 html, body { 
+    background-color: #efefef;
     height: 100%; 
 }
 
@@ -12,6 +13,10 @@ body {
     margin-right: 0.25rem;
 }
 
+.app-card-margin {
+    margin: 1rem;
+}
+
 .app-container {
     margin: auto;
     max-width: 1000px;
@@ -23,6 +28,10 @@ body {
 }
 
 .app-form-field-full-width {
+    width: 100%;
+}
+
+.app-full-width {
     width: 100%;
 }
 

@@ -6,13 +6,18 @@ import { MaterialModule } from '../material.module';
 
 import { RecipeService } from './recipe.service';
 import { ViewRecipeCardComponent } from './view-recipe-card/view-recipe-card.component';
+import { DeleteRecipeConfirmationComponent } from './delete-recipe-confirmation/delete-recipe-confirmation.component';
 
 @NgModule({
   declarations: [
-    ViewRecipeCardComponent
+    ViewRecipeCardComponent,
+    DeleteRecipeConfirmationComponent
   ],
   exports: [
     ViewRecipeCardComponent
+  ],
+  entryComponents: [
+    DeleteRecipeConfirmationComponent
   ],
   imports: [
     CommonModule,
