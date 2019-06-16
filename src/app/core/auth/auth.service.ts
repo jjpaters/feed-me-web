@@ -31,6 +31,10 @@ export class AuthService {
     return Date.now() < JSON.parse(localStorage.getItem('expires_at'));
   }
 
+  get userId(): string {
+    return this.userProfile && this.userProfile.sub;
+  }
+
   constructor(private router: Router) {
     if (JSON.parse(localStorage.getItem('expires_at')) > Date.now()) {
       this.renewToken();
@@ -43,7 +47,8 @@ export class AuthService {
         window.location.hash = '';
         this.getProfile(authResult);
       } else if (err) {
-        console.error(`Error authenticating: ${err.error}`);
+        this.clearRedirect();
+        this.router.navigate(['/']);
       }
       this.router.navigate(['/']);
     });
@@ -63,7 +68,10 @@ export class AuthService {
   }
 
   renewToken() {
-    this.webAuth.checkSession({}, (err, authResult) => {
+    this.webAuth.checkSession({
+      audience: environment.auth.audience,
+      scope: environment.auth.scope
+    }, (err, authResult) => {
       if (authResult && authResult.accessToken) {
         this.getProfile(authResult);
       } else {
@@ -77,8 +85,16 @@ export class AuthService {
     this.loggedIn = value;
   }
 
+  setRedirect(route: string) {
+    localStorage.setItem('authRedirect', route);
+  }
+
   private clearExpiration() {
     localStorage.removeItem('expires_at');
+  }
+
+  private clearRedirect() {
+    localStorage.removeItem('authRedirect');
   }
 
   private getProfile(authResult) {
@@ -87,10 +103,19 @@ export class AuthService {
     this.webAuth.client.userInfo(authResult.accessToken, (err, profile) => {
       if (profile) {
         this.setSession(authResult, profile);
+        this.redirect();
       } else if (err) {
         console.warn(`Error retrieving profile: ${err.error}`);
       }
     });
+  }
+
+  private redirect() {
+    const redirect = decodeURI(localStorage.getItem('authRedirect'));
+    const navArr = [redirect || '/'];
+
+    this.router.navigate(navArr);
+    this.clearRedirect();
   }
 
   private setSession(authResult, profile?) {

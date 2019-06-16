@@ -8,6 +8,9 @@
       <button mat-raised-button color="accent" (click)="authService.login()" *ngIf="!authService.loggedIn">
         Log In
       </button>
+      <button mat-raised-button color="accent" routerLink="/my-recipes" *ngIf="authService.loggedIn">
+        My Recipes
+      </button>
       <button mat-raised-button color="accent" [matMenuTriggerFor]="menu" *ngIf="authService.loggedIn">
         <mat-icon aria-hidden="true">account_circle</mat-icon> {{ authService.userProfile.name }}
       </button>

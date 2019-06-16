@@ -2,7 +2,7 @@
   "name": "feed-me-web",
   "version": "0.0.0",
   "scripts": {
-    "dev": "ng serve",
+    "dev": "ng serve --open",
     "ng": "ng",
     "start": "node ./dist/bin/www",
     "build": "ng build",
