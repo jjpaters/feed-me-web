@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { MaterialModule } from '../../material.module';
 import { RecipePageComponent } from './recipe-page.component';
 
 describe('RecipePageComponent', () => {
@@ -13,6 +14,7 @@ describe('RecipePageComponent', () => {
       declarations: [ RecipePageComponent ],
       imports: [
         HttpClientTestingModule,
+        MaterialModule,
         RouterTestingModule
       ]
     })

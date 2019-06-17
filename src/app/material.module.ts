@@ -9,6 +9,7 @@ import {
     MatGridListModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatMenuModule,
     MatSnackBarModule,
     MatToolbarModule,
@@ -23,6 +24,7 @@ const MATERIAL = [
     MatGridListModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatMenuModule,
     MatSnackBarModule,
     MatToolbarModule
