@@ -73,7 +73,7 @@ jobs:
           key: v1-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run: npm run test -- --no-watch
+      - run: npm run code-coverage
 
   build:
     working_directory: ~/app
