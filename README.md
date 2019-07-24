@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/jjpaters/feed-me-web/tree/master.svg?style=svg)](https://circleci.com/gh/jjpaters/feed-me-web/tree/master)
 [![Known Vulnerabilities](https://snyk.io/test/github/jjpaters/feed-me-web/badge.svg?targetFile=package.json)](https://snyk.io/test/github/jjpaters/feed-me-web?targetFile=package.json)
+[![Coverage Status](https://coveralls.io/repos/github/jjpaters/feed-me-web/badge.svg?branch=add-recipes)](https://coveralls.io/github/jjpaters/feed-me-web?branch=add-recipes)
 
 # Feed Me
 
