@@ -33,7 +33,7 @@ jobs:
   e2e_tests:
     working_directory: ~/app
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:10.16-browsers
     steps:
       - checkout
       - restore_cache:
@@ -48,7 +48,7 @@ jobs:
   lint:
     working_directory: ~/app
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:10.16-browsers
     steps:
       - checkout
       - restore_cache:
@@ -63,7 +63,7 @@ jobs:
   unit_tests:
     working_directory: ~/app
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:10.16-browsers
     steps:
       - checkout
       - restore_cache:
@@ -78,7 +78,7 @@ jobs:
   build:
     working_directory: ~/app
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:10.16-browsers
     steps:
       - checkout
       - restore_cache:
