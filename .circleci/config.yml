@@ -43,7 +43,9 @@ jobs:
           key: v1-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - command: |
+      - run:
+          name: Update Chrome
+          command: |
             sudo apt-get update
             sudo apt-get install google-chrome-stable
       - run: npm run e2e
