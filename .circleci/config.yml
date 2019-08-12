@@ -10,12 +10,10 @@ workflows:
   version: 2
   pipeline:
     jobs:
-      - e2e_tests
       - lint
       - unit_tests
       - build:
           requires:
-            - e2e_tests
             - lint
             - unit_tests
       - deploy:
