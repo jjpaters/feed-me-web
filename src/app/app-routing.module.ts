@@ -13,13 +13,13 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'callback', component: AuthPageComponent },
   { path: 'home', component: HomePageComponent },
-  { path: 'my-recipes', component: MyRecipesPageComponent, canActivate: [ AuthGuard ] },
-  { path: 'recipes/:id', component: RecipePageComponent, canActivate: [ AuthGuard ] },
-  { path: 'recipes', component: CreateRecipePageComponent, canActivate: [ AuthGuard ] }
+  { path: 'my-recipes', component: MyRecipesPageComponent, canActivate: [AuthGuard] },
+  { path: 'recipes/:id', component: RecipePageComponent, canActivate: [AuthGuard] },
+  { path: 'recipes', component: CreateRecipePageComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
