@@ -108,6 +108,6 @@ jobs:
       - run: ls
       - run: dir
       - aws-s3/sync:
-          from: dist/feed-me-web
+          from: ./dist/feed-me-web
           to: 's3://feed-me.io'
           overwrite: true
