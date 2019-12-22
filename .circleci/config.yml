@@ -105,9 +105,9 @@ jobs:
       - image: buildpack-deps:trusty
     steps:
       - checkout
+      - run: ls
+      - run: dir
       - aws-s3/sync:
           from: dist/feed-me-web
           to: 's3://feed-me.io'
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           overwrite: true
