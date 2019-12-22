@@ -1,3 +1,8 @@
+[![CircleCI](https://circleci.com/gh/jjpaters/feed-me-web/tree/master.svg?style=svg)](https://circleci.com/gh/jjpaters/feed-me-web/tree/master)
+[![Coverage Status](https://coveralls.io/repos/github/jjpaters/feed-me-web/badge.svg?branch=master)](https://coveralls.io/github/jjpaters/feed-me-web?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/jjpaters/feed-me-web/badge.svg?targetFile=package.json)](https://snyk.io/test/github/jjpaters/feed-me-web?targetFile=package.json)
+[![DeepScan grade](https://deepscan.io/api/teams/3232/projects/8543/branches/103871/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=3232&pid=8543&bid=103871)
+
 # Feed Me Web
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
