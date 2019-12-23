@@ -1,16 +1,9 @@
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
 export const environment = {
-  production: false,
-  api: {
-    uri: 'http://localhost:3000/api'
-  },
-  auth: {
-    clientId: 'wE9ro7uXyS2JTn0mcXItFW6ifLdCHNSP',
-    clientDomain: 'jjpaters.auth0.com',
-    audience: 'http://localhost:3000/api/',
-    redirect: 'http://localhost:4200/callback',
-    scope: 'openid profile'
-  },
-  self: 'http://localhost:4200/'
+  production: false
 };
 
 /*

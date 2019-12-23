@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  codecov: codecov/codecov@1.0.5
+  aws-s3: circleci/aws-s3@1.0.12
 
 #############################################################
 # Define workflows
@@ -10,28 +10,37 @@ workflows:
   version: 2
   pipeline:
     jobs:
-      - lint
-      - unit_tests
+      - install_dependencies
+      - lint:
+          requires:
+            - install_dependencies
+      - unit_tests:
+          requires:
+            - install_dependencies
+      - e2e_tests:
+          requires:
+            - install_dependencies
       - build:
           requires:
+            - e2e_tests
             - lint
             - unit_tests
       - deploy:
           requires:
             - build
-          filters:
-            branches:
-              only:
-                - master
+          #filters:
+          #  branches:
+          #    only:
+          #      - master
 
 #############################################################
 # Define jobs
 #############################################################
 jobs:
-  e2e_tests:
+  install_dependencies:
     working_directory: ~/app
     docker:
-      - image: circleci/node:10.16-browsers
+      - image: circleci/node:10-browsers
     steps:
       - checkout
       - restore_cache:
@@ -41,64 +50,66 @@ jobs:
           key: v1-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run:
-          name: Update Chrome
-          command: |
-            sudo apt-get update
-            sudo apt-get install google-chrome-stable
-      - run: npm run e2e
 
   lint:
     working_directory: ~/app
     docker:
-      - image: circleci/node:10.16-browsers
+      - image: circleci/node:10-browsers
     steps:
       - checkout
       - restore_cache:
           key: v1-{{ checksum "package.json" }}
       - run: npm install
-      - save_cache:
-          key: v1-{{ checksum "package.json" }}
-          paths:
-            - node_modules
       - run: npm run lint
 
   unit_tests:
     working_directory: ~/app
     docker:
-      - image: circleci/node:10.16-browsers
+      - image: circleci/node:10-browsers
     steps:
       - checkout
       - restore_cache:
           key: v1-{{ checksum "package.json" }}
       - run: npm install
-      - save_cache:
+      - run: npm run test -- --watch=false --code-coverage
+      - run: cat ./coverage/feed-me-web/lcov.info  | ./node_modules/coveralls/bin/coveralls.js
+
+  e2e_tests:
+    working_directory: ~/app
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - restore_cache:
           key: v1-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-      - run: npm run code-coverage
+      - run: npm install
+      - run: npm run e2e
 
   build:
     working_directory: ~/app
     docker:
-      - image: circleci/node:10.16-browsers
+      - image: circleci/node:10-browsers
     steps:
       - checkout
       - restore_cache:
           key: v1-{{ checksum "package.json" }}
       - run: npm install
-      - save_cache:
-          key: v1-{{ checksum "package.json" }}
-          paths:
-            - node_modules
       - run: npm run build -- --prod
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
 
   deploy:
     docker:
       - image: buildpack-deps:trusty
     steps:
       - checkout
-      - run:
-          name: Deploy Master to Heroku
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+      - attach_workspace:
+          at: .
+      - run: ls
+      - run: dir
+      - aws-s3/sync:
+          from: ./dist/feed-me-web
+          to: 's3://feed-me.io/'
+          overwrite: true
