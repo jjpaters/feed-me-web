@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display navbar title', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('feed-me-web app is running!');
+    expect(page.getTitleText()).toEqual('Feed Me');
   });
 
   afterEach(async () => {

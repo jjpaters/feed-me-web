@@ -20,16 +20,23 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'feed-me-web'`, () => {
+  it(`should default navbarOpen to false`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('feed-me-web');
+    expect(app.navbarOpen).toBeFalsy();
   });
 
-  it('should render title', () => {
+  it(`should set navbarOpen to "true" after calling toggleNavbar()`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    app.toggleNavbar();
+    expect(app.navbarOpen).toBeTruthy();
+  });
+
+  it('should render title "Feed Me"', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('feed-me-web app is running!');
+    expect(compiled.querySelector('a.navbar-brand').textContent).toContain('Feed Me');
   });
 });
