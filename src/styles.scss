@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+body {
+    padding-top: 3rem;
+}
+
+.button-row button {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+}
+
+.validate-form .ng-invalid {
+    border-color: red;
+}
+
+.validate-form .ng-valid {
+    border-color: green;
+}
