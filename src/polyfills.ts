@@ -57,7 +57,11 @@
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
-
 /***************************************************************************************************
- * APPLICATION IMPORTS
+ * Currently, the newest versions of Angular (6+) do not include shims for 'global' or 'process' which were provided in previous versions.
+ * The following will recreate the shims.
  */
+(window as any).global = window;
+(window as any).process = {
+    env: { DEBUG: undefined },
+};

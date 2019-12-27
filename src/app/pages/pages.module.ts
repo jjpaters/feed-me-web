@@ -1,17 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { HomePageComponent } from './home-page/home-page.component';
+import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
+import { LogInPageComponent } from './log-in-page/log-in-page.component';
+import { AccountPageComponent } from './account-page/account-page.component';
 
 @NgModule({
   declarations: [
-    HomePageComponent
+    HomePageComponent,
+    SignUpPageComponent,
+    LogInPageComponent,
+    AccountPageComponent
   ],
   exports: [
     HomePageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }
