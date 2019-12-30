@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NotifyService } from 'src/app/core-blocks/notify/notify.service';
 
 @Component({
   selector: 'app-log-in-page',
@@ -15,7 +16,7 @@ export class LogInPageComponent implements OnInit {
 
   submitted = false;
 
-  constructor() { }
+  constructor(private notifyService: NotifyService) { }
 
   ngOnInit() { }
 
@@ -25,7 +26,6 @@ export class LogInPageComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log(`Valid: ${this.loginForm.valid}`);
   }
 
 }

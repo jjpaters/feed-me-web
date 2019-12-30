@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { CoreBlocksModule } from './core-blocks/core-blocks.module';
 import { PagesModule } from './pages/pages.module';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { PagesModule } from './pages/pages.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CoreBlocksModule,
     NgbModule,
     PagesModule,
     ReactiveFormsModule
