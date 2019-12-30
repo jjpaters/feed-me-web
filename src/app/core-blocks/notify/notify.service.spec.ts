@@ -1,16 +1,33 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { NotifyService } from './notify.service';
+import { MockNotifyServiceModule } from './mock-notify-service.module';
 
 describe('NotifyService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      NgbModule
-    ]
+  let service: NotifyService;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        MockNotifyServiceModule,
+        NgbModule
+      ]
+    })
+      .compileComponents();
   }));
 
+  beforeEach(() => {
+    service = TestBed.get(NotifyService);
+  });
+
   it('should be created', () => {
-    const service: NotifyService = TestBed.get(NotifyService);
     expect(service).toBeTruthy();
   });
+
+  it('should open NotifyComponent when notify() is called', () => {
+    const modal = service.notify('title', 'message');
+    expect(modal).toBeTruthy();
+  });
+
 });

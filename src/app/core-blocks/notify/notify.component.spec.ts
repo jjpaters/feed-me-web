@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotifyComponent } from './notify.component';
 
@@ -32,4 +32,5 @@ describe('NotifyComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
