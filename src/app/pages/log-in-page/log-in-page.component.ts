@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NotifyService } from 'src/app/core-blocks/notify/notify.service';
 
 @Component({
   selector: 'app-log-in-page',
@@ -16,7 +15,7 @@ export class LogInPageComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private notifyService: NotifyService) { }
+  constructor() { }
 
   ngOnInit() { }
 
