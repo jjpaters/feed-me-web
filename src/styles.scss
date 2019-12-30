@@ -9,10 +9,26 @@ body {
     margin-right: 0.25rem;
 }
 
-.validate-form .ng-invalid {
+//
+// Forms
+//
+.account-form {
+    margin: auto;
+    max-width: 500px;
+}
+
+.validate-form .ng-invalid.ng-touched {
     border-color: red;
 }
 
-.validate-form .ng-valid {
+.validate-form .ng-valid.ng-touched {
+    border-color: green;
+}
+
+.validate-form.submitted-form  .ng-invalid {
+    border-color: red;
+}
+
+.validate-form.submitted-form .ng-valid {
     border-color: green;
 }
