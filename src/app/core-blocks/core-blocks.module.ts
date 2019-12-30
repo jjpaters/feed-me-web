@@ -1,21 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NotifyService } from './notify/notify.service';
-import { NotifyComponent } from './notify/notify.component';
+import { NotifyServiceModule } from './notify/notify-service.module';
 
 @NgModule({
-  declarations: [
-    NotifyComponent
-  ],
+  declarations: [],
   imports: [
-    CommonModule
-  ],
-  entryComponents: [
-    NotifyComponent
-  ],
-  providers: [
-    NotifyService
+    CommonModule,
+    NotifyServiceModule
   ]
 })
 export class CoreBlocksModule { }

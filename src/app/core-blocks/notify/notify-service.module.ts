@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NotifyComponent } from './notify.component';
+import { NotifyService } from './notify.service';
 
 @NgModule({
     declarations: [
@@ -7,6 +8,9 @@ import { NotifyComponent } from './notify.component';
     ],
     entryComponents: [
       NotifyComponent
+    ],
+    providers: [
+      NotifyService
     ]
   })
-  export class MockNotifyServiceModule { }
+  export class NotifyServiceModule { }

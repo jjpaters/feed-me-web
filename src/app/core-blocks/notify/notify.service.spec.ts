@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotifyService } from './notify.service';
-import { MockNotifyServiceModule } from './mock-notify-service.module';
+import { NotifyServiceModule } from './notify-service.module';
 
 describe('NotifyService', () => {
   let service: NotifyService;
@@ -10,7 +10,7 @@ describe('NotifyService', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MockNotifyServiceModule,
+        NotifyServiceModule,
         NgbModule
       ]
     })
