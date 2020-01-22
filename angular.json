@@ -95,7 +95,10 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "codeCoverageExclude": [
+              "src/app/core-blocks/auth/auth.service.ts"
+            ]
           }
         },
         "lint": {
