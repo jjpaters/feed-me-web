@@ -9,12 +9,32 @@
 
         <div class="form-group">
             <label for="email">E-mail <span class="text-danger">*</span></label>
-            <input type="email" class="form-control" formControlName="email" />
+            <input type="email" class="form-control" formControlName="email" required />
+            <div class="text-danger" *ngIf="showEmailErrors">
+                <span *ngIf="email.errors.email">
+                    E-mail is not valid.
+                </span>
+                <span *ngIf="email.errors.required">
+                    E-mail is required.
+                </span>
+            </div>
         </div>
 
         <div class="form-group">
             <label for="password">Password <span class="text-danger">*</span></label>
-            <input type="password" class="form-control" formControlName="password" />
+            <input type="password" class="form-control" formControlName="password" required />
+            <div class="text-danger" *ngIf="showPasswordErrors">
+                <span *ngIf="password.errors.required">
+                    Password is required:
+                    <ul>
+                        <li>At least 8 characters long</li>
+                        <li>At least one number</li>
+                        <li>At least one special character</li>
+                        <li>At least one uppercase letters</li>
+                        <li>At least one lowercase letters</li>
+                    </ul>
+                </span>
+            </div>
         </div>
 
         <div class="button-row">
