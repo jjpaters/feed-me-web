@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { CognitoAuthService } from '@jjpaters/cognito-auth-lib';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountPageGuard implements CanActivate {
 
-  constructor(private router: Router) { }
+  constructor(private authService: CognitoAuthService, private router: Router) { }
 
-  canActivate(): Observable<boolean> {
-    this.router.navigate(['login']);
-    return of(false);
+  canActivate(): boolean {
+    if (!this.authService.signedIn) {
+      this.router.navigate(['login']);
+    }
+
+    return this.authService.signedIn;
   }
 
 }

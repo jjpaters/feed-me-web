@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "start:db": "docker run --name feed-me-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +20,7 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "logrocket": "^1.0.6",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
@@ -28,10 +30,13 @@
     "@angular/cli": "~8.3.21",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
+    "@jjpaters/cognito-auth-lib": "0.0.1-alpha",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "aws-amplify": "^2.2.5",
+    "aws-amplify-angular": "^4.1.6",
     "bootstrap": "^4.4.1",
     "codelyzer": "^5.0.0",
     "coveralls": "^3.0.9",

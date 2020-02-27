@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { CoreBlocksModule } from 'src/app/core-blocks/core-blocks.module';
 import { LogInPageComponent } from './log-in-page.component';
 
 describe('LogInPageComponent', () => {
@@ -12,6 +13,7 @@ describe('LogInPageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LogInPageComponent ],
       imports: [
+        CoreBlocksModule,
         ReactiveFormsModule,
         RouterTestingModule
       ]

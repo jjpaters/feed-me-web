@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CognitoAuthService } from '@jjpaters/cognito-auth-lib';
+import { NotifyService } from 'src/app/core-blocks/notify/notify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in-page',
@@ -15,7 +18,9 @@ export class LogInPageComponent implements OnInit {
 
   submitted = false;
 
-  constructor() { }
+  constructor(private authService: CognitoAuthService,
+    private notifyService: NotifyService,
+    private router: Router) { }
 
   ngOnInit() { }
 
@@ -24,7 +29,14 @@ export class LogInPageComponent implements OnInit {
   }
 
   onSubmit() {
+    const username = this.loginForm.get('email').value;
+    const password = this.loginForm.get('password').value;
     this.submitted = true;
+    this.authService.signIn(username, password).subscribe((res) => {
+      this.router.navigate(['home']);
+    }, (err) => {
+      this.notifyService.notify('Uhoh!', 'Unable to log in, please try again.');
+    })
   }
 
 }

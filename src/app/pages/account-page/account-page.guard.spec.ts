@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { CoreBlocksModule } from 'src/app/core-blocks/core-blocks.module';
 import { AccountPageGuard } from './account-page.guard';
 
 describe('AccountPageGuard', () => {
@@ -9,6 +10,7 @@ describe('AccountPageGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
+        CoreBlocksModule,
         RouterTestingModule
       ],
       providers: [AccountPageGuard]
@@ -24,8 +26,7 @@ describe('AccountPageGuard', () => {
   });
 
   it('should be false and navigate to "login"', () => {
-    guard.canActivate().subscribe((res) => {
-      expect(res).toBeFalsy();
-    });
+    const res = guard.canActivate();
+    expect(res).toBeFalsy();
   });
 });
