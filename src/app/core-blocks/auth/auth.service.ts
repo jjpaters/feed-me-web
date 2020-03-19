@@ -1,44 +1,75 @@
 import { Injectable } from '@angular/core';
-import Auth from '@aws-amplify/auth';
-import { Observable, of } from 'rxjs';
+import { AmplifyService } from 'aws-amplify-angular';
+import { Auth } from 'aws-amplify';
+import { from, Observable } from 'rxjs';
+
+import { ClientMetadata } from './cognito-auth-models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  signedIn: boolean;
+  user: any;
 
-  changePassword(oldPassword: string, newPassword: string): Observable<any> {
-    return of(Auth.confirmSignUp(oldPassword, newPassword));
+  constructor(private amplifyService: AmplifyService) {
+    this.amplifyService.authStateChange$.subscribe(authState => {
+      this.signedIn = authState.state === 'signedIn';
+      if (!authState.user) {
+        this.user = null;
+      } else {
+        this.user = authState.user;
+      }
+    });
   }
 
-  confirmSignUp(username: string, code: string): Observable<any> {
-    return of(Auth.confirmSignUp(username, code));
+  changePassword(user: any, oldPassword: string, newPassword: string, clientMetadata?: ClientMetadata): Observable<any> {
+    return from(Auth.changePassword(user, oldPassword, newPassword, clientMetadata));
   }
 
-  forgotPassword(username: string): Observable<any> {
-    return of(Auth.forgotPassword(username));
+  completeNewPassword(user: any, password: string, requiredAttributes: any, clientMetadata?: ClientMetadata): Observable<any> {
+    return from(Auth.completeNewPassword(user, password, requiredAttributes, clientMetadata));
   }
 
-  forgotPasswordSubmit(username: string, code: string, newPassword: string): Observable<any> {
-    return of(Auth.forgotPasswordSubmit(username, code, newPassword));
+  confirmSignIn(user: any, code: string): Observable<any> {
+    return from(Auth.confirmSignIn(user, code));
   }
 
-  resendSignUp(username: string): Observable<any> {
-    return of(Auth.resendSignUp(username));
+  confirmSignUp(username: string, code: string, options?: any): Observable<any> {
+    return from(Auth.confirmSignUp(username, code, options));
   }
 
-  signIn(username: string, password: string): Observable<any> {
-    return of(Auth.signIn(username, password));
+  currentAuthenticatedUser(): Observable<any> {
+    return from(Auth.currentAuthenticatedUser());
   }
 
-  signOut(): Observable<any> {
-    return of(Auth.signOut());
+  currentUserInfo(): Observable<any> {
+    return from(Auth.currentUserInfo());
+  }
+
+  forgotPassword(username: string, clientMetadata?: ClientMetadata): Observable<any> {
+    return from(Auth.forgotPassword(username, clientMetadata));
+  }
+
+  forgotPasswordSubmit(username: string, code: string, password: string, clientMetadata?: ClientMetadata): Observable<any> {
+    return from(Auth.forgotPasswordSubmit(username, code, password, clientMetadata));
+  }
+
+  resendSignUp(username: string, clientMetadata?: ClientMetadata): Observable<any> {
+    return from(Auth.resendSignUp(username, clientMetadata));
+  }
+
+  signIn(username: string, password: string, clientMetadata?: ClientMetadata): Observable<any> {
+    return from(Auth.signIn(username, password, clientMetadata));
   }
 
   signUp(username: string, password: string): Observable<any> {
-    return of(Auth.signUp(username, password));
+    return from(Auth.signUp(username, password));
+  }
+
+  signOut(): Observable<any> {
+    return from(Auth.signOut());
   }
 
 }

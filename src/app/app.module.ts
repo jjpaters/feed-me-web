@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CoreBlocksModule } from './core-blocks/core-blocks.module';
-import { PagesModule } from './pages/pages.module';
+import { AuthPagesModule } from './auth-pages/auth-pages.module';
 
 @NgModule({
   declarations: [
@@ -17,8 +16,7 @@ import { PagesModule } from './pages/pages.module';
     BrowserModule,
     AppRoutingModule,
     CoreBlocksModule,
-    NgbModule,
-    PagesModule,
+    AuthPagesModule,
     ReactiveFormsModule
   ],
   providers: [],

@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import Amplify from '@aws-amplify/core';
-import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import Auth from '@aws-amplify/auth';
+import { AmplifyAngularModule, AmplifyModules, AmplifyService } from 'aws-amplify-angular';
 
 import { AuthService } from './auth.service';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 Amplify.configure({ Auth: environment.aws.auth });
 
@@ -16,7 +17,14 @@ Amplify.configure({ Auth: environment.aws.auth });
   ],
   providers: [
     AuthService,
-    AmplifyService
+    {
+      provide: AmplifyService,
+      useFactory:  () => {
+        return AmplifyModules({
+          Auth
+        });
+      }
+    }
   ]
 })
 export class AuthModule { }

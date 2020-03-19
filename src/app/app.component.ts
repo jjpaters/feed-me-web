@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './core-blocks/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,11 @@ export class AppComponent {
 
   navbarOpen = false;
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
+
+  logOut(): void {
+    this.authService.signOut();
+  }
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;

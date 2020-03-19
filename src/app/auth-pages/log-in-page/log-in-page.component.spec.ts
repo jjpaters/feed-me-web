@@ -2,25 +2,27 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { SignUpPageComponent } from './sign-up-page.component';
+import { CoreBlocksModule } from 'src/app/core-blocks/core-blocks.module';
+import { LogInPageComponent } from './log-in-page.component';
 
-describe('SignUpPageComponent', () => {
-  let component: SignUpPageComponent;
-  let fixture: ComponentFixture<SignUpPageComponent>;
+describe('LogInPageComponent', () => {
+  let component: LogInPageComponent;
+  let fixture: ComponentFixture<LogInPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SignUpPageComponent],
+      declarations: [ LogInPageComponent ],
       imports: [
+        CoreBlocksModule,
         ReactiveFormsModule,
         RouterTestingModule
       ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignUpPageComponent);
+    fixture = TestBed.createComponent(LogInPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -38,5 +40,4 @@ describe('SignUpPageComponent', () => {
     component.onSubmit();
     expect(component.submitted).toBeTruthy();
   });
-
 });
