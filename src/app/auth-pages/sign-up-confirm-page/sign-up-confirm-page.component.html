@@ -1,0 +1,29 @@
+<section class="container">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="account-form validate-form"
+        [ngClass]="{ 'submitted-form': submitted }" novalidate>
+        <h1>Sign Up</h1>
+
+        <div class="alert alert-primary" role="alert">
+            Please check your email and enter the verification code below.
+        </div>
+
+        <div class="form-group">
+            <label for="email">E-mail <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" formControlName="email" required />
+        </div>
+
+        <div class="form-group">
+            <label for="code">Verification Code <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="code" required />
+            <div class="text-danger" *ngIf="showCodeErrors">
+                <span *ngIf="code.errors.required">
+                    Verification Code is required.
+                </span>
+            </div>
+        </div>
+
+        <div class="button-row">
+            <button type="submit" class="btn btn-primary">Confirm Sign Up</button>
+        </div>
+    </form>
+</section>

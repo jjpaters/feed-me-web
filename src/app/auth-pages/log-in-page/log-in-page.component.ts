@@ -19,7 +19,8 @@ export class LogInPageComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private notifyService: NotifyService,
     private router: Router) { }
 
@@ -37,7 +38,7 @@ export class LogInPageComponent implements OnInit {
       this.router.navigate(['home']);
     }, (err) => {
       this.notifyService.notify('Uhoh!', 'Unable to log in, please try again.');
-    })
+    });
   }
 
 }

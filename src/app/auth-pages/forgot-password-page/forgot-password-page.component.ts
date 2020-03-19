@@ -20,7 +20,8 @@ export class ForgotPasswordPageComponent implements OnInit {
 
   verificationSubmitted = false;
 
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private notifyService: NotifyService,
     private router: Router) { }
 
@@ -33,7 +34,7 @@ export class ForgotPasswordPageComponent implements OnInit {
         this.enableConfirmForgotPassword();
       }, (err) => {
         this.notifyService.notify('Uhoh!', 'Unable send the verification code, please try again.');
-      })
+      });
     }
   }
 

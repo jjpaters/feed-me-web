@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 import { COGNITO_AUTH_CONFIG } from './cognito-auth-models';
 
 describe('AuthService', () => {
-  let service: AuthService
+  let service: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -21,7 +21,7 @@ describe('AuthService', () => {
         }
       ]
     });
-    service = TestBed.get(AuthService);
+    service = TestBed.inject(AuthService);
   });
 
   it('should be created', () => {

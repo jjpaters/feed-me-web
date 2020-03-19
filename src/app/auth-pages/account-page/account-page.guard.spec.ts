@@ -18,7 +18,7 @@ describe('AccountPageGuard', () => {
   });
 
   beforeEach(() => {
-    guard = TestBed.get(AccountPageGuard);
+    guard = TestBed.inject(AccountPageGuard);
   });
 
   it('should create', () => {

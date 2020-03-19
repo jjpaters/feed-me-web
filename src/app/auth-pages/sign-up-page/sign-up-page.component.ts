@@ -24,7 +24,9 @@ export class SignUpPageComponent {
 
   submitted = false;
 
-  constructor(private authService: AuthService, private notifyService: NotifyService) { }
+  constructor(
+    private authService: AuthService,
+    private notifyService: NotifyService) { }
 
   get email() {
     return this.signupForm.get('email');
@@ -53,7 +55,7 @@ export class SignUpPageComponent {
         console.log(JSON.stringify(res));
       }, (err) => {
         this.notifyService.notify('Sign Up', JSON.stringify(err));
-      })
+      });
     }
   }
 
