@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { CoreBlocksModule } from 'src/app/core-blocks/core-blocks.module';
 import { AccountPageComponent } from './account-page.component';
+
 
 describe('AccountPageComponent', () => {
   let component: AccountPageComponent;

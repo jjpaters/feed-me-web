@@ -11,6 +11,10 @@ export class AccountPageComponent implements OnInit {
 
   constructor(public authService: AuthService) { }
 
+  get email(): string {
+    return this.authService.user?.signInUserSession?.idToken?.payload?.email
+  }
+
   ngOnInit() {
   }
 
