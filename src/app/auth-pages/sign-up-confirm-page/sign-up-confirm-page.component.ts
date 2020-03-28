@@ -56,10 +56,18 @@ export class SignUpConfirmPageComponent implements OnInit {
     this.submitted = true;
     if (this.signupForm.valid) {
       this.authService.confirmSignUp(this.email.value, this.code.value).subscribe((res) => {
-        this.router.navigate(['home']);
+        this.router.navigate(['login']);
       }, (err) => {
-        this.notifyService.notify('Uhoh!', 'Unable to confirm sign up, please try again.');
+        this.notifyService.error('Unable to confirm sign up, please try again.');
       });
     }
+  }
+
+  resendVerificationCode() {
+    this.authService.resendSignUp(this.email.value).subscribe((res) => {
+      this.notifyService.info('Your verification code was re-sent. Please check your email.');
+    }, (err) => {
+      this.notifyService.error('Your verification code was re-sent. Please check your email.');
+    });
   }
 }

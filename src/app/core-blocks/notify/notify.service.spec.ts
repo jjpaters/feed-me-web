@@ -25,8 +25,8 @@ describe('NotifyService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should open NotifyComponent when notify() is called', () => {
-    const modal = service.notify('title', 'message');
+  it('should open NotifyComponent when info() is called', () => {
+    const modal = service.info('message');
     expect(modal).toBeTruthy();
   });
 

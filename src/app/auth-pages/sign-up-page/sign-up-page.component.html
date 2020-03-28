@@ -1,5 +1,5 @@
 <section class="container">
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="account-form validate-form"
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="account-form validate-form"
         [ngClass]="{ 'submitted-form': submitted }" novalidate>
         <h1>Sign Up</h1>
 
@@ -39,7 +39,6 @@
 
         <div class="button-row">
             <button type="submit" class="btn btn-primary">Sign Up</button>
-            <button type="reset" class="btn btn-outline-secondary" (click)="onReset()">Clear</button>
         </div>
     </form>
 </section>

@@ -10,7 +10,15 @@ export class NotifyService {
 
   constructor(private modalService: NgbModal) { }
 
-  notify(title: string, message: string): NgbModalRef<typeof NotifyComponent> {
+  error(message: string) {
+    return this.notify('Uh oh!', message);
+  }
+
+  info(message: string) {
+    return this.notify('Hey!', message);
+  }
+
+  private notify(title: string, message: string): NgbModalRef<typeof NotifyComponent> {
     const modal = this.modalService.open(NotifyComponent);
     modal.componentInstance.title = title;
     modal.componentInstance.message = message;

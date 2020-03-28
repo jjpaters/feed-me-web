@@ -33,7 +33,7 @@ export class ForgotPasswordPageComponent implements OnInit {
       this.authService.forgotPassword(username).subscribe((res) => {
         this.enableConfirmForgotPassword();
       }, (err) => {
-        this.notifyService.notify('Uhoh!', 'Unable send the verification code, please try again.');
+        this.notifyService.error('Unable send the verification code, please try again.');
       });
     }
   }

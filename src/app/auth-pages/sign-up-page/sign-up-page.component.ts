@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/core-blocks/auth/auth.service';
 import { NotifyService } from 'src/app/core-blocks/notify/notify.service';
@@ -11,7 +12,7 @@ import { NotifyService } from 'src/app/core-blocks/notify/notify.service';
 })
 export class SignUpPageComponent {
 
-  signupForm = new FormGroup({
+  form = new FormGroup({
     email: new FormControl('', [
       Validators.email,
       Validators.required
@@ -26,14 +27,15 @@ export class SignUpPageComponent {
 
   constructor(
     private authService: AuthService,
-    private notifyService: NotifyService) { }
+    private notifyService: NotifyService,
+    private router: Router) { }
 
   get email() {
-    return this.signupForm.get('email');
+    return this.form.get('email');
   }
 
   get password() {
-    return this.signupForm.get('password');
+    return this.form.get('password');
   }
 
   get showEmailErrors() {
@@ -44,17 +46,13 @@ export class SignUpPageComponent {
     return this.password.invalid && (this.password.dirty || this.password.touched || this.submitted);
   }
 
-  onReset() {
-    this.submitted = false;
-  }
-
   onSubmit() {
     this.submitted = true;
-    if (this.signupForm.valid) {
+    if (this.form.valid) {
       this.authService.signUp(this.email.value, this.password.value).subscribe((res) => {
-        console.log(JSON.stringify(res));
+        this.router.navigate(['signup', this.email.value]);
       }, (err) => {
-        this.notifyService.notify('Sign Up', JSON.stringify(err));
+        this.notifyService.error('Unable to sign up, please try again');
       });
     }
   }
