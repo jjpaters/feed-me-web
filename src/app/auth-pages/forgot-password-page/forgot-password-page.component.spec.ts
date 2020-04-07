@@ -3,15 +3,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { CoreBlocksModule } from 'src/app/core-blocks/core-blocks.module';
-import { LogInPageComponent } from './log-in-page.component';
+import { ForgotPasswordPageComponent } from './forgot-password-page.component';
 
-describe('LogInPageComponent', () => {
-  let component: LogInPageComponent;
-  let fixture: ComponentFixture<LogInPageComponent>;
+describe('ForgotPasswordPageComponent', () => {
+  let component: ForgotPasswordPageComponent;
+  let fixture: ComponentFixture<ForgotPasswordPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LogInPageComponent ],
+      declarations: [ ForgotPasswordPageComponent ],
       imports: [
         CoreBlocksModule,
         ReactiveFormsModule,
@@ -22,22 +22,12 @@ describe('LogInPageComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LogInPageComponent);
+    fixture = TestBed.createComponent(ForgotPasswordPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should set "submittted" to false when onReset() is called', () => {
-    component.onReset();
-    expect(component.submitted).toBeFalsy();
-  });
-
-  it('should set "submittted" to true when onReset() is called', () => {
-    component.onSubmit();
-    expect(component.submitted).toBeTruthy();
   });
 });

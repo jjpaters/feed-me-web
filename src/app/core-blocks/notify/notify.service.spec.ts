@@ -18,15 +18,15 @@ describe('NotifyService', () => {
   }));
 
   beforeEach(() => {
-    service = TestBed.get(NotifyService);
+    service = TestBed.inject(NotifyService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should open NotifyComponent when notify() is called', () => {
-    const modal = service.notify('title', 'message');
+  it('should open NotifyComponent when info() is called', () => {
+    const modal = service.info('message');
     expect(modal).toBeTruthy();
   });
 

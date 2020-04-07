@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CoreBlocksModule } from './core-blocks/core-blocks.module';
-import { PagesModule } from './pages/pages.module';
+import { AuthPagesModule } from './auth-pages/auth-pages.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { PagesModule } from './pages/pages.module';
     BrowserModule,
     AppRoutingModule,
     CoreBlocksModule,
-    PagesModule,
+    AuthPagesModule,
     ReactiveFormsModule
   ],
   providers: [],

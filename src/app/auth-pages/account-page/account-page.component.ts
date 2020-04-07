@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CognitoAuthService } from '@jjpaters/cognito-auth-lib';
+
+import { AuthService } from 'src/app/core-blocks/auth/auth.service';
 
 @Component({
   selector: 'app-account-page',
@@ -8,7 +9,11 @@ import { CognitoAuthService } from '@jjpaters/cognito-auth-lib';
 })
 export class AccountPageComponent implements OnInit {
 
-  constructor(public authService: CognitoAuthService) { }
+  constructor(public authService: AuthService) { }
+
+  get email(): string {
+    return this.authService.user?.signInUserSession?.idToken?.payload?.email;
+  }
 
   ngOnInit() {
   }

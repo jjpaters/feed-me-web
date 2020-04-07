@@ -26,7 +26,7 @@ describe('NotifyComponent', () => {
     fixture = TestBed.createComponent(NotifyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    activeModal = TestBed.get(NgbActiveModal);
+    activeModal = TestBed.inject(NgbActiveModal);
   });
 
   it('should create', () => {

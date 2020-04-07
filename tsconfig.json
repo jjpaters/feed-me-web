@@ -21,7 +21,8 @@
     ]
   },
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
+    "enableIvy": false,
+    "fullTemplateTypeCheck": false,
     "strictInjectionParameters": true
   }
 }
