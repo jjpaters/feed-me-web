@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/core-blocks/auth/auth.service';
 import { NotifyService } from 'src/app/core-blocks/notify/notify.service';
+import { EmailFormControl } from '../form-controls/email-form-control';
+import { PasswordFormControl } from '../form-controls/password-form-control';
+import { ValidationFormControl } from '../form-controls/validation-form-control';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -13,14 +16,8 @@ import { NotifyService } from 'src/app/core-blocks/notify/notify.service';
 export class SignUpPageComponent {
 
   form = new FormGroup({
-    email: new FormControl('', [
-      Validators.email,
-      Validators.required
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8)
-    ])
+    email: EmailFormControl.getControl('', false),
+    password: PasswordFormControl.getControl('', false)
   });
 
   submitted = false;
@@ -30,20 +27,20 @@ export class SignUpPageComponent {
     private notifyService: NotifyService,
     private router: Router) { }
 
-  get email() {
+  get email(): AbstractControl {
     return this.form.get('email');
   }
 
-  get password() {
+  get password(): AbstractControl {
     return this.form.get('password');
   }
 
-  get showEmailErrors() {
-    return this.email.invalid && (this.email.dirty || this.email.touched || this.submitted);
+  get showEmailErrors(): boolean {
+    return ValidationFormControl.showErrors(this.email, this.submitted);
   }
 
-  get showPasswordErrors() {
-    return this.password.invalid && (this.password.dirty || this.password.touched || this.submitted);
+  get showPasswordErrors(): boolean {
+    return ValidationFormControl.showErrors(this.password, this.submitted);
   }
 
   onSubmit() {

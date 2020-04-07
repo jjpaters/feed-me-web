@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { AuthService } from 'src/app/core-blocks/auth/auth.service';
 import { NotifyService } from 'src/app/core-blocks/notify/notify.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EmailFormControl } from '../form-controls/email-form-control';
+import { CodeFormControl } from '../form-controls/code-form-control';
+import { ValidationFormControl } from '../form-controls/validation-form-control';
 
 @Component({
   selector: 'app-sign-up-confirm-page',
@@ -13,11 +16,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SignUpConfirmPageComponent implements OnInit {
 
   signupForm = new FormGroup({
-    email: new FormControl({ value: '', disabled: true }),
-    code: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6)
-    ])
+    email: EmailFormControl.getControl('', false),
+    code: CodeFormControl.getControl('', false)
   });
 
   submitted = false;
@@ -32,24 +32,20 @@ export class SignUpConfirmPageComponent implements OnInit {
     this.email.setValue(this.route.snapshot.paramMap.get('username'));
   }
 
-  get email() {
+  get email(): AbstractControl {
     return this.signupForm.get('email');
   }
 
-  get code() {
+  get code(): AbstractControl {
     return this.signupForm.get('code');
   }
 
-  get showEmailErrors() {
-    return this.email.invalid && (this.email.dirty || this.email.touched || this.submitted);
+  get showEmailErrors(): boolean {
+    return ValidationFormControl.showErrors(this.email, this.submitted);
   }
 
-  get showCodeErrors() {
-    return this.code.invalid && (this.code.dirty || this.code.touched || this.submitted);
-  }
-
-  onReset() {
-    this.submitted = false;
+  get showCodeErrors(): boolean {
+    return ValidationFormControl.showErrors(this.code, this.submitted);
   }
 
   onSubmit() {
