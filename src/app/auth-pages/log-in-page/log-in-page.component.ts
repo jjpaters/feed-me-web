@@ -59,9 +59,7 @@ export class LogInPageComponent {
         if (err.code === 'UserNotConfirmedException') {
           this.router.navigate(['signup', this.form.get('email').value]);
         } else if (err.code === 'PasswordResetRequiredException') {
-          // The error happens when the password is reset in the Cognito console
-          // In this case you need to call forgotPassword to reset the password
-          // Please check the Forgot Password part.
+          this.router.navigate(['forgot-password']);
         } else if (err.code === 'NotAuthorizedException' || err.code === 'UserNotFoundException') {
           this.notifyService.error('Incorrect email or password. Please try again.');
         } else {
