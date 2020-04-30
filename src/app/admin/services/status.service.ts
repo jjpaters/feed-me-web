@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { API } from 'aws-amplify';
 
 import { Status } from '../models/status';
-import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatusService {
 
-  constructor(private http: HttpClient) { }
-
+  constructor() { }
   checkStatus(): Observable<Status> {
-    return this.http.get<Status>(`${environment.aws.api.uri}/health`);
+    return from(API.get('ApiGateway', 'health', {})).pipe(map((res: any) => res as Status));
   }
 }
