@@ -1,5 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
 import { CoreBlocksModule } from './core-blocks/core-blocks.module';
 
@@ -8,6 +9,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         CoreBlocksModule,
+        FontAwesomeModule,
         RouterTestingModule
       ],
       declarations: [

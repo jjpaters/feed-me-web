@@ -1,3 +1,4 @@
+@import './styles/variables';
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 
 body {
@@ -18,17 +19,17 @@ body {
 }
 
 .validate-form .ng-invalid.ng-touched {
-    border-color: red;
+    border-color: $red;
 }
 
 .validate-form .ng-valid.ng-touched {
-    border-color: green;
+    border-color: $green;
 }
 
 .validate-form.submitted-form  .ng-invalid {
-    border-color: red;
+    border-color: $red;
 }
 
 .validate-form.submitted-form .ng-valid {
-    border-color: green;
+    border-color: $green;
 }

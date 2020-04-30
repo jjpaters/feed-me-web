@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './core-blocks/auth/auth.service';
+import { faUtensils, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,10 @@ import { AuthService } from './core-blocks/auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  iconLogo = faUtensils;
+  iconMyAccount = faUser;
+  iconLogOut = faSignOutAlt;
 
   navbarOpen = false;
 

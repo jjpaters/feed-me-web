@@ -1,23 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 import { AppRoutingModule } from './app-routing.module';
-import { CoreBlocksModule } from './core-blocks/core-blocks.module';
 import { AuthPagesModule } from './auth-pages/auth-pages.module';
+import { CoreBlocksModule } from './core-blocks/core-blocks.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreBlocksModule,
     AuthPagesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
