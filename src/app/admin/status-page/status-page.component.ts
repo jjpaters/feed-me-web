@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { StatusService } from '../services/status.service';
-import { Status } from '../models/status';
 
 @Component({
   selector: 'app-status-page',
@@ -10,6 +9,7 @@ import { Status } from '../models/status';
 export class StatusPageComponent implements OnInit {
 
   message: string;
+  messageDate: Date;
 
   constructor(private statusService: StatusService) { }
 
@@ -17,9 +17,11 @@ export class StatusPageComponent implements OnInit {
     this.checkStatus();
   }
 
-  checkStatus(): void {
-    this.statusService.checkStatus().subscribe((res: Status) => {
-      this.message = res.status.toString();
-    });
+  async checkStatus(): Promise<void> {
+    const res = await this.statusService.checkStatus();
+    
+    this.message = res.status.toString();
+    this.messageDate = new Date();
+    console.log(`${JSON.stringify(res)}`);
   }
 }

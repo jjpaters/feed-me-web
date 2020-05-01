@@ -6,7 +6,10 @@
             "type": "chrome",
             "request": "launch",
             "url": "http://localhost:4200/#",
-            "webRoot": "${workspaceRoot}"
+            "webRoot": "${workspaceRoot}",
+            "runtimeArgs": [
+                "--disable-web-security"
+            ]
         },
         {
             "name": "ng test",

@@ -1,17 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { API } from 'aws-amplify';
 
 import { Status } from '../models/status';
+import { AuthService } from '../../core-blocks/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatusService {
 
-  constructor() { }
-  checkStatus(): Observable<Status> {
-    return from(API.get('ApiGateway', 'health', {})).pipe(map((res: any) => res as Status));
+  constructor(private authService: AuthService) { }
+
+  async checkStatus(): Promise<Status> {
+    const token = (await this.authService.currentSession()).getIdToken().getJwtToken();
+
+    const init = { 
+      headers: { 
+        Authorization: `Bearer ${token}`,
+      }
+    };
+
+    const response = await API.get('ApiGateway', 'health', init);
+
+    return response as Status;
   }
 }
