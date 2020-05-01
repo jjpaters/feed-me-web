@@ -7,7 +7,7 @@ import { AmplifyAngularModule, AmplifyModules, AmplifyService } from 'aws-amplif
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 
-Amplify.configure({ Auth: environment.aws.auth });
+Amplify.configure({ Auth: environment.aws.auth, API: environment.aws.api });
 
 @NgModule({
   declarations: [],

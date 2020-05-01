@@ -44,6 +44,10 @@ export class AuthService {
     return from(Auth.currentAuthenticatedUser());
   }
 
+  async currentSession(): Promise<any> {
+    return await Auth.currentSession();
+  }
+
   currentUserInfo(): Observable<any> {
     return from(Auth.currentUserInfo());
   }
