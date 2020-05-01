@@ -19,7 +19,7 @@ export class StatusPageComponent implements OnInit {
 
   async checkStatus(): Promise<void> {
     const res = await this.statusService.checkStatus();
-    
+
     this.message = res.status.toString();
     this.messageDate = new Date();
     console.log(`${JSON.stringify(res)}`);

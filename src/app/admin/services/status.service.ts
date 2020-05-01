@@ -14,8 +14,8 @@ export class StatusService {
   async checkStatus(): Promise<Status> {
     const token = (await this.authService.currentSession()).getIdToken().getJwtToken();
 
-    const init = { 
-      headers: { 
+    const init = {
+      headers: {
         Authorization: `Bearer ${token}`,
       }
     };

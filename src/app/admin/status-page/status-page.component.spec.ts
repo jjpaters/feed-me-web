@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
+import { CoreBlocksModule } from '../../core-blocks/core-blocks.module';
 import { StatusPageComponent } from './status-page.component';
 
 describe('StatusPageComponent', () => {
@@ -11,6 +12,7 @@ describe('StatusPageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ StatusPageComponent ],
       imports: [
+        CoreBlocksModule,
         HttpClientTestingModule
       ]
     })
