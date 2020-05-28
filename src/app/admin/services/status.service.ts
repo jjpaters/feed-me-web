@@ -17,13 +17,13 @@ export class StatusService {
 
     try {
       const headers = await this.authService.protectedHeaders();
-  
-      status= (await API.get('ApiGateway', 'health', headers)) as Status;
+
+      status = (await API.get('ApiGateway', 'health', headers)) as Status;
     } catch {
       status = new Status();
       status.status = StatusCode.Fail;
     }
-    
+
     return status;
   }
 }

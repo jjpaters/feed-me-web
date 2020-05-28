@@ -63,14 +63,14 @@ export class AuthService {
   async protectedHeaders() {
 
     const token = (await this.currentSession()).getIdToken().getJwtToken();
-      
-      const init = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      };
 
-      return init;
+    const init = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    };
+
+    return init;
   }
 
   resendSignUp(username: string, clientMetadata?: ClientMetadata): Observable<any> {
