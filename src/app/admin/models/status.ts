@@ -1,6 +1,6 @@
 export enum StatusCode {
-    Pass,
-    Fail
+    Pass = 'Pass',
+    Fail = 'Fail'
 }
 
 export class Status {

@@ -40,8 +40,8 @@ export class AuthService {
     return from(Auth.confirmSignUp(username, code, options));
   }
 
-  currentAuthenticatedUser(): Observable<any> {
-    return from(Auth.currentAuthenticatedUser());
+  async currentAuthenticatedUser(): Promise<any> {
+    return await Auth.currentAuthenticatedUser();
   }
 
   async currentSession(): Promise<any> {
@@ -58,6 +58,19 @@ export class AuthService {
 
   forgotPasswordSubmit(username: string, code: string, password: string, clientMetadata?: ClientMetadata): Observable<any> {
     return from(Auth.forgotPasswordSubmit(username, code, password, clientMetadata));
+  }
+
+  async protectedHeaders() {
+
+    const token = (await this.currentSession()).getIdToken().getJwtToken();
+
+    const init = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    };
+
+    return init;
   }
 
   resendSignUp(username: string, clientMetadata?: ClientMetadata): Observable<any> {

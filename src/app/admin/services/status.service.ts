@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { API } from 'aws-amplify';
 
-import { Status } from '../models/status';
+import { Status, StatusCode } from '../models/status';
 import { AuthService } from '../../core-blocks/auth/auth.service';
 
 @Injectable({
@@ -12,16 +12,18 @@ export class StatusService {
   constructor(private authService: AuthService) { }
 
   async checkStatus(): Promise<Status> {
-    const token = (await this.authService.currentSession()).getIdToken().getJwtToken();
 
-    const init = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    };
+    let status: Status;
 
-    const response = await API.get('ApiGateway', 'health', init);
+    try {
+      const headers = await this.authService.protectedHeaders();
 
-    return response as Status;
+      status = (await API.get('ApiGateway', 'health', headers)) as Status;
+    } catch {
+      status = new Status();
+      status.status = StatusCode.Fail;
+    }
+
+    return status;
   }
 }
