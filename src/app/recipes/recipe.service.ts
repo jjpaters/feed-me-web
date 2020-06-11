@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Recipe } from './recipe-models';
+import { Recipe, Step } from './recipe-models';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,9 @@ export class RecipeService {
     const recipe = new Recipe();
     recipe.description = 'Delicious mac and cheese';
     recipe.title = 'Mac and Cheese';
-    recipe.recipeId = '1234'
+    recipe.recipeId = '1234';
+    recipe.steps = new Array<Step>();
+
 
     this.recipes.push(recipe);
     this.recipes.push(recipe);

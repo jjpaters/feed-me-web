@@ -27,12 +27,18 @@ export class AppComponent {
       });
   }
 
+  closeMenu() {
+    this.navbarOpen = false;
+  }
+
   logOut(): void {
+    this.closeMenu();
     this.authService.signOut();
     this.navigate('/home');
   }
 
   navigate(route: string) {
+    this.closeMenu();
     this.router.navigate([route]);
   }
 

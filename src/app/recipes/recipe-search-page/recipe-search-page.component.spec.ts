@@ -11,16 +11,16 @@ describe('RecipeSearchPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         RecipeCardComponent,
         RecipeSearchPageComponent
-       ],
-       imports: [
-         HttpClientTestingModule,
-         RouterTestingModule
-       ]
+      ],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

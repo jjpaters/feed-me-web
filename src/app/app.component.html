@@ -15,7 +15,7 @@
     <ul class="navbar-nav ml-auto flex-nowrap">
 
       <li class="nav-item" *ngIf="authService.signedIn">
-        <a class="nav-link" routerLink="/recipes" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="/recipes" [routerLinkActive]="['active']" (click)="closeMenu()">
           <fa-icon [icon]="iconRecipe"></fa-icon> Recipes
         </a>
       </li>

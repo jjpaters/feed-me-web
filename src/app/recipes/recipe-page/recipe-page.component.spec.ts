@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { RecipePageComponent } from './recipe-page.component';
@@ -12,7 +14,9 @@ describe('RecipePageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ RecipePageComponent ],
       imports: [
+        FontAwesomeModule,
         HttpClientTestingModule,
+        ReactiveFormsModule,
         RouterTestingModule
       ]
     })

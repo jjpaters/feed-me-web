@@ -1,7 +1,44 @@
 <section class="container" *ngIf="recipe">
-    <h1>{{ recipe.title }}</h1>
+    <div class="row">
+        <div class="col">
+            <h1>{{ recipe.title }}</h1>
+        </div>
+        <div class="col">
+            <button class="btn btn-sm btn-danger m-1 float-right" (click)="deleteRecipe()" *ngIf="editMode">
+                <fa-icon [icon]="iconDelete"></fa-icon>
+            </button>
+        </div>
+    </div>
 
     <p>
         {{ recipe.description }}
     </p>
+
+    <hr>
+
+    <form [formGroup]="form" class="validate-form" [ngClass]="{ 'submitted-form': submitted }" novalidate>
+        <div class="form-group">
+            <label for="title">Title <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="title" required />
+            <div class="text-danger" *ngIf="showTitleErrors">
+                <span *ngIf="title.errors.required">
+                    Title is required.
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" formControlName="description" rows="5"></textarea>
+        </div>
+    </form>
+
+    <hr>
+
+    <div class="button-row">
+        <a [routerLink]="['/recipes']" class="btn btn-primary">Back to Recipes</a>
+        <button class="btn btn-outline-dark" (click)="editRecipe()" *ngIf="!editMode">Edit</button>
+        <button class="btn btn-outline-success" (click)="saveRecipe()" *ngIf="editMode">Save</button>
+        <button class="btn btn-outline-dark" (click)="cancelEditRecipe()" *ngIf="editMode">Cancel</button>
+    </div>
 </section>
