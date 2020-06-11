@@ -6,7 +6,6 @@ import { NotifyComponent } from './notify.component';
 describe('NotifyComponent', () => {
   let component: NotifyComponent;
   let fixture: ComponentFixture<NotifyComponent>;
-  let activeModal: NgbActiveModal;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -14,10 +13,7 @@ describe('NotifyComponent', () => {
       imports: [
         NgbModule
       ],
-      providers: [
-        NgbModal,
-        NgbActiveModal
-      ]
+      providers: []
     })
     .compileComponents();
   }));
@@ -26,17 +22,10 @@ describe('NotifyComponent', () => {
     fixture = TestBed.createComponent(NotifyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    activeModal = TestBed.inject(NgbActiveModal);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should dismiss when close() is called', () => {
-    spyOn(activeModal, 'dismiss');
-    component.close();
-    expect(activeModal.dismiss).toHaveBeenCalled();
   });
 
 });

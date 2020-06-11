@@ -1,28 +1,43 @@
 import { Injectable } from '@angular/core';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-
-import { NotifyComponent } from './notify.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotifyService {
 
-  constructor(private modalService: NgbModal) { }
+  title: string;
+  message: string;
+  show: boolean;
+  alertType: string;
 
-  error(message: string) {
-    return this.notify('Uh oh!', message);
+  constructor() { }
+
+  error(message: string): void {
+    this.notify(message, 'danger');
   }
 
-  info(message: string) {
-    return this.notify('Hey!', message);
+  info(message: string): void {
+    this.notify(message, 'primary');
   }
 
-  private notify(title: string, message: string): NgbModalRef<typeof NotifyComponent> {
-    const modal = this.modalService.open(NotifyComponent);
-    modal.componentInstance.title = title;
-    modal.componentInstance.message = message;
-    return modal;
+  clear() {
+    this.title = '';
+    this.message = '';
+    this.show = false;
   }
 
+  private notify(message: string, alertType: string) {
+    this.message = message;
+    this.alertType = alertType;
+    this.show = true;
+    this.scrollToTop();
+  }
+
+  private scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
 }

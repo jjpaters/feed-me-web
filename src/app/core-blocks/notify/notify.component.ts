@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NotifyService } from './notify.service';
 
 @Component({
   selector: 'app-notify',
@@ -8,13 +8,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NotifyComponent {
 
-  @Input() title: string;
-  @Input() message: string;
-
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor(public notifyService: NotifyService) { }
 
   close() {
-    this.activeModal.dismiss();
+    this.notifyService.clear();
   }
 
 }

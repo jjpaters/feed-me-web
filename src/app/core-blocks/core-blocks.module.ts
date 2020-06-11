@@ -12,6 +12,9 @@ import { NotifyServiceModule } from './notify/notify-service.module';
     NgbModule,
     AuthModule,
     NotifyServiceModule
+  ],
+  exports: [
+    NotifyServiceModule
   ]
 })
 export class CoreBlocksModule { }

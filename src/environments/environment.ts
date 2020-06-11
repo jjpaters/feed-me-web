@@ -14,7 +14,7 @@ export const environment = {
       endpoints: [
         {
           name: 'ApiGateway',
-          endpoint: 'https://api.feed-me.io/'
+          endpoint: 'http://localhost:5002/'
         }
       ]
     }

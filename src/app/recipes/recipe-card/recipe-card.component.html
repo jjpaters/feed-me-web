@@ -1,0 +1,10 @@
+<div class="card" style="width: 20rem;" *ngIf="recipe">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{ recipe.title }}</h5>
+        <p class="card-text">
+            {{ recipe.description }}
+        </p>
+        <a [routerLink]="['/recipes', recipe.recipeId]" class="btn btn-primary">View</a>
+    </div>
+</div>
