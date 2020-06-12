@@ -3,21 +3,21 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthPagesModule } from './auth-pages/auth-pages.module';
 import { CoreBlocksModule } from './core-blocks/core-blocks.module';
+import { RecipesModule } from './recipes/recipes.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent,
-    NotFoundPageComponent
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +27,9 @@ import { CoreBlocksModule } from './core-blocks/core-blocks.module';
     CoreBlocksModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    RecipesModule,
+    FontAwesomeModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

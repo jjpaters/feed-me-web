@@ -1,17 +1,26 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotifyComponent } from './notify.component';
 import { NotifyService } from './notify.service';
 
 @NgModule({
-    declarations: [
-      NotifyComponent
-    ],
-    entryComponents: [
-      NotifyComponent
-    ],
-    providers: [
-      NotifyService
-    ]
-  })
-  export class NotifyServiceModule { }
+  imports: [
+    CommonModule,
+    NgbModule
+  ],
+  declarations: [
+    NotifyComponent
+  ],
+  exports: [
+    NotifyComponent
+  ],
+  entryComponents: [
+    NotifyComponent
+  ],
+  providers: [
+    NotifyService
+  ]
+})
+export class NotifyServiceModule { }

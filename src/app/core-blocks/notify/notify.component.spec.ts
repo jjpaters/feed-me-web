@@ -1,12 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgbModule, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotifyComponent } from './notify.component';
+import { NotifyService } from './notify.service';
 
 describe('NotifyComponent', () => {
   let component: NotifyComponent;
   let fixture: ComponentFixture<NotifyComponent>;
-  let activeModal: NgbActiveModal;
+  let notifyService: NotifyService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -14,10 +15,7 @@ describe('NotifyComponent', () => {
       imports: [
         NgbModule
       ],
-      providers: [
-        NgbModal,
-        NgbActiveModal
-      ]
+      providers: []
     })
     .compileComponents();
   }));
@@ -25,18 +23,18 @@ describe('NotifyComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NotifyComponent);
     component = fixture.componentInstance;
+    notifyService = TestBed.get(NotifyService);
     fixture.detectChanges();
-    activeModal = TestBed.inject(NgbActiveModal);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should dismiss when close() is called', () => {
-    spyOn(activeModal, 'dismiss');
+  it('close should clear the notification', () => {
+    const spy = spyOn(notifyService, 'clear');
     component.close();
-    expect(activeModal.dismiss).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
 });
