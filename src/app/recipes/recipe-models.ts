@@ -2,6 +2,10 @@ export class Recipe {
     recipeId: string;
     title: string;
     description: string;
+    categories: string[];
+    servings: number;
+    prepTime: string;
+    cookTime: string;
     ingredients: Ingredient[];
     steps: Step[];
 }

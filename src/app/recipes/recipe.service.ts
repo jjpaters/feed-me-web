@@ -1,37 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-import { Recipe, Step } from './recipe-models';
+import { Recipe } from './recipe-models';
+import { ProtectedService } from '../core-blocks/auth/protected.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
 
-  recipes = new Array<Recipe>();
+  constructor(private protectedService: ProtectedService) { }
 
-  constructor(private http: HttpClient) {
-    const recipe = new Recipe();
-    recipe.description = 'Delicious mac and cheese';
-    recipe.title = 'Mac and Cheese';
-    recipe.recipeId = '1234';
-    recipe.steps = new Array<Step>();
+  async getRecipes(): Promise<Recipe[]> {
+    let recipes: Recipe[];
 
+    try {
+      const userId = await this.protectedService.getUserId();
+      recipes = await this.protectedService.get(`users/${userId}/recipes`);
+    } catch (ex) {
+      recipes = new Array<Recipe>();
+      console.log(`${ex.message}`);
+    }
 
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
+    return recipes;
   }
 
-  async getRecipes(userId: string): Promise<Recipe[]> {
-    return this.recipes;
+  async getRecipe(recipeId: string): Promise<Recipe> {
+    let recipe: Recipe;
+
+    try {
+      const userId = await this.protectedService.getUserId();
+      recipe = await this.protectedService.get(`users/${userId}/recipes/${recipeId}`);
+    } catch (ex) {
+      console.log(`${ex.message}`);
+    }
+
+    return recipe;
   }
 
-  async getRecipe(userId: string, recipeId: string): Promise<Recipe> {
-    return this.recipes[0];
-  }
 }

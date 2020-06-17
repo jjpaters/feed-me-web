@@ -1,44 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleLeft, faTrash, faWrench } from '@fortawesome/free-solid-svg-icons';
 
+import { NotifyService } from '../../core-blocks/notify/notify.service';
+import { RecipeForm } from '../recipe-form/recipe-form';
 import { RecipeService } from '../recipe.service';
-import { Recipe } from '../recipe-models';
-import { ValidationFormControl } from '../../auth-pages/form-controls/validation-form-control';
 
 @Component({
   selector: 'app-recipe-page',
   templateUrl: './recipe-page.component.html',
   styleUrls: ['./recipe-page.component.scss']
 })
-export class RecipePageComponent implements OnInit {
+export class RecipePageComponent extends RecipeForm implements OnInit {
 
-  editMode = false;
-  form: FormGroup;
+  iconBack = faArrowAltCircleLeft;
   iconDelete = faTrash;
+  iconEdit = faWrench;
   recipeId: string;
-  userId: string;
-  recipe: Recipe;
-  submitted = false;
+  originalTitle: string;
 
-  get title() {
-    return this.form.get('title');
+  constructor(private route: ActivatedRoute, private notifyService: NotifyService, private recipeService: RecipeService) {
+    super();
   }
-
-  get description() {
-    return this.form.get('description');
-  }
-
-  get showTitleErrors() {
-    return ValidationFormControl.showErrors(this.title, this.submitted);
-  }
-
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute) { }
 
   async ngOnInit(): Promise<void> {
     this.recipeId = this.route.snapshot.paramMap.get('id');
-    this.userId = '';
     await this.getRecipe();
   }
 
@@ -57,24 +43,16 @@ export class RecipePageComponent implements OnInit {
 
   async getRecipe(): Promise<void> {
     try {
-      this.recipe = await this.recipeService.getRecipe(this.userId, this.recipeId);
-      this.loadForm();
+      this.recipe = await this.recipeService.getRecipe(this.recipeId);
+      this.originalTitle = this.recipe.title;
+      this.loadFormGroup();
     } catch {
-
+      this.notifyService.error(`Unable to get the recipe; please try again.`);
     }
   }
 
   async saveRecipe() {
-
+    this.resetForm();
   }
-
-  private loadForm() {
-    this.form = new FormGroup({
-      title: new FormControl(this.recipe.title, [Validators.required]),
-      description: new FormControl(this.recipe.description)
-    });
-  }
-
-
 
 }
