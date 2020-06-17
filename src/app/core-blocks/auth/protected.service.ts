@@ -11,7 +11,7 @@ export class ProtectedService {
 
   async get(url: string): Promise<any> {
     const headers = await this.protectedHeaders();
-    
+
     const response = await API.get(`ApiGateway`, url, headers);
 
     return response;

@@ -14,12 +14,12 @@ export class RecipeSearchPageComponent implements OnInit {
   constructor(private recipeService: RecipeService) { }
 
   async ngOnInit(): Promise<void> {
-    await this.getRecipes('');
+    await this.getRecipes();
   }
 
-  async getRecipes(userId: string): Promise<void> {
+  async getRecipes(): Promise<void> {
     try {
-      this.recipes = await this.recipeService.getRecipes(userId);
+      this.recipes = await this.recipeService.getRecipes();
     } catch {
 
     }

@@ -23,7 +23,7 @@ describe('NotifyComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NotifyComponent);
     component = fixture.componentInstance;
-    notifyService = TestBed.get(NotifyService);
+    notifyService = TestBed.inject(NotifyService);
     fixture.detectChanges();
   });
 
