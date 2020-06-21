@@ -1,5 +1,5 @@
-import { Recipe } from '../recipe-models';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Recipe, Ingredient } from '../recipe-models';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { ValidationFormControl } from '../../auth-pages/form-controls/validation-form-control';
 
 export class RecipeForm {
@@ -32,6 +32,8 @@ export class RecipeForm {
   get showTitleErrors() {
     return ValidationFormControl.showErrors(this.title, this.submitted);
   }
+
+  constructor() { }
 
   loadFormGroup() {
     this.form = new FormGroup({

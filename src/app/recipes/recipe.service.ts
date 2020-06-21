@@ -10,31 +10,32 @@ export class RecipeService {
 
   constructor(private protectedService: ProtectedService) { }
 
+  async createRecipe(recipe: Recipe): Promise<Recipe> {
+    const userId = await this.protectedService.getUserId();
+    const createdRecipe = await this.protectedService.post(`users/${userId}/recipes`, recipe);
+    return createdRecipe;
+  }
+
+  async deleteRecipe(recipeId: string): Promise<void> {
+    const userId = await this.protectedService.getUserId();
+    await this.protectedService.delete(`users/${userId}/recipes/${recipeId}`);
+  }
+
   async getRecipes(): Promise<Recipe[]> {
-    let recipes: Recipe[];
-
-    try {
-      const userId = await this.protectedService.getUserId();
-      recipes = await this.protectedService.get(`users/${userId}/recipes`);
-    } catch (ex) {
-      recipes = new Array<Recipe>();
-      console.log(`${ex.message}`);
-    }
-
+    const userId = await this.protectedService.getUserId();
+    const recipes = await this.protectedService.get(`users/${userId}/recipes`);
     return recipes;
   }
 
   async getRecipe(recipeId: string): Promise<Recipe> {
-    let recipe: Recipe;
-
-    try {
-      const userId = await this.protectedService.getUserId();
-      recipe = await this.protectedService.get(`users/${userId}/recipes/${recipeId}`);
-    } catch (ex) {
-      console.log(`${ex.message}`);
-    }
-
+    const userId = await this.protectedService.getUserId();
+    const recipe = await this.protectedService.get(`users/${userId}/recipes/${recipeId}`);
     return recipe;
+  }
+
+  async updateRecipe(recipe: Recipe): Promise<void> {
+    const userId = await this.protectedService.getUserId();
+    await this.protectedService.patch(`users/${userId}/recipes/${recipe.recipeId}`, recipe);
   }
 
 }

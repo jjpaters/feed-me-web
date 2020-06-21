@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowAltCircleLeft, faTrash, faWrench } from '@fortawesome/free-solid-svg-icons';
 
 import { NotifyService } from '../../core-blocks/notify/notify.service';
 import { RecipeForm } from '../recipe-form/recipe-form';
 import { RecipeService } from '../recipe.service';
+import { Ingredient, Step } from '../recipe-models';
 
 @Component({
   selector: 'app-recipe-page',
@@ -19,7 +20,11 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
   recipeId: string;
   originalTitle: string;
 
-  constructor(private route: ActivatedRoute, private notifyService: NotifyService, private recipeService: RecipeService) {
+  constructor(
+    private route: ActivatedRoute, 
+    private notifyService: NotifyService, 
+    private recipeService: RecipeService, 
+    private router: Router) {
     super();
   }
 
@@ -28,16 +33,21 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     await this.getRecipe();
   }
 
-  async cancelEditRecipe() {
+  async cancelEditRecipe(): Promise<void> {
     await this.getRecipe();
     this.editMode = false;
   }
 
-  async deleteRecipe() {
-
+  async deleteRecipe(): Promise<void> {
+    try {
+      await this.recipeService.deleteRecipe(this.recipe.recipeId);
+      this.router.navigate(["/home"]);
+    } catch (ex) {
+      this.notifyService.error(`Unable to delete the recipe; please try again.`);
+    }
   }
 
-  async editRecipe() {
+  async editRecipe(): Promise<void> {
     this.editMode = true;
   }
 
@@ -51,8 +61,38 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     }
   }
 
-  async saveRecipe() {
-    this.resetForm();
+  async removeIngredient(ingredient: Ingredient): Promise<void> {
+    const index = this.recipe.ingredients.indexOf(ingredient);
+    if (index > -1) {
+      this.recipe.ingredients.splice(index, 1);
+    }
+  }
+
+  async removeStep(step: Step): Promise<void> {
+    const index = this.recipe.steps.indexOf(step);
+    if (index > -1) {
+      this.recipe.steps.splice(index, 1);
+    }
+  }
+
+  async saveRecipe(): Promise<void> {
+    if (this.form.valid) {
+      try {
+        this.mapRecipeForm();
+        await this.recipeService.updateRecipe(this.recipe);
+        this.resetForm();
+      } catch (ex) {
+        this.notifyService.error(`Unable to save the recipe; please try again`);
+      }
+    }
+  }
+
+  mapRecipeForm() {
+    this.recipe.cookTime = this.cookTime.value;
+    this.recipe.description = this.description.value;
+    this.recipe.prepTime = this.prepTime.value;
+    this.recipe.servings = this.servings.value;
+    this.recipe.title = this.title.value;
   }
 
 }
