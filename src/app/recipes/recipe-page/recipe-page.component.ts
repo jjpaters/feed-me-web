@@ -21,9 +21,9 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
   originalTitle: string;
 
   constructor(
-    private route: ActivatedRoute, 
-    private notifyService: NotifyService, 
-    private recipeService: RecipeService, 
+    private route: ActivatedRoute,
+    private notifyService: NotifyService,
+    private recipeService: RecipeService,
     private router: Router) {
     super();
   }
@@ -41,7 +41,7 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
   async deleteRecipe(): Promise<void> {
     try {
       await this.recipeService.deleteRecipe(this.recipe.recipeId);
-      this.router.navigate(["/home"]);
+      this.router.navigate(['/home']);
     } catch (ex) {
       this.notifyService.error(`Unable to delete the recipe; please try again.`);
     }
