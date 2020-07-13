@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CoreBlocksModule } from '../core-blocks/core-blocks.module';
 import { RouterModule, Routes } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { RecipeService } from './recipe.service';
@@ -25,7 +25,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule,
+    CoreBlocksModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
