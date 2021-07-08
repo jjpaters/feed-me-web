@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe-models';
 
@@ -9,17 +11,18 @@ import { Recipe } from '../recipe-models';
 })
 export class RecipeSearchPageComponent implements OnInit {
 
+  iconAdd = faPlusSquare;
   recipes: Recipe[];
 
   constructor(private recipeService: RecipeService) { }
 
   async ngOnInit(): Promise<void> {
-    await this.getRecipes('');
+    await this.getRecipes();
   }
 
-  async getRecipes(userId: string): Promise<void> {
+  async getRecipes(): Promise<void> {
     try {
-      this.recipes = await this.recipeService.getRecipes(userId);
+      this.recipes = await this.recipeService.getRecipes();
     } catch {
 
     }

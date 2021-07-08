@@ -4,8 +4,9 @@ import Amplify from '@aws-amplify/core';
 import Auth from '@aws-amplify/auth';
 import { AmplifyAngularModule, AmplifyModules, AmplifyService } from 'aws-amplify-angular';
 
-import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
+import { ProtectedService } from './protected.service';
 
 Amplify.configure({ Auth: environment.aws.auth, API: environment.aws.api });
 
@@ -17,6 +18,7 @@ Amplify.configure({ Auth: environment.aws.auth, API: environment.aws.api });
   ],
   providers: [
     AuthService,
+    ProtectedService,
     {
       provide: AmplifyService,
       useFactory:  () => {

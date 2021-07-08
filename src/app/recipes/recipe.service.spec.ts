@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
+import { CoreBlocksModule } from '../core-blocks/core-blocks.module';
 import { RecipeService } from './recipe.service';
 
 describe('RecipeService', () => {
@@ -9,6 +10,7 @@ describe('RecipeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
+        CoreBlocksModule,
         HttpClientTestingModule
       ]
     });

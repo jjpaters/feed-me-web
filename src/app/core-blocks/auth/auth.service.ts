@@ -60,19 +60,6 @@ export class AuthService {
     return from(Auth.forgotPasswordSubmit(username, code, password, clientMetadata));
   }
 
-  async protectedHeaders() {
-
-    const token = (await this.currentSession()).getIdToken().getJwtToken();
-
-    const init = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    };
-
-    return init;
-  }
-
   resendSignUp(username: string, clientMetadata?: ClientMetadata): Observable<any> {
     return from(Auth.resendSignUp(username, clientMetadata));
   }

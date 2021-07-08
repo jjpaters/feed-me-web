@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
@@ -28,7 +27,6 @@ import { RecipesModule } from './recipes/recipes.module';
     HttpClientModule,
     ReactiveFormsModule,
     RecipesModule,
-    FontAwesomeModule,
     NgbModule
   ],
   providers: [],

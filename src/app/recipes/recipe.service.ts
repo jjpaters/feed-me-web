@@ -1,37 +1,41 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-import { Recipe, Step } from './recipe-models';
+import { Recipe } from './recipe-models';
+import { ProtectedService } from '../core-blocks/auth/protected.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
 
-  recipes = new Array<Recipe>();
+  constructor(private protectedService: ProtectedService) { }
 
-  constructor(private http: HttpClient) {
-    const recipe = new Recipe();
-    recipe.description = 'Delicious mac and cheese';
-    recipe.title = 'Mac and Cheese';
-    recipe.recipeId = '1234';
-    recipe.steps = new Array<Step>();
-
-
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
+  async createRecipe(recipe: Recipe): Promise<Recipe> {
+    const userId = await this.protectedService.getUserId();
+    const createdRecipe = await this.protectedService.post(`users/${userId}/recipes`, recipe);
+    return createdRecipe;
   }
 
-  async getRecipes(userId: string): Promise<Recipe[]> {
-    return this.recipes;
+  async deleteRecipe(recipeId: string): Promise<void> {
+    const userId = await this.protectedService.getUserId();
+    await this.protectedService.delete(`users/${userId}/recipes/${recipeId}`);
   }
 
-  async getRecipe(userId: string, recipeId: string): Promise<Recipe> {
-    return this.recipes[0];
+  async getRecipes(): Promise<Recipe[]> {
+    const userId = await this.protectedService.getUserId();
+    const recipes = await this.protectedService.get(`users/${userId}/recipes`);
+    return recipes;
   }
+
+  async getRecipe(recipeId: string): Promise<Recipe> {
+    const userId = await this.protectedService.getUserId();
+    const recipe = await this.protectedService.get(`users/${userId}/recipes/${recipeId}`);
+    return recipe;
+  }
+
+  async updateRecipe(recipe: Recipe): Promise<void> {
+    const userId = await this.protectedService.getUserId();
+    await this.protectedService.patch(`users/${userId}/recipes/${recipe.recipeId}`, recipe);
+  }
+
 }
