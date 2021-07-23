@@ -7,14 +7,14 @@
       </h1>
     </div>
     <div class="col">
-      <a [routerLink]="['/add-recipe']" class="btn btn-sm btn-primary m-1 float-right">
+      <a [routerLink]="['/edit-recipes']" class="btn btn-sm btn-primary m-1 float-right">
         <fa-icon [icon]="iconAdd"></fa-icon> Add Recipe
       </a>
     </div>
   </div>
 
   <div class="alert alert-primary" role="alert" *ngIf="recipes && recipes.length === 0">
-    It looks like you haven't saved any recipes. Let's <a [routerLink]="['/add-recipe']" class="alert-link">get
+    It looks like you haven't saved any recipes. Let's <a [routerLink]="['/edit-recipes']" class="alert-link">get
       started</a>.
   </div>
 

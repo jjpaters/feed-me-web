@@ -5,7 +5,7 @@ import { faArrowAltCircleLeft, faTrash, faWrench } from '@fortawesome/free-solid
 import { NotifyService } from '../../core-blocks/notify/notify.service';
 import { RecipeForm } from '../recipe-form/recipe-form';
 import { RecipeService } from '../recipe.service';
-import { Ingredient, Step } from '../recipe-models';
+import { Ingredient, Recipe, Step } from '../recipe-models';
 
 @Component({
   selector: 'app-recipe-page',
@@ -40,21 +40,28 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
 
   async deleteRecipe(): Promise<void> {
     try {
-      await this.recipeService.deleteRecipe(this.recipe.recipeId);
+      if (this.recipeId) {
+        await this.recipeService.deleteRecipe(this.recipe.recipeId);
+      }
       this.router.navigate(['/home']);
     } catch (ex) {
       this.notifyService.error(`Unable to delete the recipe; please try again.`);
     }
   }
 
-  async editRecipe(): Promise<void> {
+  editRecipe(): void {
     this.editMode = true;
   }
 
   async getRecipe(): Promise<void> {
     try {
-      this.recipe = await this.recipeService.getRecipe(this.recipeId);
-      this.originalTitle = this.recipe.title;
+      if (this.recipeId) {
+        this.recipe = await this.recipeService.getRecipe(this.recipeId);
+        this.originalTitle = this.recipe.title;
+      } else {
+        this.recipe = new Recipe();
+        this.editMode = true;
+      }
       this.loadFormGroup();
     } catch {
       this.notifyService.error(`Unable to get the recipe; please try again.`);

@@ -12,8 +12,8 @@ export class RecipeService {
 
   async createRecipe(recipe: Recipe): Promise<Recipe> {
     const userId = await this.protectedService.getUserId();
-    const createdRecipe = await this.protectedService.post(`users/${userId}/recipes`, recipe);
-    return createdRecipe;
+    const res = await this.protectedService.post(`users/${userId}/recipes`, recipe);
+    return res;
   }
 
   async deleteRecipe(recipeId: string): Promise<void> {
@@ -23,19 +23,20 @@ export class RecipeService {
 
   async getRecipes(): Promise<Recipe[]> {
     const userId = await this.protectedService.getUserId();
-    const recipes = await this.protectedService.get(`users/${userId}/recipes`);
-    return recipes;
+    const res = await this.protectedService.get(`users/${userId}/recipes`);
+    return res;
   }
 
   async getRecipe(recipeId: string): Promise<Recipe> {
     const userId = await this.protectedService.getUserId();
-    const recipe = await this.protectedService.get(`users/${userId}/recipes/${recipeId}`);
-    return recipe;
+    const res = await this.protectedService.get(`users/${userId}/recipes/${recipeId}`);
+    return res;
   }
 
-  async updateRecipe(recipe: Recipe): Promise<void> {
+  async updateRecipe(recipe: Recipe): Promise<Recipe> {
     const userId = await this.protectedService.getUserId();
-    await this.protectedService.patch(`users/${userId}/recipes/${recipe.recipeId}`, recipe);
+    const res = await this.protectedService.patch(`users/${userId}/recipes/${recipe.recipeId}`, recipe);
+    return res;
   }
 
 }
