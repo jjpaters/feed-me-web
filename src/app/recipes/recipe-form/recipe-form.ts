@@ -1,6 +1,6 @@
 import { Recipe } from '../recipe-models';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ValidationFormControl } from '../../auth-pages/form-controls/validation-form-control';
+import { ValidationFormControl } from 'src/app/core-blocks/form/validation-form-control';
 
 export class RecipeForm {
 
