@@ -36,7 +36,7 @@
     "@angular/cli": "~10.2.3",
     "@angular/compiler-cli": "~10.2.5",
     "@angular/language-service": "~10.2.5",
-    "@ng-bootstrap/ng-bootstrap": "^6.1.0",
+    "@ng-bootstrap/ng-bootstrap": "^8.0.0",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
