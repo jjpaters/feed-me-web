@@ -1,4 +1,4 @@
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 export class ValidationFormControl {
     static showErrors(control: AbstractControl, submitted: boolean): boolean {
