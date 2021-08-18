@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   aws-s3: circleci/aws-s3@1.0.12
-  browser-tools: circleci/browser-tools@1.1.0
+  browser-tools: circleci/browser-tools@1.2.0
 
 #############################################################
 # Define workflows
@@ -65,11 +65,13 @@ jobs:
     docker:
       - image: cimg/node:14.15.5-browsers
     steps:
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - checkout
       - run: |
           node --version
           google-chrome --version
+          chromedriver --version
       - restore_cache:
           key: v1-{{ checksum "package.json" }}
       - run: npm install
