@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotifyService } from './notify.service';
@@ -7,7 +7,7 @@ import { NotifyServiceModule } from './notify-service.module';
 describe('NotifyService', () => {
   let service: NotifyService;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         NotifyServiceModule,

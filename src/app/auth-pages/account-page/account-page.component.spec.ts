@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AuthModule } from '@auth0/auth0-angular';
 
 import { CoreBlocksModule } from 'src/app/core-blocks/core-blocks.module';
@@ -8,7 +8,7 @@ describe('AccountPageComponent', () => {
   let component: AccountPageComponent;
   let fixture: ComponentFixture<AccountPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AccountPageComponent ],
       imports: [
