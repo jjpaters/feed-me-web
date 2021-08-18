@@ -65,9 +65,9 @@ jobs:
     docker:
       - image: cimg/node:14.15.5-browsers
     steps:
+      - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-      - checkout
       - run: |
           node --version
           google-chrome --version
