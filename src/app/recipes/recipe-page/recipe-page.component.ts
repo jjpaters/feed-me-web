@@ -1,80 +1,105 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faArrowAltCircleLeft, faTrash, faWrench } from '@fortawesome/free-solid-svg-icons';
 
+import { NotifyService } from '../../core-blocks/notify/notify.service';
+import { RecipeForm } from '../recipe-form/recipe-form';
 import { RecipeService } from '../recipe.service';
-import { Recipe } from '../recipe-models';
-import { ValidationFormControl } from '../../auth-pages/form-controls/validation-form-control';
+import { Ingredient, Recipe, Step } from '../recipe-models';
 
 @Component({
   selector: 'app-recipe-page',
   templateUrl: './recipe-page.component.html',
   styleUrls: ['./recipe-page.component.scss']
 })
-export class RecipePageComponent implements OnInit {
+export class RecipePageComponent extends RecipeForm implements OnInit {
 
-  editMode = false;
-  form: FormGroup;
+  iconBack = faArrowAltCircleLeft;
   iconDelete = faTrash;
+  iconEdit = faWrench;
   recipeId: string;
-  userId: string;
-  recipe: Recipe;
-  submitted = false;
+  originalTitle: string;
 
-  get title() {
-    return this.form.get('title');
+  constructor(
+    private route: ActivatedRoute,
+    private notifyService: NotifyService,
+    private recipeService: RecipeService,
+    private router: Router) {
+    super();
   }
-
-  get description() {
-    return this.form.get('description');
-  }
-
-  get showTitleErrors() {
-    return ValidationFormControl.showErrors(this.title, this.submitted);
-  }
-
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute) { }
 
   async ngOnInit(): Promise<void> {
     this.recipeId = this.route.snapshot.paramMap.get('id');
-    this.userId = '';
     await this.getRecipe();
   }
 
-  async cancelEditRecipe() {
+  async cancelEditRecipe(): Promise<void> {
     await this.getRecipe();
     this.editMode = false;
   }
 
-  async deleteRecipe() {
-
+  async deleteRecipe(): Promise<void> {
+    try {
+      if (this.recipeId) {
+        await this.recipeService.deleteRecipe(this.recipe.recipeId);
+      }
+      this.router.navigate(['/home']);
+    } catch (ex) {
+      this.notifyService.error(`Unable to delete the recipe; please try again.`);
+    }
   }
 
-  async editRecipe() {
+  editRecipe(): void {
     this.editMode = true;
   }
 
   async getRecipe(): Promise<void> {
     try {
-      this.recipe = await this.recipeService.getRecipe(this.userId, this.recipeId);
-      this.loadForm();
+      if (this.recipeId) {
+        this.recipe = await this.recipeService.getRecipe(this.recipeId);
+        this.originalTitle = this.recipe.title;
+      } else {
+        this.recipe = new Recipe();
+        this.editMode = true;
+      }
+      this.loadFormGroup();
     } catch {
-
+      this.notifyService.error(`Unable to get the recipe; please try again.`);
     }
   }
 
-  async saveRecipe() {
-
+  async removeIngredient(ingredient: Ingredient): Promise<void> {
+    const index = this.recipe.ingredients.indexOf(ingredient);
+    if (index > -1) {
+      this.recipe.ingredients.splice(index, 1);
+    }
   }
 
-  private loadForm() {
-    this.form = new FormGroup({
-      title: new FormControl(this.recipe.title, [Validators.required]),
-      description: new FormControl(this.recipe.description)
-    });
+  async removeStep(step: Step): Promise<void> {
+    const index = this.recipe.steps.indexOf(step);
+    if (index > -1) {
+      this.recipe.steps.splice(index, 1);
+    }
   }
 
+  async saveRecipe(): Promise<void> {
+    if (this.form.valid) {
+      try {
+        this.mapRecipeForm();
+        await this.recipeService.updateRecipe(this.recipe);
+        this.resetForm();
+      } catch (ex) {
+        this.notifyService.error(`Unable to save the recipe; please try again`);
+      }
+    }
+  }
 
+  mapRecipeForm() {
+    this.recipe.cookTime = this.cookTime.value;
+    this.recipe.description = this.description.value;
+    this.recipe.prepTime = this.prepTime.value;
+    this.recipe.servings = this.servings.value;
+    this.recipe.title = this.title.value;
+  }
 
 }

@@ -1,18 +1,7 @@
 export const environment = {
-  production: true,
-  aws: {
-    auth: {
-      region: 'us-east-1',
-      userPoolId: 'us-east-1_lYLxsxHLD',
-      userPoolWebClientId: '6ja50vtb9gvqodd3cpnv5g4pkv',
-    },
-    api: {
-      endpoints: [
-        {
-          name: 'ApiGateway',
-          endpoint: 'https://api.feed-me.io/'
-        }
-      ]
-    }
+  production: false,
+  auth: {
+    domain: 'feed-me-np.us.auth0.com',
+    clientId: 'hSuoo3rTQHZufL5igpgywsPSl0BZvqvK'
   }
 };

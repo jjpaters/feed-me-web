@@ -32,7 +32,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
 
 #############################################################
 # Define jobs

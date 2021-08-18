@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { AuthService } from 'src/app/core-blocks/auth/auth.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-account-page',
@@ -10,10 +9,6 @@ import { AuthService } from 'src/app/core-blocks/auth/auth.service';
 export class AccountPageComponent implements OnInit {
 
   constructor(public authService: AuthService) { }
-
-  get email(): string {
-    return this.authService.user?.signInUserSession?.idToken?.payload?.email;
-  }
 
   ngOnInit() {
   }

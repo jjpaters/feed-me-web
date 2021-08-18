@@ -1,37 +1,42 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { Recipe, Step } from './recipe-models';
+import { Recipe } from './recipe-models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
 
-  recipes = new Array<Recipe>();
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) {
-    const recipe = new Recipe();
-    recipe.description = 'Delicious mac and cheese';
-    recipe.title = 'Mac and Cheese';
-    recipe.recipeId = '1234';
-    recipe.steps = new Array<Step>();
-
-
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
-    this.recipes.push(recipe);
+  async createRecipe(recipe: Recipe): Promise<Recipe> {
+    const userId = `1`;
+    const res = await this.http.post<Recipe>(`users/${userId}/recipes`, recipe).toPromise();
+    return res;
   }
 
-  async getRecipes(userId: string): Promise<Recipe[]> {
-    return this.recipes;
+  async deleteRecipe(recipeId: string): Promise<void> {
+    const userId = `1`;
+    await this.http.delete(`users/${userId}/recipes/${recipeId}`).toPromise();
   }
 
-  async getRecipe(userId: string, recipeId: string): Promise<Recipe> {
-    return this.recipes[0];
+  async getRecipes(): Promise<Recipe[]> {
+    const userId = `1`;
+    const res = await this.http.get<Recipe[]>(`users/${userId}/recipes`).toPromise();
+    return res;
   }
+
+  async getRecipe(recipeId: string): Promise<Recipe> {
+    const userId = `1`;
+    const res = await this.http.get<Recipe>(`users/${userId}/recipes/${recipeId}`).toPromise();
+    return res;
+  }
+
+  async updateRecipe(recipe: Recipe): Promise<Recipe> {
+    const userId = `1`;
+    const res = await this.http.patch<Recipe>(`users/${userId}/recipes/${recipe.recipeId}`, recipe).toPromise();
+    return res;
+  }
+
 }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
+import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { AuthService } from './core-blocks/auth/auth.service';
+import { AuthService } from '@auth0/auth0-angular';
 import { NotifyService } from './core-blocks/notify/notify.service';
 import { faUtensils, faUser, faSignOutAlt, faDrumstickBite } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,6 +13,7 @@ import { faUtensils, faUser, faSignOutAlt, faDrumstickBite } from '@fortawesome/
 })
 export class AppComponent {
 
+  isAuthenticated$: Observable<boolean>;
   iconLogo = faUtensils;
   iconMyAccount = faUser;
   iconRecipe = faDrumstickBite;
@@ -19,7 +21,9 @@ export class AppComponent {
 
   navbarOpen = false;
 
-  constructor(public authService: AuthService, private notifyService: NotifyService, private router: Router) {
+  constructor(private authService: AuthService, private notifyService: NotifyService, private router: Router) {
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
+
     router.events
       .pipe(filter(event => event instanceof NavigationStart))
       .subscribe(() => {
@@ -31,10 +35,13 @@ export class AppComponent {
     this.navbarOpen = false;
   }
 
+  logIn(): void {
+    this.authService.loginWithRedirect();
+  }
+
   logOut(): void {
     this.closeMenu();
-    this.authService.signOut();
-    this.navigate('/home');
+    this.authService.logout();
   }
 
   navigate(route: string) {

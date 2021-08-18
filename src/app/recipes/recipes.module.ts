@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CoreBlocksModule } from '../core-blocks/core-blocks.module';
 import { RouterModule, Routes } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { RecipeService } from './recipe.service';
@@ -11,7 +11,8 @@ import { RecipeSearchPageComponent } from './recipe-search-page/recipe-search-pa
 
 const routes: Routes = [
   { path: 'recipes', component: RecipeSearchPageComponent },
-  { path: 'recipes/:id', component: RecipePageComponent }
+  { path: 'edit-recipes', component: RecipePageComponent },
+  { path: 'edit-recipes/:id', component: RecipePageComponent }
 ];
 
 @NgModule({
@@ -22,7 +23,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule,
+    CoreBlocksModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],

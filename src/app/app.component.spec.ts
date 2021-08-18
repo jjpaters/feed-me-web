@@ -1,21 +1,24 @@
-import { TestBed, async, ComponentFixture, inject } from '@angular/core/testing';
+import { TestBed, ComponentFixture, inject, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthModule } from '@auth0/auth0-angular';
+
 import { AppComponent } from './app.component';
 import { CoreBlocksModule } from './core-blocks/core-blocks.module';
 import { Router } from '@angular/router';
-import { AuthService } from './core-blocks/auth/auth.service';
 import { NotifyService } from './core-blocks/notify/notify.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
+        AuthModule.forRoot({
+          domain: '',
+          clientId: ''
+        }),
         CoreBlocksModule,
-        FontAwesomeModule,
         RouterTestingModule
       ],
       declarations: [
@@ -41,15 +44,6 @@ describe('AppComponent', () => {
 
     expect(component.navbarOpen).toBeFalsy();
   });
-
-  it(`logOut should signOut amd navigate to home`, inject([AuthService, Router], (authService: AuthService, router: Router) => {
-    spyOn(authService, 'signOut').and.stub();
-    spyOn(router, 'navigate').and.stub();
-    component.logOut();
-
-    expect(authService.signOut).toHaveBeenCalled();
-    expect(router.navigate).toHaveBeenCalledWith(['/home']);
-  }));
 
   it(`navigate should clear notification`, inject([NotifyService, Router], (notifyService: NotifyService, router: Router) => {
     spyOn(notifyService, 'clear').and.stub();

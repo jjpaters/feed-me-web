@@ -14,13 +14,13 @@
   <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarDefault" [ngClass]="{ 'show': navbarOpen }">
     <ul class="navbar-nav ml-auto flex-nowrap">
 
-      <li class="nav-item" *ngIf="authService.signedIn">
+      <li class="nav-item" *ngIf="(isAuthenticated$ | async)">
         <a class="nav-link" routerLink="/recipes" [routerLinkActive]="['active']" (click)="closeMenu()">
           <fa-icon [icon]="iconRecipe"></fa-icon> Recipes
         </a>
       </li>
 
-      <li ngbDropdown class="nav-item" *ngIf="authService.signedIn">
+      <li ngbDropdown class="nav-item" *ngIf="(isAuthenticated$ | async)">
         <a href (click)="false" class="nav-link" ngbDropdownToggle>
           <fa-icon [icon]="iconMyAccount"></fa-icon> My Account
         </a>
@@ -34,14 +34,14 @@
           </button>
         </div>
       </li>
-
-      <li class="nav-item" *ngIf="!authService.signedIn">
-        <a class="nav-link" routerLink="/account" [routerLinkActive]="['active']">
-          <fa-icon [icon]="iconMyAccount"></fa-icon> My Account
-        </a>
-      </li>
-
     </ul>
+
+    <div class="d-flex" *ngIf="(isAuthenticated$ | async) === (false || null || undefined)">
+      <button class="btn btn-primary" type="submit" (click)="logIn()">
+        <fa-icon [icon]="iconMyAccount"></fa-icon>
+        My Account
+      </button>
+    </div>
   </div>
 </nav>
 
