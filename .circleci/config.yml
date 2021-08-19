@@ -71,6 +71,7 @@ jobs:
       - run: npm install
       - run: npm run test -- --watch=false --code-coverage
       - coveralls/upload
+          path_to_lcov: ./coverage/feed-me-web/lcov.info
       # - run: cat ./coverage/feed-me-web/lcov.info  | ./node_modules/coveralls/bin/coveralls.js
 
   e2e_tests:
