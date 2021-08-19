@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.12
+  aws-s3: circleci/aws-s3@3.0.0
   coveralls: coveralls/coveralls@1.0.6
 
 #############################################################
@@ -26,10 +26,10 @@ workflows:
           context: AWS
           requires:
             - build
-          filters:
-            branches:
-              only:
-                - main
+#          filters:
+#            branches:
+#              only:
+#                - main
 
 #############################################################
 # Define jobs
