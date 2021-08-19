@@ -2,7 +2,6 @@ version: 2.1
 
 orbs:
   aws-s3: circleci/aws-s3@1.0.12
-  browser-tools: circleci/browser-tools@1.2.0
 
 #############################################################
 # Define workflows
@@ -38,7 +37,7 @@ jobs:
   install_dependencies:
     working_directory: ~/app
     docker:
-      - image: circleci/node:10-browsers
+      - image: cimg/node:14.15.5-browsers
     steps:
       - checkout
       - restore_cache:
