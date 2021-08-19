@@ -101,7 +101,7 @@ jobs:
 
   deploy:
     docker:
-      - image: buildpack-deps:trusty
+      - image: 'cimg/python:3.6'
     steps:
       - checkout
       - attach_workspace:
