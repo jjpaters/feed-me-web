@@ -26,11 +26,8 @@ module.exports = function (config) {
     },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/feed-me-web'),
-      reports: [ 
-        { type: 'html' },
-        { type: 'lcovonly' },
-        { type: 'text-summary' }
-      ],
+      subdir: '.',
+      reporters: [{ type: 'lcov' }]
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
