@@ -23,7 +23,7 @@ workflows:
             - lint
             - unit_tests
       - deploy:
-#          context: AWS
+          context: AWS
           requires:
             - build
 #          filters:
@@ -101,16 +101,11 @@ jobs:
 
   deploy:
     docker:
-      - image: 'cimg/python:3.6'
+      - image: 'circleci/aws-cli@2.0.3'
     steps:
       - checkout
       - attach_workspace:
           at: .
-      - run: ls
-      - run: dir
       - aws-s3/sync:
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-region: AWS_REGION
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           from: ./dist/feed-me-web
           to: 's3://feed-me.io'
