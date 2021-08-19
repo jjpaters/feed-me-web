@@ -101,11 +101,14 @@ jobs:
 
   deploy:
     docker:
-      - image: 'circleci/aws-cli@2.0.3'
+      - image: cimg/python:3.6
     steps:
       - checkout
       - attach_workspace:
           at: .
       - aws-s3/sync:
           from: ./dist/feed-me-web
-          to: 's3://feed-me.io'
+          to: "s3://feed-me.io"
+          arguments: |
+              --acl public-read \
+              --cache-control "max-age=86400"
