@@ -36,7 +36,7 @@
       </li>
     </ul>
 
-    <div class="d-flex" *ngIf="(isAuthenticated$ | async) === (false || null || undefined)">
+    <div class="d-flex" *ngIf="(isAuthenticated$ | async) === false">
       <button class="btn btn-primary" type="submit" (click)="logIn()">
         <fa-icon [icon]="iconMyAccount"></fa-icon>
         My Account

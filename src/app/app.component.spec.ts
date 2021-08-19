@@ -2,6 +2,7 @@ import { TestBed, ComponentFixture, inject, waitForAsync } from '@angular/core/t
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthModule } from '@auth0/auth0-angular';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreBlocksModule } from './core-blocks/core-blocks.module';
 import { Router } from '@angular/router';
@@ -14,6 +15,7 @@ describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
+        AppRoutingModule,
         AuthModule.forRoot({
           domain: '',
           clientId: ''
