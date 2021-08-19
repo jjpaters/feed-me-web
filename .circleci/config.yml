@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   aws-s3: circleci/aws-s3@1.0.12
+  coveralls: coveralls/coveralls@1.0.6
 
 #############################################################
 # Define workflows
@@ -69,7 +70,8 @@ jobs:
           key: v1-{{ checksum "package.json" }}
       - run: npm install
       - run: npm run test -- --watch=false --code-coverage
-      - run: cat ./coverage/feed-me-web/lcov.info  | ./node_modules/coveralls/bin/coveralls.js
+      - coveralls/upload
+      # - run: cat ./coverage/feed-me-web/lcov.info  | ./node_modules/coveralls/bin/coveralls.js
 
   e2e_tests:
     working_directory: ~/app
