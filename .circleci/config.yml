@@ -113,6 +113,8 @@ jobs:
       - attach_workspace:
           at: .
       - aws-s3/copy:
+          arguments: |
+            --recursive
           from: ./dist/feed-me-web
           to: "s3://feed-me.io"
           
