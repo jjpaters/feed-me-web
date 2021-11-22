@@ -15,21 +15,21 @@ workflows:
       - lint:
           requires:
             - install_dependencies
-#      - unit_tests:
-#          requires:
-#            - install_dependencies
+      - unit_tests:
+          requires:
+            - install_dependencies
       - build:
           requires:
             - lint
-#            - unit_tests
+            - unit_tests
       - deploy:
           context: AWS
           requires:
             - build
-#          filters:
-#            branches:
-#              only:
-#                - main
+          filters:
+            branches:
+              only:
+                - main
 
 #############################################################
 # Define jobs
@@ -112,9 +112,6 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-#      - aws-s3/copy:
-#          arguments: |
-#            --recursive
       - aws-s3/sync:
           from: ./dist/feed-me-web
           to: "s3://feed-me.io"
