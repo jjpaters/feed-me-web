@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.12
+  aws-s3: circleci/aws-s3@3.0.0
   coveralls: coveralls/coveralls@1.0.6
 
 #############################################################
@@ -26,10 +26,10 @@ workflows:
           context: AWS
           requires:
             - build
-          filters:
-            branches:
-              only:
-                - main
+#          filters:
+#            branches:
+#              only:
+#                - main
 
 #############################################################
 # Define jobs
@@ -42,10 +42,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package.json" }}
+          keys: 
+            - v1-deps-{{ checksum "package-lock.json" }}
+            - v1-deps-
       - run: npm install
       - save_cache:
-          key: v1-{{ checksum "package.json" }}
+          key: v1-deps-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
 
@@ -56,8 +58,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package.json" }}
-      - run: npm install
+          keys: 
+            - v1-deps-{{ checksum "package-lock.json" }}
+            - v1-deps-
       - run: npm run lint
 
   unit_tests:
@@ -67,8 +70,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package.json" }}
-      - run: npm install
+          keys: 
+            - v1-deps-{{ checksum "package-lock.json" }}
+            - v1-deps-
       - run: npm run test -- --watch=false --code-coverage
       - coveralls/upload:
           path_to_lcov: ./coverage/feed-me-web/lcov.info
@@ -80,8 +84,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package.json" }}
-      - run: npm install
+          keys: 
+            - v1-deps-{{ checksum "package-lock.json" }}
+            - v1-deps-
       - run: npm run e2e
 
   build:
@@ -91,8 +96,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package.json" }}
-      - run: npm install
+          keys: 
+            - v1-deps-{{ checksum "package-lock.json" }}
+            - v1-deps-
       - run: npm run build -- --prod
       - persist_to_workspace:
           root: .
@@ -101,14 +107,14 @@ jobs:
 
   deploy:
     docker:
-      - image: buildpack-deps:trusty
+      - image: cimg/python:3.6
     steps:
       - checkout
       - attach_workspace:
           at: .
-      - run: ls
-      - run: dir
-      - aws-s3/sync:
+      - aws-s3/copy:
+          arguments: |
+            --recursive
           from: ./dist/feed-me-web
-          to: 's3://feed-me.io/'
-          overwrite: true
+          to: "s3://feed-me.io"
+          
