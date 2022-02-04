@@ -12,8 +12,8 @@
     </div>
   </div>
   <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarDefault" [ngClass]="{ 'show': navbarOpen }">
-    <ul class="navbar-nav ml-auto flex-nowrap">
 
+    <ul class="navbar-nav ml-auto flex-nowrap">
       <li class="nav-item" *ngIf="(isAuthenticated$ | async)">
         <a class="nav-link" routerLink="/recipes" [routerLinkActive]="['active']" (click)="closeMenu()">
           <fa-icon [icon]="iconRecipe"></fa-icon> Recipes
@@ -25,7 +25,7 @@
           <fa-icon [icon]="iconMyAccount"></fa-icon> My Account
         </a>
         <div ngbDropdownMenu>
-          <button ngbDropdownItem (click)="navigate('/account')">
+          <button ngbDropdownItem (click)="navigate('/profile')">
             Profile
           </button>
           <div class="dropdown-divider"></div>
