@@ -22,7 +22,7 @@ export class AppComponent {
   navbarOpen = false;
 
   constructor(private coreAuthService: CoreAuthService, private notifyService: NotifyService, private router: Router) {
-    
+
     this.isAuthenticated$ = this.coreAuthService.isAuthenticated;
 
     router.events
