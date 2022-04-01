@@ -1,6 +1,5 @@
 import { TestBed, ComponentFixture, inject, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthModule } from '@auth0/auth0-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,10 +15,6 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         AppRoutingModule,
-        AuthModule.forRoot({
-          domain: '',
-          clientId: ''
-        }),
         CoreBlocksModule,
         RouterTestingModule
       ],

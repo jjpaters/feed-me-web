@@ -4,6 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotifyServiceModule } from './notify/notify-service.module';
+import { CoreAuthService } from './auth/core-auth.service';
 
 @NgModule({
   declarations: [],
@@ -16,6 +17,9 @@ import { NotifyServiceModule } from './notify/notify-service.module';
   exports: [
     FontAwesomeModule,
     NotifyServiceModule
+  ],
+  providers: [
+    CoreAuthService
   ]
 })
 export class CoreBlocksModule { }

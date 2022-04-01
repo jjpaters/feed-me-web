@@ -20,11 +20,12 @@ workflows:
             - install_dependencies
       - build:
           requires:
-            - lint
-            - unit_tests
+            - install_dependencies
       - deploy:
           context: AWS
           requires:
+            - lint
+            - unit_tests
             - build
           filters:
             branches:
