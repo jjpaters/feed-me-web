@@ -1,51 +1,25 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <div class="d-flex flex-grow-1">
-    <a class="navbar-brand" routerLink="/home">
-      <fa-icon [icon]="iconLogo"></fa-icon> Feed Me
-    </a>
-    <div class="w-100 text-right">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDefault"
-        aria-controls="navbarDefault" [attr.aria-expanded]="navbarOpen" aria-label="Toggle navigation"
-        (click)="toggleNavbar()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-  </div>
-  <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarDefault" [ngClass]="{ 'show': navbarOpen }">
+<header>
+  <mat-toolbar>
+    <span>Feed Me</span>
+  </mat-toolbar>
+  <span class="spacer"></span> 
 
-    <ul class="navbar-nav ml-auto flex-nowrap">
-      <li class="nav-item" *ngIf="(isAuthenticated$ | async)">
-        <a class="nav-link" routerLink="/recipes" [routerLinkActive]="['active']" (click)="closeMenu()">
-          <fa-icon [icon]="iconRecipe"></fa-icon> Recipes
-        </a>
-      </li>
+  <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+    <button (click)="auth.logout()">
+      Log out
+    </button>
+  </ng-container>
+  
+  <ng-template #loggedOut>
+    <button (click)="auth.loginWithRedirect()">Log in</button>
+  </ng-template>
+</header>
 
-      <li ngbDropdown class="nav-item" *ngIf="(isAuthenticated$ | async)">
-        <a href (click)="false" class="nav-link" ngbDropdownToggle>
-          <fa-icon [icon]="iconMyAccount"></fa-icon> My Account
-        </a>
-        <div ngbDropdownMenu>
-          <button ngbDropdownItem (click)="navigate('/profile')">
-            Profile
-          </button>
-          <div class="dropdown-divider"></div>
-          <button ngbDropdownItem (click)="logOut()">
-            Log Out
-          </button>
-        </div>
-      </li>
-    </ul>
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Item 1</button>
+  <button mat-menu-item>Item 2</button>
+</mat-menu>
 
-    <div class="d-flex" *ngIf="(isAuthenticated$ | async) === false">
-      <button class="btn btn-primary" type="submit" (click)="logIn()">
-        <fa-icon [icon]="iconMyAccount"></fa-icon>
-        My Account
-      </button>
-    </div>
-  </div>
-</nav>
 
-<main role="main">
-  <app-notify></app-notify>
-  <router-outlet></router-outlet>
-</main>
+<router-outlet></router-outlet>

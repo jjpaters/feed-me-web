@@ -1,25 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { NotifyServiceModule } from './notify/notify-service.module';
-import { CoreAuthService } from './auth/core-auth.service';
+import { NotifyComponent } from './notify/notify.component';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+
+const MaterialModules = [
+  MatButtonModule,
+  MatIconModule,
+  MatMenuModule,
+  MatToolbarModule
+]
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    NotifyComponent
+  ],
   imports: [
     CommonModule,
-    FontAwesomeModule,
-    NgbModule,
-    NotifyServiceModule
+    MatToolbarModule
   ],
   exports: [
-    FontAwesomeModule,
-    NotifyServiceModule
-  ],
-  providers: [
-    CoreAuthService
+    MatToolbarModule
   ]
 })
 export class CoreBlocksModule { }
