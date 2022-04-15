@@ -75,10 +75,8 @@ jobs:
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
       - run: npm run test -- --watch=false --code-coverage
-      - persist_to_workspace:
-          root: .
-          paths:
-            - coverage
+      - run: ls
+      - run: ls -LR
       - coveralls/upload:
           path_to_lcov: ./coverage/feed-me-web/lcov.info
 
