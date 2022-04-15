@@ -1,0 +1,13 @@
+<section class="toolbar-spacer" *ngIf="user">
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ user.name }}</mat-card-title>
+      <mat-card-subtitle>Recipe Box</mat-card-subtitle>
+    </mat-card-header>
+    <img [src]="user.picture" mat-card-image alt="Profile Picture">
+    <mat-card-actions>
+      <button mat-raised-button color="warn">Deactive Account</button>
+    </mat-card-actions>
+  </mat-card>
+</section>

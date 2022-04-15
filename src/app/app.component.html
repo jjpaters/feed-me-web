@@ -1,25 +1,23 @@
 <header>
-  <mat-toolbar>
+  <mat-toolbar color="primary">
     <span>Feed Me</span>
-  </mat-toolbar>
-  <span class="spacer"></span> 
-
-  <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-    <button (click)="auth.logout()">
-      Log out
+    <span class="spacer"></span>
+    <button mat-button (click)="auth.loginWithRedirect()" *ngIf="(auth.isAuthenticated$ | async) === false">
+      <mat-icon>account_circle</mat-icon> My Account
     </button>
-  </ng-container>
-  
-  <ng-template #loggedOut>
-    <button (click)="auth.loginWithRedirect()">Log in</button>
-  </ng-template>
+    <a routerLink="/recipes" mat-button *ngIf="auth.isAuthenticated$ | async">
+      <mat-icon>account_circle</mat-icon> Recipes
+    </a>
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf="auth.isAuthenticated$ | async">
+      <mat-icon>account_circle</mat-icon> My Account
+    </button>
+    <mat-menu #menu="matMenu">
+      <a routerLink="/profile" mat-menu-item>Profile</a>
+      <button mat-menu-item (click)="auth.logout()">Log Out</button>
+    </mat-menu>
+  </mat-toolbar>
 </header>
 
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>Item 1</button>
-  <button mat-menu-item>Item 2</button>
-</mat-menu>
-
-
-<router-outlet></router-outlet>
+<main class="footer-spacer">
+  <router-outlet></router-outlet>
+</main>

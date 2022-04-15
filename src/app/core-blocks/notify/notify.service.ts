@@ -1,43 +1,27 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotifyService {
 
-  title: string;
-  message: string;
-  show: boolean;
-  alertType: string;
-
-  constructor() { }
+  constructor(private snackBar: MatSnackBar) { }
 
   error(message: string): void {
-    this.notify(message, 'danger');
+    this.notify(message, 'Okay');
   }
 
   info(message: string): void {
-    this.notify(message, 'primary');
+    this.notify(message, 'Okay');
   }
 
   clear() {
-    this.title = '';
-    this.message = '';
-    this.show = false;
+    this.snackBar.dismiss();
   }
 
-  private notify(message: string, alertType: string) {
-    this.message = message;
-    this.alertType = alertType;
-    this.show = true;
-    this.scrollToTop();
+  private notify(message: string, action: string) {
+    this.snackBar.open(message, action);
   }
 
-  private scrollToTop() {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
-  }
 }
