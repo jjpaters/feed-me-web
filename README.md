@@ -1,4 +1,8 @@
-# FeedMeWeb
+[![CircleCI](https://circleci.com/gh/jjpaters/feed-me-web/tree/main.svg?style=svg)](https://circleci.com/gh/jjpaters/feed-me-web/tree/main)
+[![Coverage Status](https://coveralls.io/repos/github/jjpaters/feed-me-web/badge.svg?branch=main)](https://coveralls.io/github/jjpaters/feed-me-web?branch=main)
+[![DeepScan grade](https://deepscan.io/api/teams/3232/projects/8543/branches/103871/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=3232&pid=8543&bid=103871)
+
+# Feed Me Web
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
 
