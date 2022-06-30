@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="d-flex flex-grow-1">
     <a class="navbar-brand" routerLink="/home">
-      <fa-icon [icon]="iconLogo"></fa-icon> Feed Me
+      Feed Me
     </a>
     <div class="w-100 text-right">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDefault"
@@ -16,13 +16,13 @@
     <ul class="navbar-nav ml-auto flex-nowrap">
       <li class="nav-item" *ngIf="(isAuthenticated$ | async)">
         <a class="nav-link" routerLink="/recipes" [routerLinkActive]="['active']" (click)="closeMenu()">
-          <fa-icon [icon]="iconRecipe"></fa-icon> Recipes
+          Recipes
         </a>
       </li>
 
       <li ngbDropdown class="nav-item" *ngIf="(isAuthenticated$ | async)">
         <a href (click)="false" class="nav-link" ngbDropdownToggle>
-          <fa-icon [icon]="iconMyAccount"></fa-icon> My Account
+          My Account
         </a>
         <div ngbDropdownMenu>
           <button ngbDropdownItem (click)="navigate('/profile')">
@@ -38,7 +38,6 @@
 
     <div class="d-flex" *ngIf="(isAuthenticated$ | async) === false">
       <button class="btn btn-primary" type="submit" (click)="logIn()">
-        <fa-icon [icon]="iconMyAccount"></fa-icon>
         My Account
       </button>
     </div>
