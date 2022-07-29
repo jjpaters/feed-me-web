@@ -6,21 +6,18 @@ import { NotifyComponent } from './notify.component';
 import { NotifyService } from './notify.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    NgbModule
-  ],
-  declarations: [
-    NotifyComponent
-  ],
-  exports: [
-    NotifyComponent
-  ],
-  entryComponents: [
-    NotifyComponent
-  ],
-  providers: [
-    NotifyService
-  ]
+    imports: [
+        CommonModule,
+        NgbModule
+    ],
+    declarations: [
+        NotifyComponent
+    ],
+    exports: [
+        NotifyComponent
+    ],
+    providers: [
+        NotifyService
+    ]
 })
 export class NotifyServiceModule { }
