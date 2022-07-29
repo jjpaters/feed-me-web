@@ -2,9 +2,7 @@
   <div class="row">
     <div class="col">
       <h1>
-        <a [routerLink]="['/recipes']">
-          <fa-icon [icon]="iconBack"></fa-icon>
-        </a>
+        <a [routerLink]="['/recipes']">Back</a>
         {{ originalTitle }}
       </h1>
     </div>
@@ -13,10 +11,10 @@
         Cancel
       </button>
       <button class="btn btn-sm btn-danger m-1 float-right" (click)="deleteRecipe()" *ngIf="editMode">
-        <fa-icon [icon]="iconDelete"></fa-icon> Delete
+        Delete
       </button>
       <button class="btn btn-sm btn-primary m-1 float-right" (click)="editRecipe()" *ngIf="!editMode">
-        <fa-icon [icon]="iconEdit"></fa-icon> Edit
+        Edit
       </button>
     </div>
   </div>
@@ -27,7 +25,7 @@
         <label for="title">Title <span class="text-danger">*</span></label>
         <input type="text" class="form-control" formControlName="title" required />
         <div class="text-danger" *ngIf="showTitleErrors">
-          <span *ngIf="title.errors.required">
+          <span *ngIf="title?.errors?.required">
             Title is required.
           </span>
         </div>

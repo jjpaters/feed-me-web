@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowAltCircleLeft, faTrash, faWrench } from '@fortawesome/free-solid-svg-icons';
 
 import { NotifyService } from '../../core-blocks/notify/notify.service';
 import { RecipeForm } from '../recipe-form/recipe-form';
@@ -14,10 +13,7 @@ import { Ingredient, Recipe, Step } from '../recipe-models';
 })
 export class RecipePageComponent extends RecipeForm implements OnInit {
 
-  iconBack = faArrowAltCircleLeft;
-  iconDelete = faTrash;
-  iconEdit = faWrench;
-  recipeId: string;
+  recipeId: string | null;
   originalTitle: string;
 
   constructor(
