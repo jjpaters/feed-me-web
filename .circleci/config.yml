@@ -12,9 +12,6 @@ workflows:
   pipeline:
     jobs:
       - install_dependencies
-      - lint:
-          requires:
-            - install_dependencies
       - unit_tests:
           requires:
             - install_dependencies
@@ -24,7 +21,6 @@ workflows:
       - deploy:
           context: AWS
           requires:
-            - lint
             - unit_tests
             - build
           filters:
@@ -39,7 +35,7 @@ jobs:
   install_dependencies:
     working_directory: ~/app
     docker:
-      - image: circleci/node:14.17.5-browsers
+      - image: circleci/node:16.16.0-browsers
     steps:
       - checkout
       - restore_cache:
@@ -100,7 +96,7 @@ jobs:
           keys: 
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
-      - run: npm run build -- --prod
+      - run: npm run build
       - persist_to_workspace:
           root: .
           paths:
