@@ -73,7 +73,7 @@ jobs:
           keys: 
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
-      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
       - coveralls/upload:
           path_to_lcov: ./coverage/feed-me-web/lcov.info
 
