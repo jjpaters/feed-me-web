@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="alert alert-primary" role="alert" *ngIf="recipes && recipes.length === 0">
+  <div class="alert alert-primary" role="alert" *ngIf="recipes?.length === 0">
     It looks like you haven't saved any recipes. Let's <a [routerLink]="['/edit-recipes']" class="alert-link">get
       started</a>.
   </div>
