@@ -3,7 +3,6 @@ version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@3.0.0
   browser-tools: circleci/browser-tools@1.4.0
-  coveralls: coveralls/coveralls@1.0.6
 
 #############################################################
 # Define workflows
@@ -74,8 +73,6 @@ jobs:
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
       - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
-      - coveralls/upload:
-          path_to_lcov: ./coverage/feed-me-web/lcov.info
 
   build:
     working_directory: ~/app
