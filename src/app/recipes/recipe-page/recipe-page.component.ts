@@ -65,10 +65,10 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
   }
 
   async removeIngredient(ingredient: Ingredient): Promise<void> {
-    const index = this.recipe.ingredients.indexOf(ingredient);
-    if (index > -1) {
-      this.recipe.ingredients.splice(index, 1);
-    }
+    // const index = this.recipe.ingredients.indexOf(ingredient);
+    // if (index > -1) {
+    //   this.recipe.ingredients.splice(index, 1);
+    // }
   }
 
   async removeStep(step: Step): Promise<void> {
@@ -91,11 +91,11 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
   }
 
   mapRecipeForm() {
-    this.recipe.cookTime = this.cookTime.value;
-    this.recipe.description = this.description.value;
-    this.recipe.prepTime = this.prepTime.value;
-    this.recipe.servings = this.servings.value;
-    this.recipe.title = this.title.value;
+    // this.recipe.cookTime = this.cookTime.value;
+    // this.recipe.description = this.description.value;
+    // this.recipe.prepTime = this.prepTime.value;
+    // this.recipe.servings = this.servings.value;
+    // this.recipe.title = this.title.value;
   }
 
 }

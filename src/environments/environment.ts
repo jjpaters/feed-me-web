@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  api: 'http://localhost:31497',
   auth: {
     domain: 'feed-me-np.us.auth0.com',
     clientId: 'J3WurenvAkUNgusXkdHkJLiAx56dCiVq'

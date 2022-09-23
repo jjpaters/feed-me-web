@@ -13,7 +13,12 @@ import { environment } from 'src/environments/environment';
     CommonModule,
     AuthModule.forRoot({
       domain: environment.auth.domain,
-      clientId: environment.auth.clientId
+      clientId: environment.auth.clientId,
+      httpInterceptor: {
+        allowedList: [{
+          uri: `${environment.api}/*`
+        }]
+      }
     }),
     NgbModule,
     NotifyServiceModule

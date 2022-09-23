@@ -1,24 +1,25 @@
 export class Recipe {
   recipeId: string;
+  userId: string;
   title: string;
   description: string;
-  category: string;
   servings: number;
   prepTime: string;
   cookTime: string;
-  ingredients: Ingredient[];
+  ingredientGroups: IngredientGroups[];
   steps: Step[];
 }
 
+export class IngredientGroups {
+  ingredientGroupName: string;
+  ingredients: Ingredient[];
+}
+
 export class Ingredient {
-  ingredientId: number;
   text: string;
-  recipeId: number;
 }
 
 export class Step {
-  stepId: number;
   orderNumber: number;
   text: string;
-  recipeId: number;
 }

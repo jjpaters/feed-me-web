@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthService, User } from '@auth0/auth0-angular';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,10 +8,12 @@ import { Router } from '@angular/router';
 })
 export class CoreAuthService {
 
-  isAuthenticated: BehaviorSubject<boolean>;
+  isAuthenticated$: Observable<boolean>;
+  user$: Observable<User | null | undefined>;
 
   constructor(private authService: AuthService, private router: Router) {
-    this.isAuthenticated = new BehaviorSubject<boolean>(false);
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
+    this.user$ = this.authService.user$;
   }
 
   logIn(): Observable<void> {

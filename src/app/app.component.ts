@@ -18,7 +18,7 @@ export class AppComponent {
 
   constructor(private coreAuthService: CoreAuthService, private notifyService: NotifyService, private router: Router) {
 
-    this.isAuthenticated$ = this.coreAuthService.isAuthenticated;
+    this.isAuthenticated$ = this.coreAuthService.isAuthenticated$;
 
     router.events
       .pipe(filter(event => event instanceof NavigationStart))
@@ -32,7 +32,7 @@ export class AppComponent {
   }
 
   logIn(): void {
-    this.navigate('profile');
+    this.coreAuthService.logIn();
   }
 
   logOut(): void {

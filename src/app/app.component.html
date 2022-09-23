@@ -7,15 +7,15 @@
     </button>
     <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarCollapse"
       [ngClass]="{ 'show': navbarOpen }">
-      <ul class="navbar-nav ml-auto flex-nowrap">
+      <ul class="navbar-nav ml-auto flex-nowrap" *ngIf="(isAuthenticated$ | async)">
         <li class="nav-item">
           <a class="nav-link" routerLink="/recipes" [routerLinkActive]="['active']" (click)="closeMenu()">
-            Recipes
+            <i class="bi bi-journals"></i> Recipes
           </a>
         </li>
         <li ngbDropdown class="nav-item">
           <a href (click)="false" class="nav-link" ngbDropdownToggle>
-            My Account
+            <i class="bi bi-person-circle"></i> My Account
           </a>
           <div ngbDropdownMenu>
             <button ngbDropdownItem (click)="navigate('/profile')">
@@ -28,8 +28,8 @@
           </div>
         </li>
       </ul>
-      <button class="btn btn-primary" type="submit" (click)="logIn()">
-        My Account
+      <button class="btn btn-primary" type="submit" (click)="logIn()" *ngIf="(isAuthenticated$ | async) === false">
+        <i class="bi bi-person-circle"></i> My Account
       </button>
     </div>
   </div>
