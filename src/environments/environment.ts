@@ -4,17 +4,10 @@
 
 export const environment = {
   production: false,
+  api: 'http://localhost:31497',
   auth: {
-    region: 'us-east-2',
-    userPoolId: 'us-east-1_KLhotzEne',
-    userPoolWebClientId: '5te7v4a3tm0m1lki6icjmkckvh',
-    oauth: {
-        domain: 'https://feed-me-np.auth.us-east-1.amazoncognito.com',
-        scope: ['email', 'openid', 'profile'],
-        redirectSignIn: 'http://localhost:4200/',
-        redirectSignOut: 'http://localhost:4200/',
-        responseType: 'code'
-    }
+    domain: 'feed-me-np.us.auth0.com',
+    clientId: 'J3WurenvAkUNgusXkdHkJLiAx56dCiVq'
   }
 };
 

@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CoreBlocksModule } from '../core-blocks/core-blocks.module';
 
 import { ProfilePageComponent } from './profile-page.component';
 
@@ -8,7 +10,11 @@ describe('ProfilePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfilePageComponent ]
+      declarations: [ ProfilePageComponent ],
+      imports: [
+        CoreBlocksModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   });

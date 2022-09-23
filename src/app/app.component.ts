@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { CoreAuthService } from './core-blocks/auth/core-auth.service';
 import { NotifyService } from './core-blocks/notify/notify.service';
-import { faUtensils, faUser, faSignOutAlt, faDrumstickBite } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -14,16 +13,12 @@ import { faUtensils, faUser, faSignOutAlt, faDrumstickBite } from '@fortawesome/
 export class AppComponent {
 
   isAuthenticated$: Observable<boolean>;
-  iconLogo = faUtensils;
-  iconMyAccount = faUser;
-  iconRecipe = faDrumstickBite;
-  iconLogOut = faSignOutAlt;
 
   navbarOpen = false;
 
   constructor(private coreAuthService: CoreAuthService, private notifyService: NotifyService, private router: Router) {
 
-    this.isAuthenticated$ = this.coreAuthService.isAuthenticated;
+    this.isAuthenticated$ = this.coreAuthService.isAuthenticated$;
 
     router.events
       .pipe(filter(event => event instanceof NavigationStart))
@@ -37,7 +32,7 @@ export class AppComponent {
   }
 
   logIn(): void {
-    this.navigate('profile');
+    this.coreAuthService.logIn();
   }
 
   logOut(): void {

@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   aws-s3: circleci/aws-s3@3.0.0
-  coveralls: coveralls/coveralls@1.0.6
+  browser-tools: circleci/browser-tools@1.4.0
 
 #############################################################
 # Define workflows
@@ -12,9 +12,6 @@ workflows:
   pipeline:
     jobs:
       - install_dependencies
-      - lint:
-          requires:
-            - install_dependencies
       - unit_tests:
           requires:
             - install_dependencies
@@ -24,7 +21,6 @@ workflows:
       - deploy:
           context: AWS
           requires:
-            - lint
             - unit_tests
             - build
           filters:
@@ -39,7 +35,7 @@ jobs:
   install_dependencies:
     working_directory: ~/app
     docker:
-      - image: circleci/node:14.17.5-browsers
+      - image: cimg/node:16.16.0-browsers
     steps:
       - checkout
       - restore_cache:
@@ -55,7 +51,7 @@ jobs:
   lint:
     working_directory: ~/app
     docker:
-      - image: circleci/node:14.17.5-browsers
+      - image: cimg/node:16.16.0-browsers
     steps:
       - checkout
       - restore_cache:
@@ -67,40 +63,28 @@ jobs:
   unit_tests:
     working_directory: ~/app
     docker:
-      - image: circleci/node:14.17.5-browsers
+      - image: cimg/node:16.16.0-browsers
     steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - checkout
       - restore_cache:
           keys: 
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
-      - run: npm run test -- --watch=false --code-coverage
-      - coveralls/upload:
-          path_to_lcov: ./coverage/feed-me-web/lcov.info
-
-  e2e_tests:
-    working_directory: ~/app
-    docker:
-      - image: circleci/node:14.17.5-browsers
-    steps:
-      - checkout
-      - restore_cache:
-          keys: 
-            - v1-deps-{{ checksum "package-lock.json" }}
-            - v1-deps-
-      - run: npm run e2e
+      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
 
   build:
     working_directory: ~/app
     docker:
-      - image: circleci/node:14.17.5-browsers
+      - image: cimg/node:16.16.0-browsers
     steps:
       - checkout
       - restore_cache:
           keys: 
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
-      - run: npm run build -- --prod
+      - run: npm run build
       - persist_to_workspace:
           root: .
           paths:

@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import Amplify from 'aws-amplify';
-import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
@@ -13,11 +12,6 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreBlocksModule } from './core-blocks/core-blocks.module';
 import { RecipesModule } from './recipes/recipes.module';
-import { environment } from 'src/environments/environment';
-
-Amplify.configure({
-  Auth: environment.auth
-});
 
 @NgModule({
   declarations: [
@@ -28,14 +22,15 @@ Amplify.configure({
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AmplifyAuthenticatorModule,
     CoreBlocksModule,
     HttpClientModule,
     ReactiveFormsModule,
     RecipesModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
