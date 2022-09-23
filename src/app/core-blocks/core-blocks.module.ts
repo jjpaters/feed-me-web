@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthModule } from '@auth0/auth0-angular';
+import { AuthModule, HttpMethod } from '@auth0/auth0-angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotifyServiceModule } from './notify/notify-service.module';
@@ -14,10 +14,11 @@ import { environment } from 'src/environments/environment';
     AuthModule.forRoot({
       domain: environment.auth.domain,
       clientId: environment.auth.clientId,
+      audience: environment.auth.audience,
       httpInterceptor: {
-        allowedList: [{
-          uri: `${environment.api}/*`
-        }]
+        allowedList: [
+          `${environment.api}/recipes*`
+        ]
       }
     }),
     NgbModule,

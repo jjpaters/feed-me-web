@@ -20,8 +20,14 @@ export class RecipeService {
     await this.http.delete(`${environment.api}/recipes/${recipeId}`).toPromise();
   }
 
-  async getRecipes(): Promise<Recipe[]> {
-    const res = await this.http.get<Recipe[]>(`${environment.api}/recipes`).toPromise();
+  async getRecipes(category: string | null): Promise<Recipe[]> {
+    var url = `${environment.api}/recipes`;
+    
+    if (category !== null) {
+      url += `?category=${category}`
+    }
+    
+    const res = await this.http.get<Recipe[]>(url).toPromise();
     return res;
   }
 
@@ -31,7 +37,7 @@ export class RecipeService {
   }
 
   async updateRecipe(recipe: Recipe): Promise<Recipe> {
-    const res = await this.http.patch<Recipe>(`${environment.api}/recipes/${recipe.recipeId}`, recipe).toPromise();
+    const res = await this.http.put<Recipe>(`${environment.api}/recipes/${recipe.recipeId}`, recipe).toPromise();
     return res;
   }
 

@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  api: 'http://localhost:31497',
+  api: 'https://localhost:44341',
   auth: {
     domain: 'feed-me-np.us.auth0.com',
-    clientId: 'J3WurenvAkUNgusXkdHkJLiAx56dCiVq'
+    clientId: 'J3WurenvAkUNgusXkdHkJLiAx56dCiVq',
+    audience: 'https://feed-me.io/api',
   }
 };
 

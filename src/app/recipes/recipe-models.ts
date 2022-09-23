@@ -3,6 +3,7 @@ export class Recipe {
   userId: string;
   title: string;
   description: string;
+  category: string;
   servings: number;
   prepTime: string;
   cookTime: string;
@@ -22,4 +23,11 @@ export class Ingredient {
 export class Step {
   orderNumber: number;
   text: string;
+}
+
+export interface RecipeSummary {
+  name: string;
+  description?: string;
+  imageUri: string;
+  url?: string;
 }

@@ -24,6 +24,14 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     super();
   }
 
+  get recipeTitle(): string {
+    return this.isNewRecipe ? 'New Recipe' : this.title?.value;
+  }
+
+  get isNewRecipe(): boolean {
+    return this.recipeId ? false : true;
+  }
+
   async ngOnInit(): Promise<void> {
     this.recipeId = this.route.snapshot.paramMap.get('id');
     await this.getRecipe();
@@ -31,14 +39,12 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
 
   async cancelEditRecipe(): Promise<void> {
     await this.getRecipe();
-    this.editMode = false;
+    this.isInEditMode = false;
   }
 
   async deleteRecipe(): Promise<void> {
     try {
-      if (this.recipeId) {
-        await this.recipeService.deleteRecipe(this.recipe.recipeId);
-      }
+      await this.recipeService.deleteRecipe(this.recipe.recipeId);
       this.router.navigate(['/home']);
     } catch (ex) {
       this.notifyService.error(`Unable to delete the recipe; please try again.`);
@@ -46,7 +52,7 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
   }
 
   editRecipe(): void {
-    this.editMode = true;
+    this.isInEditMode = true;
   }
 
   async getRecipe(): Promise<void> {
@@ -56,7 +62,7 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
         this.originalTitle = this.recipe.title;
       } else {
         this.recipe = new Recipe();
-        this.editMode = true;
+        this.isInEditMode = true;
       }
       this.loadFormGroup();
     } catch {
@@ -79,10 +85,15 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
   }
 
   async saveRecipe(): Promise<void> {
+    this.submitted = true;
     if (this.form.valid) {
-      try {
-        this.mapRecipeForm();
-        await this.recipeService.updateRecipe(this.recipe);
+      this.mapRecipeForm();
+      try {        
+        if (this.isNewRecipe) {
+          await this.recipeService.updateRecipe(this.recipe);
+        } else {
+          await this.recipeService.createRecipe(this.recipe);
+        }        
         this.resetForm();
       } catch (ex) {
         this.notifyService.error(`Unable to save the recipe; please try again`);
@@ -90,12 +101,13 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     }
   }
 
-  mapRecipeForm() {
-    // this.recipe.cookTime = this.cookTime.value;
-    // this.recipe.description = this.description.value;
-    // this.recipe.prepTime = this.prepTime.value;
-    // this.recipe.servings = this.servings.value;
-    // this.recipe.title = this.title.value;
+  private mapRecipeForm(): void {
+    this.recipe.title = this.title?.value;    
+    this.recipe.description = this.description?.value;
+    this.recipe.category = this.category?.value;
+    this.recipe.servings = this.servings?.value;    
+    this.recipe.prepTime = this.prepTime?.value;
+    this.recipe.cookTime = this.cookTime?.value;
   }
 
 }

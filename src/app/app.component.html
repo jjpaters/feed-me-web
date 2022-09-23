@@ -1,12 +1,11 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container-fluid">
     <a routerLink="/home" class="navbar-brand">Feed Me</a>
-    <button class="navbar-toggler" type="button" aria-controls="navbarCollapse" [attr.aria-expanded]="navbarOpen"
-      aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse" [attr.aria-expanded]="navbarOpen" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarCollapse"
-      [ngClass]="{ 'show': navbarOpen }">
+    <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarCollapse">
       <ul class="navbar-nav ml-auto flex-nowrap" *ngIf="(isAuthenticated$ | async)">
         <li class="nav-item">
           <a class="nav-link" routerLink="/recipes" [routerLinkActive]="['active']" (click)="closeMenu()">
