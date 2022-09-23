@@ -7,11 +7,11 @@ export class Recipe {
   servings: number;
   prepTime: string;
   cookTime: string;
-  ingredientGroups: IngredientGroups[];
+  ingredientGroups: IngredientGroup[];
   steps: Step[];
 }
 
-export class IngredientGroups {
+export class IngredientGroup {
   ingredientGroupName: string;
   ingredients: Ingredient[];
 }

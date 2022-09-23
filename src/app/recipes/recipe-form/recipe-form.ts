@@ -1,11 +1,11 @@
 import { Recipe } from '../recipe-models';
-import { UntypedFormGroup, UntypedFormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, AbstractControl, Validators } from '@angular/forms';
 import { ValidationFormControl } from 'src/app/core-blocks/form/validation-form-control';
 
 export class RecipeForm {
 
   isInEditMode = false;
-  form: UntypedFormGroup;
+  form: FormGroup;
   recipe: Recipe;
   submitted = false;
 
@@ -33,17 +33,47 @@ export class RecipeForm {
     return this.form.get('cookTime');
   }
 
+  get ingredients(): FormArray {
+    return <FormArray>this.form.get('ingredients');
+  }
+
+  get steps(): FormArray {
+    return <FormArray>this.form.get('steps');
+  }
+
   constructor() { }
 
   loadFormGroup() {
-    this.form = new UntypedFormGroup({
-      title: new UntypedFormControl(this.recipe.title, [Validators.required]),
-      description: new UntypedFormControl(this.recipe.description),
-      category: new UntypedFormControl(this.recipe.category, [Validators.required]),
-      servings: new UntypedFormControl(this.recipe.servings, [Validators.required, Validators.min(1)]),
-      prepTime: new UntypedFormControl(this.recipe.prepTime, [Validators.required]),
-      cookTime: new UntypedFormControl(this.recipe.cookTime, [Validators.required])
+    this.form = new FormGroup({
+      title: new FormControl(this.recipe.title, [Validators.required]),
+      description: new FormControl(this.recipe.description),
+      category: new FormControl(this.recipe.category, [Validators.required]),
+      servings: new FormControl(this.recipe.servings, [Validators.required, Validators.min(1)]),
+      prepTime: new FormControl(this.recipe.prepTime, [Validators.required]),
+      cookTime: new FormControl(this.recipe.cookTime, [Validators.required]),
+      ingredients: new FormArray([], Validators.required),
+      steps: new FormArray([], Validators.required)
     });
+  }
+
+  addIngredientFormControl(value: string): void {
+    if (value) {
+      this.ingredients.push(new FormControl(value));
+    }
+  }
+
+  addStepFormControl(value: string): void {
+    if (value) {
+      this.steps.push(new FormControl(value));
+    }
+  }
+
+  removeIngredient(index: number): void {
+    this.ingredients.removeAt(index);
+  }
+
+  removeStep(index: number): void {
+    this.steps.removeAt(index);
   }
 
   resetForm() {

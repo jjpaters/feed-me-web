@@ -14,7 +14,7 @@ export class RecipeSummaryPageComponent implements OnInit {
     this.recipeSummaries = [
       {
         name: 'Breakfast',
-        imageUri: './assets/images/recipe-summaries/breakfast.jpg',
+        imageUri: 'assets/images/recipe-summaries/breakfast.jpg',
         url: '/recipes/Breakfast'
       },
       {

@@ -1,6 +1,59 @@
 <div class="container">
-  <h1 class="display-3">Feed Me</h1>
-  <p>
-    Welcome to Feed Me, the online recipe box.
-  </p>
+  <div class="p-5 my-4 bg-light border rounded-3">
+    <div class="py-5">
+      <h1 class="display-5 fw-bold">Feed Me</h1>
+      <p class="fs-4">
+        Welcome to Feed Me, the personal recipe box without the life stories and ads.
+      </p>
+      <button class="btn btn-primary btn-lg" (click)="logIn()" *ngIf="(isAuthenticated$ | async) === false">
+        Get Started
+      </button>
+      <a [routerLink]="['/recipes']" class="btn btn-primary btn-lg" *ngIf="isAuthenticated$ | async">
+        View Recipe Box
+      </a>
+    </div>
+  </div>
+
+  <div class="mt-5 mb-5 text-center">
+    <h2 class="display-6">Start enjoying great recipes in only three simple steps!</h2>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-lg-4">
+      <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
+        role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <title>Placeholder</title>
+        <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+      </svg>
+      <h2 class="fw-normal">Sign Up</h2>
+      <p>
+        Easily sign up to store your favorite recipes online, without all the extra fluff from food blogs.
+      </p>
+    </div>
+
+    <div class="col-lg-4">
+      <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
+        role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <title>Placeholder</title>
+        <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+      </svg>
+      <h2 class="fw-normal">Add Recipes</h2>
+      <p>
+        Quickly add recipes by only focusing on the important stuff.
+      </p>
+    </div>
+
+    <div class="col-lg-4">
+      <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
+        role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <title>Placeholder</title>
+        <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+      </svg>
+      <h2 class="fw-normal">Enjoy Food</h2>
+      <p>
+        Follow the recipes, and enjoy cooking your food without any distractions.
+      </p>
+    </div>
+  </div>
+
 </div>

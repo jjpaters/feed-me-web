@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreBlocksModule } from '../core-blocks/core-blocks.module';
 import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ProtectedRouteGuard } from '../core-blocks/guards/protected-route.guard';
 import { RecipeService } from './recipe.service';
@@ -28,6 +28,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     CoreBlocksModule,
+    FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })
   ],

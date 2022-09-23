@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotifyService } from '../../core-blocks/notify/notify.service';
 import { RecipeForm } from '../recipe-form/recipe-form';
 import { RecipeService } from '../recipe.service';
-import { Ingredient, Recipe, Step } from '../recipe-models';
+import { IngredientGroup, Recipe, Step } from '../recipe-models';
 
 @Component({
   selector: 'app-recipe-page',
@@ -45,7 +45,7 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
   async deleteRecipe(): Promise<void> {
     try {
       await this.recipeService.deleteRecipe(this.recipe.recipeId);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/recipes']);
     } catch (ex) {
       this.notifyService.error(`Unable to delete the recipe; please try again.`);
     }
@@ -53,6 +53,16 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
 
   editRecipe(): void {
     this.isInEditMode = true;
+  }
+
+  addIngredient(input: HTMLInputElement): void {
+    this.addIngredientFormControl(input.value);
+    input.value = '';
+  }
+
+  addStep(input: HTMLInputElement): void {
+    this.addStepFormControl(input.value);
+    input.value = '';
   }
 
   async getRecipe(): Promise<void> {
@@ -70,29 +80,15 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     }
   }
 
-  async removeIngredient(ingredient: Ingredient): Promise<void> {
-    // const index = this.recipe.ingredients.indexOf(ingredient);
-    // if (index > -1) {
-    //   this.recipe.ingredients.splice(index, 1);
-    // }
-  }
-
-  async removeStep(step: Step): Promise<void> {
-    const index = this.recipe.steps.indexOf(step);
-    if (index > -1) {
-      this.recipe.steps.splice(index, 1);
-    }
-  }
-
   async saveRecipe(): Promise<void> {
     this.submitted = true;
     if (this.form.valid) {
       this.mapRecipeForm();
       try {        
         if (this.isNewRecipe) {
-          await this.recipeService.updateRecipe(this.recipe);
-        } else {
           await this.recipeService.createRecipe(this.recipe);
+        } else {
+          await this.recipeService.updateRecipe(this.recipe);          
         }        
         this.resetForm();
       } catch (ex) {
@@ -108,6 +104,22 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     this.recipe.servings = this.servings?.value;    
     this.recipe.prepTime = this.prepTime?.value;
     this.recipe.cookTime = this.cookTime?.value;
+    
+
+    this.recipe.ingredientGroups = new Array<IngredientGroup>();
+    this.ingredients?.value.forEach((element: string) => {
+      const ingredientGroup = new IngredientGroup();
+      ingredientGroup.ingredientGroupName = element;
+      this.recipe.ingredientGroups.push(ingredientGroup)
+    });
+
+    this.recipe.steps = new Array<Step>();
+    this.steps?.value.forEach((element: string, index: number) => {
+      const step = new Step();
+      step.text = element;
+      step.orderNumber = index;
+      this.recipe.steps.push(step)
+    });
   }
 
 }
