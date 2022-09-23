@@ -1,4 +1,4 @@
-import { Recipe } from '../recipe-models';
+import { IngredientGroup, Recipe, Step } from '../recipe-models';
 import { FormGroup, FormArray, FormControl, AbstractControl, Validators } from '@angular/forms';
 import { ValidationFormControl } from 'src/app/core-blocks/form/validation-form-control';
 
@@ -44,6 +44,21 @@ export class RecipeForm {
   constructor() { }
 
   loadFormGroup() {
+    const ingredientGroupFormArray = new FormArray<any>([], Validators.required);
+    const stepFormArray = new FormArray<any>([], Validators.required);
+
+    if (this.recipe.ingredientGroups) {
+      this.recipe.ingredientGroups.forEach((element: IngredientGroup) => {
+        ingredientGroupFormArray.push(new FormControl(element.ingredientGroupName));
+      });
+    }
+
+    if (this.recipe.steps) {
+      this.recipe.steps.forEach((element: Step) => {
+        stepFormArray.push(new FormControl(element.text));
+      });
+    }
+
     this.form = new FormGroup({
       title: new FormControl(this.recipe.title, [Validators.required]),
       description: new FormControl(this.recipe.description),
@@ -51,8 +66,8 @@ export class RecipeForm {
       servings: new FormControl(this.recipe.servings, [Validators.required, Validators.min(1)]),
       prepTime: new FormControl(this.recipe.prepTime, [Validators.required]),
       cookTime: new FormControl(this.recipe.cookTime, [Validators.required]),
-      ingredients: new FormArray([], Validators.required),
-      steps: new FormArray([], Validators.required)
+      ingredients: ingredientGroupFormArray,
+      steps: stepFormArray
     });
   }
 

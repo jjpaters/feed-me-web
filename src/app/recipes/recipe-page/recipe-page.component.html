@@ -79,6 +79,10 @@
       <div class="row mt-5">
         <div class="col-sm">
           <h3>Ingredients</h3>
+          <div class="input-group mb-3"  *ngIf="isInEditMode">
+            <input type="text" class="form-control" #newIngredient>
+            <button class="btn btn-outline-secondary" (click)="addIngredient(newIngredient)">Add</button>            
+          </div>
           <ul class="list-group list-group-flush" formArrayName="ingredients">
             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let ingredient of ingredients.controls; let i = index">
               {{ ingredient.value  }}
@@ -86,27 +90,23 @@
                 X
               </button>
             </li>
-          </ul>
-          <div class="input-group mb-3"  *ngIf="isInEditMode">
-            <input type="text" class="form-control" #newIngredient>
-            <button class="btn btn-outline-secondary" (click)="addIngredient(newIngredient)">Add</button>            
-          </div>
+          </ul>          
         </div>
 
         <div class="col-sm">
           <h3>Steps</h3>
-          <ol class="list-group list-group-flush list-group-numbered">
+          <div class="input-group mb-3"  *ngIf="isInEditMode">
+            <input type="text" class="form-control" #newStep>
+            <button class="btn btn-outline-secondary" (click)="addStep(newStep)">Add</button>
+          </div>
+          <ol class="list-group list-group-flush list-group-numbered" formArrayName="steps">
             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let step of steps.controls; let i = index">
               {{ step.value  }}
               <button class="btn btn-sm btn-danger" (click)="removeStep(i)" *ngIf="isInEditMode">
                 X
               </button>
             </li>
-          </ol>
-          <div class="input-group mb-3"  *ngIf="isInEditMode">
-            <input type="text" class="form-control" #newStep>
-            <button class="btn btn-outline-secondary" (click)="addStep(newStep)">Add</button>
-          </div>
+          </ol>          
         </div>
 
       </div>
