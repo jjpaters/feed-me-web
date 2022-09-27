@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotifyService } from '../../core-blocks/notify/notify.service';
 import { RecipeForm } from '../recipe-form/recipe-form';
 import { RecipeService } from '../recipe.service';
-import { Ingredient, Recipe, Step } from '../recipe-models';
+import { IngredientGroup, Recipe, Step } from '../recipe-models';
 
 @Component({
   selector: 'app-recipe-page',
@@ -24,6 +24,14 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     super();
   }
 
+  get recipeTitle(): string {
+    return this.isNewRecipe ? 'New Recipe' : this.title?.value;
+  }
+
+  get isNewRecipe(): boolean {
+    return this.recipeId ? false : true;
+  }
+
   async ngOnInit(): Promise<void> {
     this.recipeId = this.route.snapshot.paramMap.get('id');
     await this.getRecipe();
@@ -31,22 +39,30 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
 
   async cancelEditRecipe(): Promise<void> {
     await this.getRecipe();
-    this.editMode = false;
+    this.isInEditMode = false;
   }
 
   async deleteRecipe(): Promise<void> {
     try {
-      if (this.recipeId) {
-        await this.recipeService.deleteRecipe(this.recipe.recipeId);
-      }
-      this.router.navigate(['/home']);
+      await this.recipeService.deleteRecipe(this.recipe.recipeId);
+      this.router.navigate(['/recipes']);
     } catch (ex) {
       this.notifyService.error(`Unable to delete the recipe; please try again.`);
     }
   }
 
   editRecipe(): void {
-    this.editMode = true;
+    this.isInEditMode = true;
+  }
+
+  addIngredient(input: HTMLInputElement): void {
+    this.addIngredientFormControl(input.value);
+    input.value = '';
+  }
+
+  addStep(input: HTMLInputElement): void {
+    this.addStepFormControl(input.value);
+    input.value = '';
   }
 
   async getRecipe(): Promise<void> {
@@ -56,7 +72,7 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
         this.originalTitle = this.recipe.title;
       } else {
         this.recipe = new Recipe();
-        this.editMode = true;
+        this.isInEditMode = true;
       }
       this.loadFormGroup();
     } catch {
@@ -64,25 +80,16 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     }
   }
 
-  async removeIngredient(ingredient: Ingredient): Promise<void> {
-    // const index = this.recipe.ingredients.indexOf(ingredient);
-    // if (index > -1) {
-    //   this.recipe.ingredients.splice(index, 1);
-    // }
-  }
-
-  async removeStep(step: Step): Promise<void> {
-    const index = this.recipe.steps.indexOf(step);
-    if (index > -1) {
-      this.recipe.steps.splice(index, 1);
-    }
-  }
-
   async saveRecipe(): Promise<void> {
+    this.submitted = true;
     if (this.form.valid) {
-      try {
-        this.mapRecipeForm();
-        await this.recipeService.updateRecipe(this.recipe);
+      this.mapRecipeForm();
+      try {        
+        if (this.isNewRecipe) {
+          await this.recipeService.createRecipe(this.recipe);
+        } else {
+          await this.recipeService.updateRecipe(this.recipe);          
+        }        
         this.resetForm();
       } catch (ex) {
         this.notifyService.error(`Unable to save the recipe; please try again`);
@@ -90,12 +97,29 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     }
   }
 
-  mapRecipeForm() {
-    // this.recipe.cookTime = this.cookTime.value;
-    // this.recipe.description = this.description.value;
-    // this.recipe.prepTime = this.prepTime.value;
-    // this.recipe.servings = this.servings.value;
-    // this.recipe.title = this.title.value;
+  private mapRecipeForm(): void {
+    this.recipe.title = this.title?.value;    
+    this.recipe.description = this.description?.value;
+    this.recipe.category = this.category?.value;
+    this.recipe.servings = this.servings?.value;    
+    this.recipe.prepTime = this.prepTime?.value;
+    this.recipe.cookTime = this.cookTime?.value;
+    
+
+    this.recipe.ingredientGroups = new Array<IngredientGroup>();
+    this.ingredients?.value.forEach((element: string) => {
+      const ingredientGroup = new IngredientGroup();
+      ingredientGroup.ingredientGroupName = element;
+      this.recipe.ingredientGroups.push(ingredientGroup)
+    });
+
+    this.recipe.steps = new Array<Step>();
+    this.steps?.value.forEach((element: string, index: number) => {
+      const step = new Step();
+      step.text = element;
+      step.orderNumber = index;
+      this.recipe.steps.push(step)
+    });
   }
 
 }

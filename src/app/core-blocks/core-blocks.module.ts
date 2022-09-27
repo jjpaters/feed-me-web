@@ -14,10 +14,11 @@ import { environment } from 'src/environments/environment';
     AuthModule.forRoot({
       domain: environment.auth.domain,
       clientId: environment.auth.clientId,
+      audience: environment.auth.audience,
       httpInterceptor: {
-        allowedList: [{
-          uri: `${environment.api}/*`
-        }]
+        allowedList: [
+          `${environment.api}/recipes*`
+        ]
       }
     }),
     NgbModule,

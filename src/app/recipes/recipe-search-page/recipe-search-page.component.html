@@ -1,16 +1,10 @@
-<section class="container">
+<div class="container">
 
-  <div class="row">
-    <div class="col">
-      <h1>
-        Recipes
-      </h1>
-    </div>
-    <div class="col">
-      <a [routerLink]="['/edit-recipes']" class="btn btn-sm btn-primary m-1 float-right">
-        Add Recipe
-      </a>
-    </div>
+  <div class="clearfix">
+    <span class="display-5">{{ category }}</span>
+    <a [routerLink]="['/edit-recipes']" class="btn btn-primary m-2 float-end">
+      Add Recipe
+    </a>
   </div>
 
   <div class="alert alert-primary" role="alert" *ngIf="recipes?.length === 0">
@@ -23,4 +17,4 @@
       <app-recipe-card [recipe]="recipe"></app-recipe-card>
     </div>
   </div>
-</section>
+</div>

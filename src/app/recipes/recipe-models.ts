@@ -3,14 +3,15 @@ export class Recipe {
   userId: string;
   title: string;
   description: string;
+  category: string;
   servings: number;
   prepTime: string;
   cookTime: string;
-  ingredientGroups: IngredientGroups[];
+  ingredientGroups: IngredientGroup[];
   steps: Step[];
 }
 
-export class IngredientGroups {
+export class IngredientGroup {
   ingredientGroupName: string;
   ingredients: Ingredient[];
 }
@@ -22,4 +23,11 @@ export class Ingredient {
 export class Step {
   orderNumber: number;
   text: string;
+}
+
+export interface RecipeSummary {
+  name: string;
+  description?: string;
+  imageUri: string;
+  url?: string;
 }

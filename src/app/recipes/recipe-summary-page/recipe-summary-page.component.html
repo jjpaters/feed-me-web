@@ -1,0 +1,22 @@
+<section class="container">
+
+  <div class="clearfix">
+    <span class="display-5">Recipes</span>
+    <a [routerLink]="['/edit-recipes']" class="btn btn-primary m-2 float-end">
+      Add Recipe
+    </a>
+  </div>
+
+  <div class="row">
+    <div class="col col-sm-3" *ngFor="let recipeSummary of recipeSummaries">
+      <div class="card m-3 text-white bg-dark">
+        <img [src]="recipeSummary.imageUri" class="card-img-top" [alt]="recipeSummary.name">
+        <div class="card-body">
+          <h4 class="card-title">{{ recipeSummary.name }}</h4>
+          <a [routerLink]="recipeSummary.url" class="btn btn-outline-primary">View Recipes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

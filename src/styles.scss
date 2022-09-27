@@ -1,36 +1,20 @@
 @import './styles/variables';
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import '../node_modules/bootstrap-icons/font/bootstrap-icons.scss';
+@import './styles/bootswatch';
+
+html,
+body {
+  min-height: 100vh;
+  background-repeat: no-repeat;
+}
 
 body {
-    padding-top: 3.5rem;
+  padding-top: 5rem;
 }
 
-.button-row button {
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-}
-
-//
-// Forms
-//
-.account-form {
-    margin: auto;
-    max-width: 500px;
-}
-
-.validate-form .ng-invalid.ng-touched {
-    border-color: $red;
-}
-
-.validate-form .ng-valid.ng-touched {
-    border-color: $green;
-}
-
-.validate-form.submitted-form  .ng-invalid {
-    border-color: $red;
-}
-
-.validate-form.submitted-form .ng-valid {
-    border-color: $green;
+.button-row a,
+button {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }
