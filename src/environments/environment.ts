@@ -9,6 +9,7 @@ export const environment = {
     domain: 'feed-me-np.us.auth0.com',
     clientId: 'J3WurenvAkUNgusXkdHkJLiAx56dCiVq',
     audience: 'https://feed-me.io/api',
+    returnTo: 'http://localhost:4200'
   }
 };
 

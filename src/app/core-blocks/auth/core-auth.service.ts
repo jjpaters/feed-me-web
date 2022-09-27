@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,9 @@ export class CoreAuthService {
   }
 
   logOut(): void {
-    this.authService.logout();
+    this.authService.logout({
+      returnTo: environment.auth.returnTo
+    });
   }
 
 }
