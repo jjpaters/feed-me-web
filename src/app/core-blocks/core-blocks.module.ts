@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthModule, HttpMethod } from '@auth0/auth0-angular';
+import { AuthModule } from '@auth0/auth0-angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotifyServiceModule } from './notify/notify-service.module';
