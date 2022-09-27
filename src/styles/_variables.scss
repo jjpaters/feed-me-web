@@ -83,6 +83,8 @@ $table-bg-scale:              0 !default;
 $input-bg:                              lighten($body-bg, 10%) !default;
 $input-disabled-bg:                     lighten($body-bg, 5%) !default;
 
+$form-select-disabled-bg:               lighten($body-bg, 5%) !default;
+
 $input-color:                           $white !default;
 
 $input-placeholder-color:               rgba($white, .4) !default;
