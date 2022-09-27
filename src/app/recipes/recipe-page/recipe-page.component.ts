@@ -5,6 +5,7 @@ import { NotifyService } from '../../core-blocks/notify/notify.service';
 import { RecipeForm } from '../recipe-form/recipe-form';
 import { RecipeService } from '../recipe.service';
 import { IngredientGroup, Recipe, Step } from '../recipe-models';
+import { ConfirmModalService } from 'src/app/core-blocks/confirm-modal/confirm-modal.service';
 
 @Component({
   selector: 'app-recipe-page',
@@ -18,6 +19,7 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private modalService: ConfirmModalService,
     private notifyService: NotifyService,
     private recipeService: RecipeService,
     private router: Router) {
@@ -42,13 +44,13 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     this.isInEditMode = false;
   }
 
-  async deleteRecipe(): Promise<void> {
-    try {
-      await this.recipeService.deleteRecipe(this.recipe.recipeId);
-      this.router.navigate(['/recipes']);
-    } catch (ex) {
-      this.notifyService.error(`Unable to delete the recipe; please try again.`);
-    }
+  deleteRecipe(): void {
+    const modal = this.modalService.open('Are you sure you want to delete the recipe? This action cannot be undone.');
+    modal.closed.subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.confirmedDeleteRecipe();
+      }
+    });
   }
 
   editRecipe(): void {
@@ -84,12 +86,12 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     this.submitted = true;
     if (this.form.valid) {
       this.mapRecipeForm();
-      try {        
+      try {
         if (this.isNewRecipe) {
           await this.recipeService.createRecipe(this.recipe);
         } else {
-          await this.recipeService.updateRecipe(this.recipe);          
-        }        
+          await this.recipeService.updateRecipe(this.recipe);
+        }
         this.resetForm();
       } catch (ex) {
         this.notifyService.error(`Unable to save the recipe; please try again`);
@@ -97,14 +99,23 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     }
   }
 
+  private async confirmedDeleteRecipe() {
+    try {
+      await this.recipeService.deleteRecipe(this.recipe.recipeId);
+      this.router.navigate(['/recipes']);
+    } catch (ex) {
+      this.notifyService.error(`Unable to delete the recipe; please try again.`);
+    }
+  }
+
   private mapRecipeForm(): void {
-    this.recipe.title = this.title?.value;    
+    this.recipe.title = this.title?.value;
     this.recipe.description = this.description?.value;
     this.recipe.category = this.category?.value;
-    this.recipe.servings = this.servings?.value;    
+    this.recipe.servings = this.servings?.value;
     this.recipe.prepTime = this.prepTime?.value;
     this.recipe.cookTime = this.cookTime?.value;
-    
+
 
     this.recipe.ingredientGroups = new Array<IngredientGroup>();
     this.ingredients?.value.forEach((element: string) => {

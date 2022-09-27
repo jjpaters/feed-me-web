@@ -6,9 +6,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotifyServiceModule } from './notify/notify-service.module';
 import { CoreAuthService } from './auth/core-auth.service';
 import { environment } from 'src/environments/environment';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ConfirmModalComponent
+  ],
   imports: [
     CommonModule,
     AuthModule.forRoot({
