@@ -84,7 +84,7 @@ jobs:
           keys: 
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
-      - run: npm run build
+      - run: npm run build -- --configuration production
       - persist_to_workspace:
           root: .
           paths:
