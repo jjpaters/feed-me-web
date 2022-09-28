@@ -6,6 +6,8 @@ import { RecipeForm } from '../recipe-form/recipe-form';
 import { RecipeService } from '../recipe.service';
 import { IngredientGroup, Recipe, Step } from '../recipe-models';
 import { ConfirmModalService } from 'src/app/core-blocks/confirm-modal/confirm-modal.service';
+import { FormControlModalService } from 'src/app/core-blocks/form-control-modal/form-control-modal.service';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-page',
@@ -20,6 +22,7 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private modalService: ConfirmModalService,
+    private formControlModalService: FormControlModalService,
     private notifyService: NotifyService,
     private recipeService: RecipeService,
     private router: Router) {
@@ -65,6 +68,10 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
   addStep(input: HTMLInputElement): void {
     this.addStepFormControl(input.value);
     input.value = '';
+  }
+
+  editFormControl(formControl: AbstractControl<any, any>, name: string): void {
+    this.formControlModalService.open(this.form, formControl, name);
   }
 
   async getRecipe(): Promise<void> {
