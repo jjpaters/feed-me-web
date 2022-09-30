@@ -9,6 +9,7 @@ export class Recipe {
   cookTime: string;
   ingredientGroups: IngredientGroup[];
   steps: Step[];
+  notes: string;
 }
 
 export class IngredientGroup {

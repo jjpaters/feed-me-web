@@ -41,6 +41,10 @@ export class RecipeForm {
     return <FormArray>this.form.get('steps');
   }
 
+  get notes(): AbstractControl<any, any> | null {
+    return this.form.get('notes');
+  }
+
   constructor() { }
 
   loadFormGroup() {
@@ -67,7 +71,8 @@ export class RecipeForm {
       prepTime: new FormControl(this.recipe.prepTime, [Validators.required]),
       cookTime: new FormControl(this.recipe.cookTime, [Validators.required]),
       ingredients: ingredientGroupFormArray,
-      steps: stepFormArray
+      steps: stepFormArray,
+      notes: new FormControl(this.recipe.notes)
     });
   }
 

@@ -122,7 +122,7 @@ export class RecipePageComponent extends RecipeForm implements OnInit {
     this.recipe.servings = this.servings?.value;
     this.recipe.prepTime = this.prepTime?.value;
     this.recipe.cookTime = this.cookTime?.value;
-
+    this.recipe.notes = this.notes?.value;
 
     this.recipe.ingredientGroups = new Array<IngredientGroup>();
     this.ingredients?.value.forEach((element: string) => {
