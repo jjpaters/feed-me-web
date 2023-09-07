@@ -22,9 +22,7 @@ export class CoreAuthService {
   }
 
   logOut(): void {
-    this.authService.logout({
-      returnTo: environment.auth.returnTo
-    });
+    this.authService.logout({ logoutParams: { returnTo: environment.auth.returnTo } });
   }
 
 }

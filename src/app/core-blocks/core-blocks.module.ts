@@ -20,7 +20,9 @@ import { FormControlModalComponent } from './form-control-modal/form-control-mod
     AuthModule.forRoot({
       domain: environment.auth.domain,
       clientId: environment.auth.clientId,
-      audience: environment.auth.audience,
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      },
       httpInterceptor: {
         allowedList: [
           `${environment.api}/recipes*`
