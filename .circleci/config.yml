@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@3
   browser-tools: circleci/browser-tools@1
+  codecov: codecov/codecov@3.2.5
 
 executors:
   node:
@@ -77,6 +78,7 @@ jobs:
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
       - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
+      - codecov/upload
 
   build:
     working_directory: ~/app

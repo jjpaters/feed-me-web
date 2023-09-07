@@ -14,6 +14,7 @@ export class RecipeSearchPageComponent implements OnInit {
 
   category: string | null;
   recipes: Recipe[];
+  filteredRecipes: Recipe[];
 
   constructor(private notifyService: NotifyService, private recipeService: RecipeService, private route: ActivatedRoute) { }
 
@@ -25,10 +26,20 @@ export class RecipeSearchPageComponent implements OnInit {
   async getRecipes(): Promise<void> {
     try {
       this.recipes = await this.recipeService.getRecipes(this.category);
+      this.filteredRecipes = this.recipes;
     } catch (ex) {
-      console.log(ex);
       this.notifyService.error(`Unable to get your recipes. Please try again.`);
     }
+  }
+
+  filterRecipes(text: string) {
+    if (!text) {
+      this.filteredRecipes = this.recipes;
+    }
+
+    this.filteredRecipes = this.recipes.filter(
+      recipe => recipe?.title.toLowerCase().includes(text.toLowerCase())
+    );
   }
 
 }

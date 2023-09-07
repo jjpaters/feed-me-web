@@ -12,9 +12,14 @@
       started</a>.
   </div>
 
-  <div class="row">
-    <div class="col-12 col-sm-6 col-md-4 m-0" *ngFor="let recipe of recipes">
-      <app-recipe-card [recipe]="recipe"></app-recipe-card>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="filter">Filter</span>
+    <input type="text" class="form-control" name="filter" (keyup)="filterRecipes(filter.value)" #filter/>
+  </div>
+
+  <div class="w-100" *ngFor="let recipe of filteredRecipes">
+    <app-recipe-card [recipe]="recipe"></app-recipe-card>
   </div>
 </div>
+
+<div class="card-group"></div>
