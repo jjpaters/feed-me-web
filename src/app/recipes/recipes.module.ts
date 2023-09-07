@@ -30,7 +30,7 @@ const routes: Routes = [
     CoreBlocksModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })
+    RouterModule.forRoot(routes, {})
   ],
   providers: [
     RecipeService
