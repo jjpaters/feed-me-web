@@ -4,8 +4,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreBlocksModule } from './core-blocks/core-blocks.module';
-import { Router } from '@angular/router';
 import { NotifyService } from './core-blocks/notify/notify.service';
+import { CoreAuthService } from './core-blocks/auth/core-auth.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -20,7 +20,7 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent
-      ],
+      ]
     }).compileComponents();
   }));
 
@@ -42,13 +42,12 @@ describe('AppComponent', () => {
     expect(component.navbarOpen).toBeFalsy();
   });
 
-  it(`navigate should clear notification`, inject([NotifyService, Router], (notifyService: NotifyService, router: Router) => {
+  it(`navigate should clear notification`, inject([NotifyService], (notifyService: NotifyService) => {
     spyOn(notifyService, 'clear').and.stub();
     component.navigate('home');
 
     expect(notifyService.clear).toHaveBeenCalled();
   }));
-
 
   it(`should default navbarOpen to false`, () => {
     expect(component.navbarOpen).toBeFalsy();
@@ -63,5 +62,17 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('a.navbar-brand').textContent).toContain('Feed Me');
   });
+
+  it('should invoke coreAuthService.logIn', inject([CoreAuthService], (coreAuthService: CoreAuthService) => {
+    spyOn(coreAuthService, 'logIn'); 
+    component.logIn();
+    expect(coreAuthService.logIn).toHaveBeenCalled();
+  }));
+
+  it('should invoke coreAuthService.logOut and closeMenu', inject([CoreAuthService], (coreAuthService: CoreAuthService) => {
+    spyOn(coreAuthService, 'logOut');
+    component.logOut();
+    expect(coreAuthService.logOut).toHaveBeenCalled();
+  }));
 
 });

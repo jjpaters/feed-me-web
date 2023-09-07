@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/jjpaters/feed-me-web/tree/main.svg?style=svg)](https://circleci.com/gh/jjpaters/feed-me-web/tree/main)
+[![codecov](https://codecov.io/gh/jjpaters/feed-me-web/graph/badge.svg?token=YHB5RjaiCN)](https://codecov.io/gh/jjpaters/feed-me-web)
 [![DeepScan grade](https://deepscan.io/api/teams/3232/projects/8543/branches/103871/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=3232&pid=8543&bid=103871)
 
 # Feed Me Web

@@ -1,5 +1,8 @@
-<div class="container">
-  <h1>Welcome, {{ user?.nickname }}!</h1>
+<section class="container">
+  
+  <h1 class="display-5">
+    Welcome, {{ user?.nickname }}
+  </h1>
 
   <div>
     <form>
@@ -15,12 +18,7 @@
         <label for="email_verified" class="form-label">Email Verified</label>
         <input type="text" class="form-control" id="email_verified" readonly disabled [value]="user?.email_verified">
       </div>
-      <!-- <div class="mb-3">
-        <label for="jwt_token">JWT Token</label>
-        <textarea class="form-control" id="jwt_token" rows="5" readonly
-          [value]="user.signInUserSession.idToken.jwtToken"></textarea>
-      </div> -->
     </form>
   </div>
 
-</div>
+</section>

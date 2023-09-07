@@ -1,6 +1,17 @@
 {
   "name": "feed-me-web",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Justin Paterson",
+  "description": "Simple website to store recipes",
+  "repository": "https://github.com/jjpaters/feed-me-api",
+  "bugs": {
+    "url": "hhttps://github.com/jjpaters/feed-me-api/issues"
+  },
+  "homepage": "https://github.com/jjpaters/feed-me-api#readme",
+  "engines": {
+    "node": ">=18.10 <20",
+    "npm": ">=8.19.0"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

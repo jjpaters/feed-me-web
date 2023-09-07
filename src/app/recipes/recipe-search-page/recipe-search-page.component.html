@@ -1,4 +1,4 @@
-<div class="container">
+<section class="container">
 
   <div class="clearfix">
     <span class="display-5">{{ category }}</span>
@@ -20,6 +20,4 @@
   <div class="w-100" *ngFor="let recipe of filteredRecipes">
     <app-recipe-card [recipe]="recipe"></app-recipe-card>
   </div>
-</div>
-
-<div class="card-group"></div>
+</section>

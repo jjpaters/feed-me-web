@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthModule } from '@auth0/auth0-angular';
+import { AuthModule, AuthService, User } from '@auth0/auth0-angular';
 
 import { CoreAuthService } from './core-auth.service';
 import { environment } from 'src/environments/environment';
@@ -24,4 +24,16 @@ describe('CoreAuthService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should invoke authService.loginWithRedirect', inject([AuthService], (authService: AuthService) => {
+    spyOn(authService, 'loginWithRedirect'); 
+    service.logIn();
+    expect(authService.loginWithRedirect).toHaveBeenCalled();
+  }));
+
+  it('should invoke authService.logout', inject([AuthService], (authService: AuthService) => {
+    spyOn(authService, 'logout');
+    service.logOut();
+    expect(authService.logout).toHaveBeenCalled();
+  }));
 });

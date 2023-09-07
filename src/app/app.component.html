@@ -1,13 +1,33 @@
+<!-- <div class="container">
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+      <span class="fs-4">Simple header</span>
+    </a>
+
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+    </ul>
+  </header>
+</div> -->
+
+
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/home" (click)="closeMenu()">Feed Me</a>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/home" (click)="closeMenu()">
+      <i class="bi bi-fan"></i> Feed Me
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
       aria-controls="navbarCollapse" [attr.aria-expanded]="navbarOpen" aria-label="Toggle navigation"
       (click)="toggleNavbar()">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse" [ngClass]="{ 'show': navbarOpen }">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="(isAuthenticated$ | async)">
+    <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse" [ngClass]="{ 'show': navbarOpen }">
+      <ul class="navbar-nav mb-2 mb-md-0" *ngIf="(isAuthenticated$ | async)">
         <li class="nav-item">
           <a class="nav-link" routerLink="/recipes" (click)="closeMenu()">
             <i class="bi bi-journals"></i> Recipes
@@ -28,7 +48,8 @@
           </div>
         </li>
       </ul>
-      <button class="btn btn-outline-light" type="submit" (click)="logIn()" *ngIf="(isAuthenticated$ | async) === false">
+      <button class="btn btn-outline-light" type="submit" (click)="logIn()"
+        *ngIf="(isAuthenticated$ | async) === false">
         <i class="bi bi-person-circle"></i> My Account
       </button>
     </div>
@@ -36,8 +57,8 @@
 </nav>
 
 <main role="main">
-  <div class="container">
+  <section class="container">
     <app-notify></app-notify>
-  </div>
+  </section>
   <router-outlet></router-outlet>
 </main>
