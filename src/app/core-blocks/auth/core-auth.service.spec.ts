@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthModule, AuthService, User } from '@auth0/auth0-angular';
+import { AuthModule, AuthService } from '@auth0/auth0-angular';
 
 import { CoreAuthService } from './core-auth.service';
 import { environment } from 'src/environments/environment';

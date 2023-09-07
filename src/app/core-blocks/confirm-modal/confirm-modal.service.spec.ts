@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ConfirmModalService } from './confirm-modal.service';
 
