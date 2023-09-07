@@ -24,7 +24,6 @@
     "@ng-bootstrap/ng-bootstrap": "^15.0.0",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.5",
-    "logrocket": "^1.0.6",
     "rxjs": "~6.5.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.13.1"
