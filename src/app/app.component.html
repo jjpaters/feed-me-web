@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/home" (click)="closeMenu()">Feed Me</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -28,7 +28,7 @@
           </div>
         </li>
       </ul>
-      <button class="btn btn-primary" type="submit" (click)="logIn()" *ngIf="(isAuthenticated$ | async) === false">
+      <button class="btn btn-outline-light" type="submit" (click)="logIn()" *ngIf="(isAuthenticated$ | async) === false">
         <i class="bi bi-person-circle"></i> My Account
       </button>
     </div>
