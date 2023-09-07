@@ -17,6 +17,10 @@ export class CoreAuthService {
     this.user$ = this.authService.user$;
   }
 
+  isAuthenticated(): Observable<boolean> {
+    return this.authService.isAuthenticated$;
+  }
+
   logIn(): Observable<void> {
     return this.authService.loginWithRedirect();
   }

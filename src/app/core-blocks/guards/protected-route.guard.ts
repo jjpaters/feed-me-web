@@ -11,7 +11,7 @@ export class ProtectedRouteGuard {
   constructor(private coreAuthService: CoreAuthService) { }
 
   canActivate(): Observable<boolean> {
-    return this.coreAuthService.isAuthenticated$;
+    return this.coreAuthService.isAuthenticated();
   }
 
 }
