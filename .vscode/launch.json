@@ -16,16 +16,6 @@
             "url": "http://localho.st:9876/debug.html",
             "webRoot": "${workspaceRoot}",
             "runtimeArgs": ["--disable-web-security"]
-        },
-        {
-            "name": "ng e2e",
-            "type": "node",
-            "request": "launch",
-            "program": "${workspaceRoot}/node_modules/protractor/bin/protractor",
-            "protocol": "inspector",
-            "args": [
-                "${workspaceRoot}/protractor.conf.js"
-            ]
         }
     ]
 }
