@@ -21,7 +21,8 @@ import { FormControlModalComponent } from './form-control-modal/form-control-mod
       domain: environment.auth.domain,
       clientId: environment.auth.clientId,
       authorizationParams: {
-        redirect_uri: window.location.origin
+        redirect_uri: window.location.origin,
+        audience: environment.auth.audience,
       },
       httpInterceptor: {
         allowedList: [
