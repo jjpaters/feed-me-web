@@ -84,7 +84,7 @@ jobs:
       - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
       - codecov/upload
       - store_test_results:
-          path: /coverage
+          path: /coverage/feed-me-web
 
   build:
     working_directory: ~/app
@@ -101,7 +101,7 @@ jobs:
           paths:
             - dist
       - store_artifacts:
-          path: /dist
+          path: /dist/feed-me-web
 
   deploy:
     executor: python
