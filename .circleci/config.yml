@@ -85,6 +85,8 @@ jobs:
       - codecov/upload
       - store_test_results:
           path: /home/circleci/app/coverage/feed-me-web/lcov.info
+      - store_artifacts:
+          path: /home/circleci/app/coverage/feed-me-web/lcov.info
 
   build:
     working_directory: ~/app
