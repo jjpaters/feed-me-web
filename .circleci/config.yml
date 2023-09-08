@@ -83,7 +83,8 @@ jobs:
             - v1-deps-
       - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
       - codecov/upload
-      - store_test_results
+      - store_test_results:
+          path: /coverage
 
   build:
     working_directory: ~/app
