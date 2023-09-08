@@ -83,6 +83,7 @@ jobs:
             - v1-deps-
       - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
       - codecov/upload
+      - store_test_results
 
   build:
     working_directory: ~/app
@@ -98,6 +99,8 @@ jobs:
           root: .
           paths:
             - dist
+      - store_artifacts:
+        path: /dist
 
   deploy:
     executor: python
