@@ -10,9 +10,9 @@ executors:
   node:
     docker:
       - image: cimg/node:18.17.1-browsers
-  base:
+  aws:
     docker:
-      - image: deploy
+      - image: cimg/aws:2023.09
 
 #############################################################
 # Define workflows
@@ -110,7 +110,7 @@ jobs:
           path: /home/circleci/app/dist/feed-me-web
 
   deploy:
-    executor: base
+    executor: aws
     steps:
       - attach_workspace:
           at: .
