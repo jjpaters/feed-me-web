@@ -81,8 +81,15 @@ jobs:
           keys: 
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
-      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
+      - run: 
+          environment:
+            # JUNIT_REPORT_PATH: ./junit/
+            # JUNIT_REPORT_NAME: test-results.xml
+          command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
+          when: always      
       - codecov/upload
+      - store_test_results:
+          path: /home/circleci/app/coverage/feed-me-web/junit
 
   build:
     working_directory: ~/app
@@ -98,6 +105,8 @@ jobs:
           root: .
           paths:
             - dist
+      - store_artifacts:
+          path: /home/circleci/app/dist/feed-me-web
 
   deploy:
     executor: python
