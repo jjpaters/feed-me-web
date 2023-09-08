@@ -1,17 +1,18 @@
 version: 2.1
 
 orbs:
+  aws-cli: circleci/aws-cli@4
   aws-s3: circleci/aws-s3@4
   browser-tools: circleci/browser-tools@1
-  codecov: codecov/codecov@3.2.5
+  codecov: codecov/codecov@3
 
 executors:
   node:
     docker:
       - image: cimg/node:18.17.1-browsers
-  python:
+  aws:
     docker:
-      - image: cimg/python:3.6
+      - image: cimg/aws:2023.09
 
 #############################################################
 # Define workflows
@@ -81,12 +82,7 @@ jobs:
           keys: 
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
-      - run: 
-          environment:
-            # JUNIT_REPORT_PATH: ./junit/
-            # JUNIT_REPORT_NAME: test-results.xml
-          command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
-          when: always      
+      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
       - codecov/upload
       - store_test_results:
           path: /home/circleci/app/coverage/feed-me-web/junit
@@ -109,11 +105,15 @@ jobs:
           path: /home/circleci/app/dist/feed-me-web
 
   deploy:
-    executor: python
+    executor: aws
     steps:
-      - checkout
       - attach_workspace:
           at: .
+      - aws-cli/setup:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+          region: $AWS_REGION
       - aws-s3/sync:
+          arguments: "--delete"
           from: ./dist/feed-me-web
-          to: "s3://feed-me.io"
+          to: s3://feed-me.io
