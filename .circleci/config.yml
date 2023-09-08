@@ -1,9 +1,10 @@
 version: 2.1
 
 orbs:
+  aws-cli: circleci/aws-cli@4
   aws-s3: circleci/aws-s3@4
   browser-tools: circleci/browser-tools@1
-  codecov: codecov/codecov@3.2.5
+  codecov: codecov/codecov@3
 
 executors:
   node:
