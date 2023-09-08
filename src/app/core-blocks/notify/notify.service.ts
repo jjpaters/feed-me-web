@@ -10,8 +10,6 @@ export class NotifyService {
   show: boolean;
   alertType: string;
 
-  constructor() { }
-
   error(message: string): void {
     this.notify(message, 'danger');
   }
