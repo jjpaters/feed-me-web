@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { CoreAuthService } from '../core-blocks/auth/core-auth.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-home-page',
@@ -9,14 +8,10 @@ import { CoreAuthService } from '../core-blocks/auth/core-auth.service';
 })
 export class HomePageComponent {
 
-  isAuthenticated$: Observable<boolean>;
-
-  constructor(private coreAuthService: CoreAuthService) {
-    this.isAuthenticated$ = this.coreAuthService.isAuthenticated$;
-  }
+  constructor(public authService: AuthService) { }
 
   logIn(): void {
-    this.coreAuthService.logIn();
+    this.authService.loginWithPopup();
   }
 
 }

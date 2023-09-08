@@ -1,11 +1,11 @@
 import { TestBed, ComponentFixture, inject, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AuthService } from '@auth0/auth0-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreBlocksModule } from './core-blocks/core-blocks.module';
 import { NotifyService } from './core-blocks/notify/notify.service';
-import { CoreAuthService } from './core-blocks/auth/core-auth.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -63,16 +63,16 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('a.navbar-brand').textContent).toContain('Feed Me');
   });
 
-  it('should invoke coreAuthService.logIn', inject([CoreAuthService], (coreAuthService: CoreAuthService) => {
-    spyOn(coreAuthService, 'logIn'); 
+  it('should invoke coreAuthService.logIn', inject([AuthService], (authService: AuthService) => {
+    spyOn(authService, 'loginWithPopup'); 
     component.logIn();
-    expect(coreAuthService.logIn).toHaveBeenCalled();
+    expect(authService.loginWithPopup).toHaveBeenCalled();
   }));
 
-  it('should invoke coreAuthService.logOut and closeMenu', inject([CoreAuthService], (coreAuthService: CoreAuthService) => {
-    spyOn(coreAuthService, 'logOut');
+  it('should invoke coreAuthService.logOut and closeMenu', inject([AuthService], (authService: AuthService) => {
+    spyOn(authService, 'logout');
     component.logOut();
-    expect(coreAuthService.logOut).toHaveBeenCalled();
+    expect(authService.logout).toHaveBeenCalled();
   }));
 
 });

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { User } from '@auth0/auth0-angular';
-import { CoreAuthService } from '../core-blocks/auth/core-auth.service';
+import { AuthService, User } from '@auth0/auth0-angular';
+
 
 @Component({
   selector: 'app-profile-page',
@@ -11,8 +11,8 @@ export class ProfilePageComponent {
 
   user: User | null | undefined;
 
-  constructor(private coreAuthService: CoreAuthService) {
-    this.coreAuthService.user$.subscribe((res) => {
+  constructor(private authService: AuthService) {
+    this.authService.user$.subscribe((res) => {
       this.user = res;
     });
   }
