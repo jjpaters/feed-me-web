@@ -81,13 +81,12 @@ jobs:
           keys: 
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
-      - run:
+      - run: 
           environment:
             # JUNIT_REPORT_PATH: ./junit/
-            JUNIT_REPORT_NAME: test-results.xml
-          when: always
-      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
-      
+            # JUNIT_REPORT_NAME: test-results.xml
+          command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
+          when: always      
       - codecov/upload
       - store_test_results:
           path: /home/circleci/app/coverage/feed-me-web/junit
