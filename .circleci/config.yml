@@ -84,9 +84,7 @@ jobs:
       - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
       - codecov/upload
       - store_test_results:
-          path: /home/circleci/app/coverage/feed-me-web/lcov.info
-      - store_artifacts:
-          path: /home/circleci/app/coverage/feed-me-web/lcov.info
+          path: /home/circleci/app/coverage/feed-me-web/coverage.xml
 
   build:
     working_directory: ~/app
