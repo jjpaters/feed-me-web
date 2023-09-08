@@ -35,6 +35,11 @@ workflows:
             - unit_tests
             - build
             - lint
+          auth:
+            - aws-cli/setup:
+                aws_access_key_id: AWS_ACCESS_KEY_ID
+                aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                region: AWS_REGION
           from: ./dist/feed-me-web
           to: "s3://feed-me.io"
 #          filters:
