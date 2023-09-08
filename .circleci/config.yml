@@ -84,7 +84,7 @@ jobs:
       - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
       - codecov/upload
       - store_test_results:
-          path: /coverage/feed-me-web
+          path: /home/circleci/app/coverage/feed-me-web
 
   build:
     working_directory: ~/app
@@ -96,8 +96,6 @@ jobs:
             - v1-deps-{{ checksum "package-lock.json" }}
             - v1-deps-
       - run: npm run build -- --configuration production
-      - run: pwd
-      - run: ls
       - persist_to_workspace:
           root: .
           paths:
