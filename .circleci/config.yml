@@ -29,16 +29,18 @@ workflows:
       - lint:
           requires:
             - install_dependencies
-      - deploy:
+      - aws-s3/sync:
           context: AWS
           requires:
             - unit_tests
             - build
             - lint
-          filters:
-            branches:
-              only:
-                - main
+          from: ./dist/feed-me-web
+          to: "s3://feed-me.io"
+#          filters:
+#            branches:
+#              only:
+#                - main
 
 #############################################################
 # Define jobs
@@ -107,13 +109,3 @@ jobs:
             - dist
       - store_artifacts:
           path: /home/circleci/app/dist/feed-me-web
-
-  deploy:
-    executor: python
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - aws-s3/sync:
-          from: ./dist/feed-me-web
-          to: "s3://feed-me.io"
