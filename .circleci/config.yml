@@ -103,7 +103,7 @@ jobs:
           paths:
             - dist
       - store_artifacts:
-          path: /dist/feed-me-web
+          path: /home/circleci/app/dist/feed-me-web
 
   deploy:
     executor: python
