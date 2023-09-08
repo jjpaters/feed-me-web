@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RecipeSummary } from '../recipe-models';
 
 @Component({
@@ -6,7 +6,7 @@ import { RecipeSummary } from '../recipe-models';
   templateUrl: './recipe-summary-page.component.html',
   styleUrls: ['./recipe-summary-page.component.scss']
 })
-export class RecipeSummaryPageComponent implements OnInit {
+export class RecipeSummaryPageComponent {
 
   recipeSummaries: RecipeSummary[];
 
@@ -53,9 +53,6 @@ export class RecipeSummaryPageComponent implements OnInit {
         url: '/recipes/Drinks'
       },
     ];
-  }
-
-  ngOnInit(): void {
   }
 
 }

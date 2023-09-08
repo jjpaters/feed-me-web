@@ -11,6 +11,4 @@ export class RecipeCardComponent {
 
   @Input() recipe: Recipe;
 
-  constructor() { }
-
 }

@@ -21,7 +21,7 @@ export class RecipeService {
   }
 
   async getRecipes(category: string | null): Promise<Recipe[]> {
-    var url = `${environment.api}/recipes`;
+    let url = `${environment.api}/recipes`;
     
     if (category !== null) {
       url += `?category=${category}`

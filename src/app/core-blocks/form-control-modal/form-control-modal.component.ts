@@ -16,7 +16,7 @@ export class FormControlModalComponent {
   }
 
   delete() {
-    var namedFormArray = this.modalService.formGroup.get(this.modalService.name) as FormArray;
+    const namedFormArray = this.modalService.formGroup.get(this.modalService.name) as FormArray;
     const index = namedFormArray.controls.indexOf(this.modalService.formControl);
     namedFormArray.controls.splice(index, 1);
     this.modalService.modalRef.close();

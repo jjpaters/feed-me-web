@@ -9,27 +9,27 @@ export class RecipeForm {
   recipe: Recipe;
   submitted = false;
 
-  get title(): AbstractControl<any, any> | null {
+  get title(): AbstractControl<string> | null {
     return this.form.get('title');
   }
 
-  get description(): AbstractControl<any, any> | null {
+  get description(): AbstractControl<string> | null {
     return this.form.get('description');
   }
 
-  get category(): AbstractControl<any, any> | null {
+  get category(): AbstractControl<string> | null {
     return this.form.get('category');
   }
 
-  get servings(): AbstractControl<any, any> | null {
+  get servings(): AbstractControl<number> | null {
     return this.form.get('servings');
   }
 
-  get prepTime(): AbstractControl<any, any> | null {
+  get prepTime(): AbstractControl<string> | null {
     return this.form.get('prepTime');
   }
 
-  get cookTime(): AbstractControl<any, any> | null {
+  get cookTime(): AbstractControl<string> | null {
     return this.form.get('cookTime');
   }
 
@@ -41,12 +41,10 @@ export class RecipeForm {
     return <FormArray>this.form.get('steps');
   }
 
-  get notes(): AbstractControl<any, any> | null {
+  get notes(): AbstractControl<string> | null {
     return this.form.get('notes');
   }
-
-  constructor() { }
-
+  
   loadFormGroup() {
     const ingredientGroupFormArray = new FormArray<any>([], Validators.required);
     const stepFormArray = new FormArray<any>([], Validators.required);
