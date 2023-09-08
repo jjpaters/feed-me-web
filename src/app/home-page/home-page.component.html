@@ -5,10 +5,10 @@
       <p class="fs-4">
         Welcome to Feed Me, the personal recipe box without the life stories and ads.
       </p>
-      <button class="btn btn-primary btn-lg" (click)="logIn()" *ngIf="(isAuthenticated$ | async) === false">
+      <button class="btn btn-primary btn-lg" (click)="logIn()" *ngIf="(authService.isAuthenticated$ | async) === false">
         Get Started
       </button>
-      <a [routerLink]="['/recipes']" class="btn btn-primary btn-lg" *ngIf="isAuthenticated$ | async">
+      <a [routerLink]="['/recipes']" class="btn btn-primary btn-lg" *ngIf="authService.isAuthenticated$ | async">
         View Recipe Box
       </a>
     </div>

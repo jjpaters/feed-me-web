@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotifyServiceModule } from './notify/notify-service.module';
-import { CoreAuthService } from './auth/core-auth.service';
 import { environment } from 'src/environments/environment';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { FormControlModalComponent } from './form-control-modal/form-control-modal.component';
@@ -22,8 +21,9 @@ import { FormControlModalComponent } from './form-control-modal/form-control-mod
       clientId: environment.auth.clientId,
       authorizationParams: {
         redirect_uri: window.location.origin,
-        audience: environment.auth.audience,
+        audience: environment.auth.audience        
       },
+      useRefreshTokens: true,
       httpInterceptor: {
         allowedList: [
           `${environment.api}/recipes*`
@@ -36,9 +36,6 @@ import { FormControlModalComponent } from './form-control-modal/form-control-mod
   ],
   exports: [
     NotifyServiceModule
-  ],
-  providers: [
-    CoreAuthService
   ]
 })
 export class CoreBlocksModule { }

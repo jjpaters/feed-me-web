@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
-import { Observable } from 'rxjs';
+import { AuthService } from '@auth0/auth0-angular';
 import { filter } from 'rxjs/operators';
-import { CoreAuthService } from './core-blocks/auth/core-auth.service';
+
 import { NotifyService } from './core-blocks/notify/notify.service';
 
 @Component({
@@ -12,14 +12,9 @@ import { NotifyService } from './core-blocks/notify/notify.service';
 })
 export class AppComponent {
 
-  isAuthenticated$: Observable<boolean>;
-
   navbarOpen = false;
 
-  constructor(private coreAuthService: CoreAuthService, private notifyService: NotifyService, private router: Router) {
-
-    this.isAuthenticated$ = this.coreAuthService.isAuthenticated$;
-
+  constructor(public authService: AuthService, private notifyService: NotifyService, private router: Router) {
     router.events
       .pipe(filter(event => event instanceof NavigationStart))
       .subscribe(() => {
@@ -32,11 +27,11 @@ export class AppComponent {
   }
 
   logIn(): void {
-    this.coreAuthService.logIn();
+    this.authService.loginWithPopup();
   }
 
   logOut(): void {
-    this.coreAuthService.logOut();
+    this.authService.logout();
     this.closeMenu();
   }
 
