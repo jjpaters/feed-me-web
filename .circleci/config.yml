@@ -120,4 +120,5 @@ jobs:
           region: $AWS_REGION
       - aws-s3/sync:
           from: ./dist/feed-me-web
-          to: "s3://feed-me.io"
+          to: s3://feed-me.io
+          agruments: --delete
